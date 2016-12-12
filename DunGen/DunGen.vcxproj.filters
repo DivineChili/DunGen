@@ -33,7 +33,7 @@
     <ClInclude Include="xxHash32.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DunGen.h">
+    <ClInclude Include="randomizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -48,6 +48,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="randomizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

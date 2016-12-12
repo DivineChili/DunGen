@@ -146,8 +146,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cell.h" />
-    <ClInclude Include="DunGen.h" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="randomizer.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="xxHash32.h" />
@@ -156,6 +156,7 @@
     <ClCompile Include="DunGen.cpp" />
     <ClCompile Include="cell.cpp" />
     <ClCompile Include="map.cpp" />
+    <ClCompile Include="randomizer.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
