@@ -1,8 +1,18 @@
 #include "stdafx.h"
+#include "DunGen.h"
 #include "cell.h"
 #include "map.h"
+#include "xxHash32.h"
 
 using namespace std;
+
+uint32_t globalSeed = 655863;
+uint32_t key1 = 1;
+uint32_t *key1_p = &key1;
+uint32_t mazeSeed = XXHash32::hash(key1_p, 4, globalSeed);
+uint32_t mazeKey = 0;
+uint32_t *mazeKey_p = &mazeKey;
+
 
 void recursive_backtracking(int * start_pos, Map * grid) {
 	// Create vector for recursive-backtracking history.
@@ -60,7 +70,11 @@ void recursive_backtracking(int * start_pos, Map * grid) {
 		if (check.size() > 0) {
 
 			history.push_back({ c , r });
-			int move_direction = check[rand() % check.size()];	 // Randomly pick a cell! For use of hash-functions, put stuff here!
+			uint32_t mazeHash = XXHash32::hash(mazeKey_p, 4, mazeSeed);
+			mazeKey++;
+			//cout << mazeKey << endl;
+			//cout << mazeHash << endl;
+			int move_direction = check[static_cast<int>(mazeHash) % check.size()];	 // Randomly pick a cell! For use of hash-functions, put stuff here!
 
 			cout << "Moving:  " << move_direction << "   !!!";
 			if (move_direction == UP)
@@ -106,6 +120,7 @@ void recursive_backtracking(int * start_pos, Map * grid) {
 
 int main()
 {
+	
 	int size_x = 38;	   // Size of map's width. (Multiply by 3 to get width in chars!)
 	int size_y = 20;	   // Size of map's height. (Multiply by 3 to get height in chars!)
 						   // Recommended X-size = 38
@@ -133,6 +148,8 @@ int main()
 	*/
 	grid.drawMap();
 	cout << endl;
+	cout << "Global seed: " << globalSeed << endl;
+	cout << "Maze seed: " << mazeSeed << endl;
 
 	return 0;
 }

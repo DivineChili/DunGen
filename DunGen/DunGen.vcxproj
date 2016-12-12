@@ -146,9 +146,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cell.h" />
+    <ClInclude Include="DunGen.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="xxHash32.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DunGen.cpp" />
