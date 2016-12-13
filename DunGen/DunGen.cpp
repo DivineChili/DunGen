@@ -2,6 +2,7 @@
 #include "DunGen.h"
 #include "cell.h"
 #include "map.h"
+#include "room.h"
 #include "randomizer.h"
 #include "xxHash32.h"
 
@@ -153,6 +154,10 @@ int main()
 	cout << endl;
 	cout << "Global seed: " << globalSeed << endl;
 	cout << "Maze seed: " << mazeSeed << endl;
+
+	Room room1;
+	Room room2;
+	Room room3;
 
 	//uint32_t myseed = 69;
 	//Randomizer test(myseed);
