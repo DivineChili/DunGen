@@ -21,7 +21,7 @@ uint32_t Randomizer::randomizeAtPos(uint32_t x, uint32_t y) {
 }
 //Used for the global randomizer only
 uint32_t Randomizer::randomizeFromKey(uint32_t key){
-	this->hash.add(&key);
+	this->hash.add(&key, 4);
 	this->result = this->hash.hash();
 	this->updateSeed(); //used to undo add()
 	return this->result;

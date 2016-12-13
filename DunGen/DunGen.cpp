@@ -7,16 +7,13 @@
 
 using namespace std;
 
+//Randomizer for generating seeds
 uint32_t globalSeed = 655863;
 Randomizer globalRandomizer(globalSeed);
+
+//Randomizer for the maze generation
 uint32_t mazeSeed = globalRandomizer.randomizeFromKey(0);
 Randomizer mazeRandomizer(mazeSeed);
-//uint32_t key1 = 1;
-//uint32_t *key1_p = &key1;
-//uint32_t mazeSeed = XXHash32::hash(key1_p, 4, globalSeed);
-//uint32_t mazeKey = 0;
-//uint32_t *mazeKey_p = &mazeKey;
-
 
 void recursive_backtracking(int * start_pos, Map * grid) {
 	// Create vector for recursive-backtracking history.
@@ -78,9 +75,9 @@ void recursive_backtracking(int * start_pos, Map * grid) {
 			//mazeKey++;
 			//cout << mazeKey << endl;
 			//cout << mazeHash << endl;
-			//uint32_t mazeHash = mazeRandomizer->randomizeAtPos(324, 142);
+			uint32_t result = mazeRandomizer.randomizeAtPos(c, r);
 			
-			int move_direction = check[static_cast<int>(mazeHash) % check.size()];	 // Randomly pick a cell! For use of hash-functions, put stuff here!
+			int move_direction = check[static_cast<int>(result) % check.size()];	 // Randomly pick a cell! For use of hash-functions, put stuff here!
 
 			cout << "Moving:  " << move_direction << "   !!!";
 			if (move_direction == UP)
@@ -127,8 +124,8 @@ void recursive_backtracking(int * start_pos, Map * grid) {
 int main()
 {
 	
-	int size_x = 10;	   // Size of map's width. (Multiply by 3 to get width in chars!)
-	int size_y = 10;	   // Size of map's height. (Multiply by 3 to get height in chars!)
+	int size_x = 30;	   // Size of map's width. (Multiply by 3 to get width in chars!)
+	int size_y = 30;	   // Size of map's height. (Multiply by 3 to get height in chars!)
 						   // Recommended X-size = 38
 	Map grid = Map(size_x, size_y);
 	// [0] = x; [1] = y
@@ -157,9 +154,9 @@ int main()
 	cout << "Global seed: " << globalSeed << endl;
 	cout << "Maze seed: " << mazeSeed << endl;
 
-	uint32_t myseed = 69;
-	Randomizer test(myseed);
-	cout << "This is the random number: " << test.randomizeAtPos(32, 52) << endl;
+	//uint32_t myseed = 69;
+	//Randomizer test(myseed);
+	//cout << "This is the random number: " << test.randomizeAtPos(32, 52) << endl;
 
 	return 0;
 }
