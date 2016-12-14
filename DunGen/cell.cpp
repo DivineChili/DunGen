@@ -57,7 +57,7 @@ void Cell::setWallChar(char newChar){
 	rebuild();
 }
 
-// Sets the Floor-Char. NB! Rebuilds the cell! All changes done to the cell will be lost!
+// Sets the Floor-Char. NB! Rebuilds the cell! All custom changes done to the cell will be lost!
 void Cell::setFloorChar(char newChar)
 {
 	this->floor = newChar;
