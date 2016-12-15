@@ -1,4 +1,7 @@
 #pragma once
+#ifndef RANDOMIZER_H
+#define RANDOMIZER_H
+
 #include "stdafx.h"
 #include "xxHash32.h"
 #include <iostream>
@@ -20,3 +23,5 @@ public:
 	uint32_t Randomizer::getSeed();
 	void Randomizer::updateSeed();
 };
+
+#endif // !RANDOMIZER_H
