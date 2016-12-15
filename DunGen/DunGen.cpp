@@ -150,15 +150,11 @@ int main()
 	newCell.rebuild();
 	newCell.drawCell();
 	*/
-	grid.drawMap();
 	cout << endl;
 	cout << "Global seed: " << globalSeed << endl;
 	cout << "Maze seed: " << mazeSeed << endl;
-
-	Room room1;
-	Room room2;
-	Room room3;
-
+	grid.drawMap();
+	grid.outputMap("map");
 	//uint32_t myseed = 69;
 	//Randomizer test(myseed);
 	//cout << "This is the random number: " << test.randomizeAtPos(32, 52) << endl;
