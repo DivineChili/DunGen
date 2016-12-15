@@ -35,7 +35,7 @@ void Map::drawCellAtPos(int x, int y) {
 	this->map_grid.at(y).at(x).drawCell();	// Draws the cell at a posistion in the map_grid.
 }
 
-// Simply draws the hole map and all of it's cell-data
+// Simply draws the hole map and all of it's cell-data to the terminal
 void Map::drawMap() {
 	int mapX, mapY, cellRow = 0;  // Initialize the loop-counters. Optional!
 	for (mapY = 0; mapY < this->size_y; mapY++) {   // Loop through map_grid rows
@@ -53,6 +53,30 @@ void Map::drawMap() {
 			cout << endl; // Newline for new cellrow
 		}
 		cout << "";
+	}
+}
+
+void Map::outputMap(string filename) {
+	ofstream outfile;
+
+	outfile.open(filename + ".txt", std::ios_base::app);
+	
+	int mapX, mapY, cellRow = 0;  // Initialize the loop-counters. Optional!
+	for (mapY = 0; mapY < this->size_y; mapY++) {   // Loop through map_grid rows
+													// cout << "Map Y: " << mapY << endl;	 // For debugging 
+		for (cellRow = 0; cellRow < 3; cellRow++) {   // Loop through the cellRows within each map_grid.
+			for (mapX = 0; mapX < this->size_x; mapX++) {   // Loop through the colums in the map_grid
+				vector<char> temp_char = this->map_grid[mapY][mapX].getCellRow(cellRow); // Get the char_vector of the first row in cell
+				vector<char>::iterator it = temp_char.begin();	// Create iterator pointer at the begining of vector
+				for (; it < temp_char.end(); ++it)	// Loop through vector using the iterator
+				{
+					outfile << *it; // Print out the value of the iterator
+				}
+				outfile << "";  // Used for debug-purposes!
+			}
+			outfile << endl; // Newline for new cellrow
+		}
+		outfile << ""; // Also used for debugging!
 	}
 }
 

@@ -6,6 +6,7 @@
 #include "cell.h"
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <vector>
 
 using namespace std;
@@ -26,6 +27,9 @@ public:
 
 	// Draws the entire map.
 	void Map::drawMap();
+
+	// Writes the enitre map to .txt file
+	void Map::outputMap(string filename);
 
 	/* The following functions is used for generating algorithms and indirect methods of changing cells. */
 	// Set cell-struct at a spesific position
