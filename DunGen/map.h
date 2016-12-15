@@ -1,4 +1,7 @@
 #pragma once
+#ifndef MAP_H
+#define MAP_H
+
 #include "stdafx.h"
 #include "cell.h"
 #include <string>
@@ -34,3 +37,5 @@ public:
 	// Returns the visited-state of cell at [y][x] coordinates.
 	bool Map::cellVisited(int x, int y);
 };
+
+#endif // !MAP_H

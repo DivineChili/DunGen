@@ -1,4 +1,7 @@
 #pragma once
+#ifndef CELL_H
+#define CELL_H
+
 #include "stdafx.h"
 #include <string>
 #include <iostream>
@@ -41,3 +44,5 @@ public:
 	// Independent function to draw cell
 	void Cell::drawCell();
 };
+
+#endif // !CELL_H
