@@ -16,6 +16,9 @@ Randomizer globalRandomizer(globalSeed);
 uint32_t mazeSeed = globalRandomizer.randomizeFromKey(0);
 Randomizer mazeRandomizer(mazeSeed);
 
+uint32_t roomSeed = globalRandomizer.randomizeFromKey(1);
+Randomizer roomRandomizer(roomSeed);
+
 void recursive_backtracking(int * start_pos, Map * grid) {
 	// Create vector for recursive-backtracking history.
 	bool running = true;
@@ -153,6 +156,13 @@ int main()
 	cout << endl;
 	cout << "Global seed: " << globalSeed << endl;
 	cout << "Maze seed: " << mazeSeed << endl;
+	cout << "Room seed: " << roomSeed << endl;
+
+	//test for randomizer function
+	for (int i = 0; i < 30; i++) {
+		cout << roomRandomizer.randomizeFromChance(50, i) << endl;
+	}
+
 	grid.drawMap();
 	grid.outputMap("map");
 	//uint32_t myseed = 69;

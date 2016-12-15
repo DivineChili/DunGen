@@ -26,6 +26,15 @@ uint32_t Randomizer::randomizeFromKey(uint32_t key){
 	this->updateSeed(); //used to undo add()
 	return this->result;
 }
+bool Randomizer::randomizeFromChance(int chance, uint32_t key){
+	this->hash.add(&key, 4);
+	this->result = this->hash.hash();
+	this->updateSeed();
+	result %= 100;
+	if (result < chance) return 1;
+	else return 0;
+	cout << result % 2 << endl;
+}
 void Randomizer::setSeed(uint32_t seed) {
 	this->seed = seed;
 	this->updateSeed();

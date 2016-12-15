@@ -15,6 +15,5 @@ private:
 	uint32_t height;
 public:
 	static vector<Room*> rooms;
-	static int test;
-	Room::Room();
+	Room::Room(uint32_t seed);
 };
