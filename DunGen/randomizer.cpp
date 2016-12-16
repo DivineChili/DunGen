@@ -9,8 +9,6 @@ Randomizer::Randomizer(uint32_t seed): hash(seed) {
 	this->seed = seed;
 }
 Randomizer::~Randomizer() {
-	cout << "Destroying randomizer!" << endl;
-	cout << "seed: " << this->seed << endl;
 }
 uint32_t Randomizer::randomizeAtPos(uint32_t x, uint32_t y) {
 	this->hash.add(&x, 4);

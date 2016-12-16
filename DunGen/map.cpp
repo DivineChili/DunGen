@@ -99,10 +99,7 @@ bool Map::cellVisited(int x, int y) {
 	return this->map_grid.at(y).at(x)._visited;   // Using .at() insted of Operator[] to throw exceptions needed to bypass errors!
 }
 
-unsigned int Map::getWidth() {
-	return this->size_x;
-}
-
-unsigned int Map::getHeight() {
-	return this->size_y;
+// Returns the x,y size of map
+pair<int,int> Map::getSize() {
+	return{ this->size_x, this->size_y };
 }

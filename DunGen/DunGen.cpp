@@ -9,7 +9,7 @@
 using namespace std;
 
 //Randomizer for generating seeds
-uint32_t globalSeed = 13441435;
+uint32_t globalSeed = 3420348;
 Randomizer globalRandomizer(globalSeed);
 
 //Randomizer for the maze generation
@@ -28,7 +28,6 @@ void recursive_backtracking(int * start_pos, Map * grid) {
 	int r = start_pos[1];
 
 	history.push_back({ start_pos[0], start_pos[1] }); // Start at the startingposistion
-	(*grid).setCellStructureAtPos(start_pos[0], start_pos[1], "---------");
 
 	// Recursive backtracing starts here!
 	while (running) {
@@ -128,21 +127,30 @@ void recursive_backtracking(int * start_pos, Map * grid) {
 
 int main()
 {
-	
-	int size_x = 800;	   // Size of map's width. (Multiply by 3 to get width in chars!)
-	int size_y = 800;	   // Size of map's height. (Multiply by 3 to get height in chars!)
+	int size_x = 38;	   // Size of map's width. (Multiply by 3 to get width in chars!)
+	int size_y = 20;	   // Size of map's height. (Multiply by 3 to get height in chars!)
 						   // Recommended X-size for teminal is 38, for output to .txt opened in notepad 341!
-	
+
 	cout << "This map size (" << size_x << "x" << size_y << "), will be: " << (48 * (size_x*size_y))/1024 << " KB!" << endl;
-	cout << "It would take roughly: " << 0.05 * (size_x*size_y) << " seconds! (Calculated by linear regression of time used to process square mazes,\nso time may not be accurate!)" << endl;
 	cout << "Are you sure you wish to continue (Y/n)?";
 	string input;
 	cin >> input;
 	if (input[0] == 'n' || input[0] == 'N') exit(1);
 	Map grid = Map(size_x, size_y);
-	// [0] = x; [1] = y
-	int start_pos[2] = { 2,2 }; // Start backtracking from cell [0,3]
 
+	// [0] = x; [1] = y
+	int start_pos[2] = { 2,2 }; // Start backtracking from cell at this xy-coordinate
+	grid.setCellStructureAtPos(start_pos[0], start_pos[1], "---------");
+	grid.visitCell(start_pos[0], start_pos[1]);
+
+	vector<Room> rooms;
+	// Generate rooms
+	do {
+		rooms.push_back(Room(roomRandomizer.randomizeFromKey(Room::rooms.size()),4,4, &grid));
+	} while (Room::rooms.size() < (size_x*size_y) / 40);
+	
+	cout << "Rooms generated: " << Room::rooms.size() << endl;
+	
 	recursive_backtracking(start_pos, &grid);
 	
 	/* // Cell Debug!
@@ -167,13 +175,7 @@ int main()
 	cout << "Room seed: " << roomSeed << endl;
 
 
-	//test for randomizer function
-	for (int i = 0; i < 30; i++) {
-		cout << roomRandomizer.randomizeFromChance(50, i) << endl;
-	}
-
 	grid.drawMap();
-	grid.outputMap("map");
 
 	return 0;
 }

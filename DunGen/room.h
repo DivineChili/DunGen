@@ -1,7 +1,10 @@
 #pragma once
+#ifndef ROOM_H
+#define ROOM_H
+
 #include "stdafx.h"
 #include "randomizer.h"
-#include <iostream>
+#include "map.h"
 #include <vector>
 
 using namespace std;
@@ -17,6 +20,8 @@ private:
 	uint32_t height;
 public:
 	static vector<Room*> rooms;
-	Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY);
+	Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map);
 	Room::~Room();
 };
+
+#endif

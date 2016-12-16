@@ -40,9 +40,9 @@ public:
 	void Map::visitCell(int x, int y);
 	// Returns the visited-state of cell at [y][x] coordinates.
 	bool Map::cellVisited(int x, int y);
+	
 	//Returns the size of the map
-	unsigned int Map::getWidth();
-	unsigned int Map::getHeight();
+	pair<int, int> Map::getSize();
 };
 
 #endif // !MAP_H
