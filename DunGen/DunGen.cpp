@@ -164,11 +164,16 @@ int main()
 	cout << endl;
 	cout << "Global seed: " << globalSeed << endl;
 	cout << "Maze seed: " << mazeSeed << endl;
-	grid.outputMap("map800x800");
-	//grid.outputMap("map");
-	//uint32_t myseed = 69;
-	//Randomizer test(myseed);
-	//cout << "This is the random number: " << test.randomizeAtPos(32, 52) << endl;
+	cout << "Room seed: " << roomSeed << endl;
+
+
+	//test for randomizer function
+	for (int i = 0; i < 30; i++) {
+		cout << roomRandomizer.randomizeFromChance(50, i) << endl;
+	}
+
+	grid.drawMap();
+	grid.outputMap("map");
 
 	return 0;
 }

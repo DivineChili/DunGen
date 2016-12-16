@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.h"
+#include "randomizer.h"
 #include <iostream>
 #include <vector>
 
@@ -8,6 +9,7 @@ using namespace std;
 class Room {
 private:
 	uint32_t seed;
+	Randomizer randomizer;
 	uint32_t id;
 	uint32_t x;
 	uint32_t y;
@@ -15,5 +17,6 @@ private:
 	uint32_t height;
 public:
 	static vector<Room*> rooms;
-	Room::Room(uint32_t seed);
+	Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY);
+	Room::~Room();
 };
