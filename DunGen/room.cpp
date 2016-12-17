@@ -1,13 +1,12 @@
 #include "stdafx.h"
 #include "room.h"
-#include <iostream>
 
 vector<Room*> Room::rooms;
 
 Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map): randomizer(seed) {
 	this->id = Room::rooms.size(); //Set id
 	this->rooms.push_back(this); //Push to static vector
-	cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << endl;
+	//cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << endl;
 	this->x = (this->randomizer.randomizeFromKey(0) % (map->getSize().first-maxX));
 	this->y = (this->randomizer.randomizeFromKey(1) % (map->getSize().second-maxY));
 	this->width = (this->randomizer.randomizeFromKey(2) % maxX);
@@ -43,11 +42,11 @@ Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map): rando
 	
 		}
 	}
-	cout << "Room Generation Complete!\n";
+	//cout << "Room Generation Complete!\n";
 }
 
 Room::~Room() {
-	cout << "Destroying room!" << endl;
+	//cout << "Destroying room!" << endl;
 }
 
 
