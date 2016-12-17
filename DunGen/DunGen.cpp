@@ -9,7 +9,7 @@
 using namespace std;
 
 //Randomizer for generating seeds
-uint32_t globalSeed = 3420348;
+uint32_t globalSeed = 655863;
 Randomizer globalRandomizer(globalSeed);
 
 //Randomizer for the maze generation
@@ -145,8 +145,12 @@ int main()
 
 	vector<Room> rooms;
 	// Generate rooms
+	int key = 0;
 	do {
-		rooms.push_back(Room(roomRandomizer.randomizeFromKey(Room::rooms.size()),4,4, &grid));
+		rooms.push_back(Room(roomRandomizer.randomizeFromKey(Room::rooms.size()),4,4, &grid, key));
+		if (Room::rooms[Room::rooms.size() - 1]->overlap) {
+			key += 4;
+		}
 	} while (Room::rooms.size() < (size_x*size_y) / 40);
 	
 	cout << "Rooms generated: " << Room::rooms.size() << endl;

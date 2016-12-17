@@ -20,7 +20,8 @@ private:
 	uint32_t height;
 public:
 	static vector<Room*> rooms;
-	Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map);
+	bool overlap;
+	Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int key);
 	Room::~Room();
 };
 
