@@ -149,8 +149,11 @@ int main()
 	do {
 		rooms.push_back(Room(roomRandomizer.randomizeFromKey(Room::rooms.size()),4,4, &grid, key));
 		if (Room::rooms[Room::rooms.size() - 1]->overlap) {
+			Room::rooms[Room::rooms.size() - 1]->~Room();
+			
 			key += 4;
 		}
+		cout << Room::rooms.size() << endl;
 	} while (Room::rooms.size() < (size_x*size_y) / 40);
 	
 	cout << "Rooms generated: " << Room::rooms.size() << endl;

@@ -20,11 +20,12 @@ Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int ke
 	/*
 		Map construction here
 	*/
+	//Check for any cells already visited.
 	for (int posY = this->y; posY <= (this->y + this->height); posY++) { // Loops through the cells aalong the y-axis, starting from the starting y-position
 		for (int posX = this->x; posX <= (this->x + this->width); posX++) { // Loops through the cells along the x-axis starting from the starting x-position
 			if (map->cellVisited(posX, posY)) {
+				//This will make the while-loop delete the room to prevent overlapping.
 				this->overlap = true;
-				//Room(seed, maxX, maxY, map, key + 4);
 			}
 		}
 	}
