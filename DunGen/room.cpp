@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "room.h"
-#include <iostream>
 
 vector<Room*> Room::rooms;
 
@@ -61,7 +60,7 @@ Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int ke
 }
 
 Room::~Room() {
-	cout << "Destroying room!" << endl;
+	//cout << "Destroying room!" << endl;
 }
 
 
