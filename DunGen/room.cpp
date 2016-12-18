@@ -10,12 +10,8 @@ Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int ke
 	cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << endl;
 	this->x = (this->randomizer.randomizeFromKey(key) % (map->getSize().first - maxX));
 	this->y = (this->randomizer.randomizeFromKey(key + 1) % (map->getSize().second - maxY));
-	this->width = (this->randomizer.randomizeFromKey(key + 2) % maxX);
-	this->height = (this->randomizer.randomizeFromKey(key + 3) % maxY);
-
-	if (this->width <= 2) this->width = 2;
-	if (this->height <= 2) this->height = 2;
-
+	this->width = ((this->randomizer.randomizeFromKey(key + 2) % (maxX - 2))) + 2; //Get the random width and height maxX is the max width and 2 is the min height.
+	this->height = ((this->randomizer.randomizeFromKey(key + 3) % (maxY - 2))) + 2;//Get the random width and height maxY is the max height and 2 is the min height.
 	/*
 		Map construction here
 	*/

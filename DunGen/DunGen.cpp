@@ -154,7 +154,7 @@ int main()
 			key += 4;
 		}
 		cout << Room::rooms.size() << endl;
-	} while (Room::rooms.size() < (size_x*size_y) / 40);
+	} while (Room::rooms.size() < (size_x*size_y) / 20);
 	
 	cout << "Rooms generated: " << Room::rooms.size() << endl;
 	
