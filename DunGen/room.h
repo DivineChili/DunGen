@@ -20,9 +20,14 @@ private:
 	uint32_t height;
 public:
 	static vector<Room*> rooms;
-	bool overlap;
+	bool overlap; //Tells the external file that the room is overlapping a cell that has already been visited.
 	Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int key);
 	Room::~Room();
+	class Start {
+	private:
+	public:
+		Start::Start(){}
+	};
 };
 
 #endif

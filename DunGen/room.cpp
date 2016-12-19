@@ -7,7 +7,7 @@ Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int ke
 	this->overlap = false;
 	this->id = Room::rooms.size(); //Set id
 	this->rooms.push_back(this); //Push to static vector
-	cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << endl;
+	cout << "Creating room!" << endl;
 	this->x = (this->randomizer.randomizeFromKey(key) % (map->getSize().first - maxX));
 	this->y = (this->randomizer.randomizeFromKey(key + 1) % (map->getSize().second - maxY));
 	this->width = ((this->randomizer.randomizeFromKey(key + 2) % (maxX - 2))) + 2; //Get the random width and height maxX is the max width and 2 is the min height.
@@ -49,7 +49,7 @@ Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int ke
 
 			}
 		}
-		cout << "Room Generation Complete!\n";
+		cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << endl;
 	} else {
 		cout << "Room overlapping" << endl << "Reconstructing room!" << endl;
 	}
