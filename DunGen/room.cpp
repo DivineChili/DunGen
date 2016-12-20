@@ -7,23 +7,20 @@ Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int ke
 	this->overlap = false;
 	this->id = Room::rooms.size(); //Set id
 	this->rooms.push_back(this); //Push to static vector
-	cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << endl;
+	cout << "Creating room!" << endl;
 	this->x = (this->randomizer.randomizeFromKey(key) % (map->getSize().first - maxX));
 	this->y = (this->randomizer.randomizeFromKey(key + 1) % (map->getSize().second - maxY));
-	this->width = (this->randomizer.randomizeFromKey(key + 2) % maxX);
-	this->height = (this->randomizer.randomizeFromKey(key + 3) % maxY);
-
-	if (this->width <= 2) this->width = 2;
-	if (this->height <= 2) this->height = 2;
-
+	this->width = ((this->randomizer.randomizeFromKey(key + 2) % (maxX - 2))) + 2; //Get the random width and height maxX is the max width and 2 is the min height.
+	this->height = ((this->randomizer.randomizeFromKey(key + 3) % (maxY - 2))) + 2;//Get the random width and height maxY is the max height and 2 is the min height.
 	/*
 		Map construction here
 	*/
+	//Check for any cells already visited.
 	for (int posY = this->y; posY <= (this->y + this->height); posY++) { // Loops through the cells aalong the y-axis, starting from the starting y-position
 		for (int posX = this->x; posX <= (this->x + this->width); posX++) { // Loops through the cells along the x-axis starting from the starting x-position
 			if (map->cellVisited(posX, posY)) {
+				//This will make the while-loop delete the room to prevent overlapping.
 				this->overlap = true;
-				//Room(seed, maxX, maxY, map, key + 4);
 			}
 		}
 	}
@@ -52,7 +49,7 @@ Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int ke
 
 			}
 		}
-		cout << "Room Generation Complete!\n";
+		cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << endl;
 	} else {
 		cout << "Room overlapping" << endl << "Reconstructing room!" << endl;
 	}
