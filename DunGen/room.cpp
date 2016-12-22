@@ -54,7 +54,7 @@ Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int ke
 		}
 		cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << endl;
 	} else {
-		cout << "Room overlapping" << endl << "Reconstructing room!" << endl;
+		cout << "Room overlapping" << endl;
 	}
 }
 
