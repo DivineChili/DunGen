@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #include "room.h"
+#include "room_loot.h"
 
 vector<Room*> Room::rooms;
 
-Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int key) : randomizer(seed) {
+Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int key) : overlap(false), randomizer(seed) {
 	this->overlap = false;
 	this->id = Room::rooms.size(); //Set id
 	this->rooms.push_back(this); //Push to static vector
@@ -50,6 +51,8 @@ Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int ke
 			}
 		}
 		cout << "Room Generation Complete!\n";
+		//cout << "Calling subclass constructor!" << endl;
+		//Room_loot::Room_loot(seed, maxX, maxY, map, key);
 	} else {
 		cout << "Room overlapping" << endl << "Reconstructing room!" << endl;
 	}
@@ -58,5 +61,6 @@ Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int ke
 Room::~Room() {
 	//cout << "Destroying room!" << endl;
 }
+
 
 
