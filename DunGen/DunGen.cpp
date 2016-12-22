@@ -147,21 +147,20 @@ int main()
 	// Generate rooms
 	int key = 0;
 	do {
-		Room::rooms.push_back((Room*) new Room_loot(roomRandomizer.randomizeFromKey(Room::rooms.size()), 4, 4, &grid, key));
+		Room::rooms.push_back(new Room(roomRandomizer.randomizeFromKey(Room::rooms.size()), 4, 4, &grid, key));
 		if (Room::rooms[Room::rooms.size() - 1]->overlap) {
-			Room::rooms[Room::rooms.size() - 1]->~Room(); //Delete the room.
-			Room::rooms.pop_back(); //Remove last element of vector.
+			//Room::rooms[Room::rooms.size() - 1]->~Room(); //Delete the room.
+			//Room::rooms.pop_back(); //Remove last element of vector.
+			//delete Room::rooms[Room::rooms.size() - 1];
 			key += 4; //Increment the room by 4 so the size of the room and position of the room are generated with new values.
 			continue;
 		}
 		cout << "	Amount of rooms: " << Room::rooms.size() << endl;
 	} while (Room::rooms.size() < (size_x*size_y) / 30);
 	
-	Room::rooms.push_back((Room_loot*) new Room_loot(roomRandomizer.randomizeFromKey(Room::rooms.size()), 4, 4, &grid, key));
+	//Room::rooms.push_back((Room_loot*) new Room_loot(roomRandomizer.randomizeFromKey(Room::rooms.size()), 4, 4, &grid, key));
 
 	//dynamic_cast<int>(uint32_t);
-
-
 
 	//vector<Room*>::iterator it = Room::rooms.begin();
 	//for (; it < Room::rooms.end(); it++) {
