@@ -128,8 +128,8 @@ void recursive_backtracking(int * start_pos, Map * grid) {
 
 int main()
 {
-	int size_x = 30;	   // Size of map's width. (Multiply by 3 to get width in chars!)
-	int size_y = 40;	   // Size of map's height. (Multiply by 3 to get height in chars!)
+	int size_x = 50;	   // Size of map's width. (Multiply by 3 to get width in chars!)
+	int size_y = 80;	   // Size of map's height. (Multiply by 3 to get height in chars!)
 						   // Recommended X-size for teminal is 38, for output to .txt opened in notepad 341!
 
 	cout << "This map size (" << size_x << "x" << size_y << "), will be: " << (48 * (size_x*size_y))/1024 << " KB!" << endl;
@@ -149,13 +149,13 @@ int main()
 	do {
 		Room::rooms.push_back((Room*) new Room_loot(roomRandomizer.randomizeFromKey(Room::rooms.size()), 4, 4, &grid, key));
 		if (Room::rooms[Room::rooms.size() - 1]->overlap) {
-			Room::rooms[Room::rooms.size() - 1]->~Room();
-			key += 4;
+			Room::rooms[Room::rooms.size() - 1]->~Room(); //Delete the room.
+			Room::rooms.pop_back(); //Remove last element of vector.
+			key += 4; //Increment the room by 4 so the size of the room and position of the room are generated with new values.
 			continue;
 		}
-		cout << Room::rooms.size() << endl;
-
-	} while (Room::rooms.size() < (size_x*size_y) / 20);
+		cout << "	Amount of rooms: " << Room::rooms.size() << endl;
+	} while (Room::rooms.size() < (size_x*size_y) / 30);
 	
 	Room::rooms.push_back((Room_loot*) new Room_loot(roomRandomizer.randomizeFromKey(Room::rooms.size()), 4, 4, &grid, key));
 

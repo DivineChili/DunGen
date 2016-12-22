@@ -24,6 +24,11 @@ public:
 
 	Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int key);
 	Room::~Room();
+	class Start {
+	private:
+	public:
+		Start::Start(){}
+	};
 };
 
 #endif
