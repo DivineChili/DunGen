@@ -21,14 +21,9 @@ public:
 	static vector<Room*> rooms;
 	bool overlap;
 	uint32_t id;
-
 	Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int key);
-	Room::~Room();
-	class Start {
-	private:
-	public:
-		Start::Start(){}
-	};
+	virtual Room::~Room();
+	virtual void printType() = 0;
 };
 
 #endif
