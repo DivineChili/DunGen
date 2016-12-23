@@ -7,7 +7,7 @@
 class Room_loot : public Room {
 public:
 	string test;
-	Room_loot(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int key);
+	Room_loot(uint32_t seed, Map* map, int key);
 	virtual ~Room_loot();
 	virtual void Room_loot::printType();
 };
