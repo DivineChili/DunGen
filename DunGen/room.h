@@ -13,21 +13,17 @@ class Room {
 private:
 	uint32_t seed;
 	Randomizer randomizer;
-	uint32_t id;
 	uint32_t x;
 	uint32_t y;
 	uint32_t width;
 	uint32_t height;
 public:
 	static vector<Room*> rooms;
-	bool overlap; //Tells the external file that the room is overlapping a cell that has already been visited.
+	bool overlap;
+	uint32_t id;
 	Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int key);
-	Room::~Room();
-	class Start {
-	private:
-	public:
-		Start::Start(){}
-	};
+	virtual Room::~Room();
+	virtual void printType() = 0;
 };
 
 #endif
