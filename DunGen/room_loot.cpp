@@ -3,7 +3,7 @@
 
 
 Room_loot::Room_loot(uint32_t seed, Map* map, int key) : Room::Room(seed, DEFAULT, map, key), test("hello") {
-	cout << "Making room: Loot" << endl;
+	cout << "Making Room: Loot" << endl;
 }
 
 Room_loot::~Room_loot(){
