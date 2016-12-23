@@ -4,6 +4,8 @@
 #include "map.h"
 #include "room.h"
 #include "room_loot.h"
+#include "default_room.h"
+#include "boss_room.h"
 #include "randomizer.h"
 #include "xxHash32.h"
 
@@ -128,8 +130,8 @@ void recursive_backtracking(int * start_pos, Map * grid) {
 
 int main()
 {
-	int size_x = 30;	   // Size of map's width. (Multiply by 3 to get width in chars!)
-	int size_y = 100;	   // Size of map's height. (Multiply by 3 to get height in chars!)
+	int size_x = 500;	   // Size of map's width. (Multiply by 3 to get width in chars!)
+	int size_y = 200;	   // Size of map's height. (Multiply by 3 to get height in chars!)
 						   // Recommended X-size for teminal is 38, for output to .txt opened in notepad 341!
 
 	cout << "This map size (" << size_x << "x" << size_y << "), will be: " << (48 * (size_x*size_y))/1024 << " KB!" << endl;
@@ -148,16 +150,19 @@ int main()
 	int key = 0;
 	do {
 		//Room::rooms.push_back(new Room(roomRandomizer.randomizeFromKey(Room::rooms.size()), 4, 4, &grid, key));
-		cout << endl << endl << endl;
-		new Room_loot(roomRandomizer.randomizeFromKey(Room::rooms.size()), 4, 4, &grid, key);//Uses the new keyword, so the room does not get deleted instantly.
-		Room::rooms[Room::rooms.size() - 1]->printType();
+		//cout << endl << endl << endl;
+		if(roomRandomizer.randomizeFromChance(100,key)) new Room_loot(roomRandomizer.randomizeFromKey(Room::rooms.size()),&grid, key);//Uses the new keyword, so the room does not get deleted instantly.
+		//else if (roomRandomizer.randomizeFromChance(90, key)) new Default_room(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key);
+		//else if (roomRandomizer.randomizeFromChance(1, key)) new Boss_room(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key);
+		//Room::rooms[Room::rooms.size() - 1]->printType();
 		if (Room::rooms[Room::rooms.size() - 1]->overlap) {
 			Room::rooms[Room::rooms.size() - 1]->~Room(); //Delete the room.
+			//delete *Room::rooms.end();
 			Room::rooms.pop_back(); //Remove last element of vector.
 			key += 4; //Increment the room by 4 so the size of the room and position of the room are generated with new values.
 			continue;
 		}
-		cout << "	Amount of rooms: " << Room::rooms.size() << endl;
+		//cout << "	Amount of rooms: " << Room::rooms.size() << endl;
 	} while (Room::rooms.size() < (size_x*size_y) / 30);
 
 	
@@ -193,13 +198,7 @@ int main()
 	cout << "Maze seed: " << mazeSeed << endl;
 	cout << "Room seed: " << roomSeed << endl;
 
-
-	grid.drawMap();
-
-	for (int i = Room::rooms.size(); i > 0; i--) {
-		//cout << Room::rooms.size() << endl;
-		//Room::rooms.pop_back();
-	}
+	grid.outputMap("test");
 
 	return 0;
 }
