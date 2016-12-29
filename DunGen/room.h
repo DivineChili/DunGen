@@ -13,17 +13,24 @@ class Room {
 private:
 	uint32_t seed;
 	Randomizer randomizer;
+public:
 	uint32_t x;
 	uint32_t y;
+	unsigned int maxX;
+	unsigned int maxY;
 	uint32_t width;
 	uint32_t height;
-public:
+	Map* map;
 	static vector<Room*> rooms;
+	int key;
 	bool overlap;
 	uint32_t id;
-	Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int key);
+	//Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int key);
+	Room::Room(uint32_t seed, Map* map, int key, unsigned int maxX, unsigned int maxY);
 	virtual Room::~Room();
 	virtual void printType() = 0;
+	virtual bool isOverlapping();
+	virtual void build();
 };
 
 #endif

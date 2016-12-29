@@ -6,6 +6,7 @@
 #include "room_loot.h"
 #include "randomizer.h"
 #include "xxHash32.h"
+#include <cmath>
 
 using namespace std;
 
@@ -149,9 +150,16 @@ int main()
 	do {
 		//Room::rooms.push_back(new Room(roomRandomizer.randomizeFromKey(Room::rooms.size()), 4, 4, &grid, key));
 		cout << endl << endl << endl;
-		new Room_loot(roomRandomizer.randomizeFromKey(Room::rooms.size()), 4, 4, &grid, key);//Uses the new keyword, so the room does not get deleted instantly.
+		//switch (roomRandomizer.randomizeFromChance(100, 0)) {
+		//case(1):
+		//}
+		new Room_loot(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key, 4, 4);//Uses the new keyword, so the room does not get deleted instantly.
 		Room::rooms[Room::rooms.size() - 1]->printType();
-		if (Room::rooms[Room::rooms.size() - 1]->overlap) {
+		cout << Room::rooms[Room::rooms.size() - 1]->isOverlapping() << endl;
+		//cout << Room::rooms[Room::rooms.size() - 1]->overlap << endl;
+		if (!Room::rooms[Room::rooms.size() - 1]->isOverlapping()) {
+			Room::rooms[Room::rooms.size() - 1]->build();
+		} else {
 			Room::rooms[Room::rooms.size() - 1]->~Room(); //Delete the room.
 			Room::rooms.pop_back(); //Remove last element of vector.
 			key += 4; //Increment the room by 4 so the size of the room and position of the room are generated with new values.
@@ -196,9 +204,10 @@ int main()
 
 	grid.drawMap();
 
-	for (int i = Room::rooms.size(); i > 0; i--) {
+	for (int i = Room::rooms.size() - 1; i > 0; i--) {
 		//cout << Room::rooms.size() << endl;
-		//Room::rooms.pop_back();
+		Room::rooms[i]->~Room();
+		Room::rooms.pop_back();
 	}
 
 	return 0;

@@ -4,7 +4,7 @@
 
 vector<Room*> Room::rooms;
 
-Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int key) :
+/*Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int key) :
 	seed(seed), randomizer(seed), //Initialization list
 	x(this->randomizer.randomizeFromKey(key) % (map->getSize().first - maxX)),
 	y(this->randomizer.randomizeFromKey(key + 1) % (map->getSize().second - maxY)),
@@ -15,9 +15,7 @@ Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int ke
 	
 	this->rooms.push_back(this); //Push to static vector
 	cout << "Creating room!" << endl;
-	/*
-		Map construction here
-	*/
+
 	//Check for any cells already visited.
 	for (int posY = this->y; posY <= (this->y + this->height); posY++) { // Loops through the cells aalong the y-axis, starting from the starting y-position
 		for (int posX = this->x; posX <= (this->x + this->width); posX++) { // Loops through the cells along the x-axis starting from the starting x-position
@@ -57,10 +55,70 @@ Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int ke
 		cout << "Room overlapping" << endl;
 	}
 }
+*/
+
+Room::Room(uint32_t seed, Map* map, int key, unsigned int maxX, unsigned int maxY) :
+	seed(seed),
+	randomizer(seed),
+	id(Room::rooms.size()),
+	map(map),
+	key(key),
+	x(this->randomizer.randomizeFromKey(key) % (map->getSize().first - maxX)),
+	y(this->randomizer.randomizeFromKey(key + 1) % (map->getSize().second - maxY)),
+	width(((this->randomizer.randomizeFromKey(key + 2) % (maxX - 2))) + 2),
+	height(((this->randomizer.randomizeFromKey(key + 3) % (maxY - 2))) + 2),
+	overlap(false) {
+
+	this->rooms.push_back(this);
+	cout << "Creating room!" << endl;
+}
 
 Room::~Room() {
 	cout << "Destroying room!" << endl;
 }
 
+bool Room::isOverlapping() {
+	//Check for any cells already visited.
+	cout << "height:" << this->height << " width:" << this->width << " x:" << this->x << " y:" << this->y << endl;
+	for (int posY = this->y; posY <= (this->y + this->height); posY++) { // Loops through the cells aalong the y-axis, starting from the starting y-position
+		for (int posX = this->x; posX <= (this->x + this->width); posX++) { // Loops through the cells along the x-axis starting from the starting x-position
+			if (map->cellVisited(posX, posY)) {
+				//This will make the while-loop delete the room to prevent overlapping.
+				cout << "Room overlapping!!!!!!!" << endl;
+				this->overlap = true;
+				return true;
+			}
+		}
+	}
+	cout << "Room not overlapping !!!!!!" << endl;
+	return false;
+}
 
+void Room::build() {
+	if (this->width && this->height && this->x && this->y) {
+		// Loop through and generate the cells at positions in map
+		//cout << this->width << this->height << this->x << this->y << endl;
+		for (int posY = this->y; posY <= (this->y + this->height); posY++) { // Loops through the cells aalong the y-axis, starting from the starting y-position
+			for (int posX = this->x; posX <= (this->x + this->width); posX++) { // Loops through the cells along the x-axis starting from the starting x-position
+																				// Visit cell
+				this->map->visitCell(posX, posY);
+				// Construct the 4 corners of the room
+				if (posY == this->y && posX == this->x) this->map->setCellStructureAtPos(posX, posY, "####--#--"); // Top Left
+				else if (posY == (this->y + this->height) && posX == this->x) this->map->setCellStructureAtPos(posX, posY, "#--#--###"); // Bottom Left
+				else if (posY == this->y && posX == (this->x + this->width)) this->map->setCellStructureAtPos(posX, posY, "###--#--#"); // Top Right
+				else if (posY == (this->y + this->height) && posX == (this->x + this->width)) this->map->setCellStructureAtPos(posX, posY, "--#--####"); // Bottom Right
 
+																																				   // Construct the 4 walls
+				else if (posY == this->y && (posX != this->x || posX != (this->x + this->width))) this->map->setCellStructureAtPos(posX, posY, "###------"); // Top wall
+				else if (posX == this->x && (posY != this->y || posY != (this->y + this->height))) this->map->setCellStructureAtPos(posX, posY, "#--#--#--"); // Left Wall
+				else if (posY == (this->y + this->height) && (posX != this->x || posX != (this->x + this->width))) this->map->setCellStructureAtPos(posX, posY, "------###"); // Bottom wall
+				else if (posX == (this->x + this->width) && (posY != this->y || posY != (this->y + this->height))) this->map->setCellStructureAtPos(posX, posY, "--#--#--#"); // Right wall
+
+																																										// Else, construct middle room
+				else this->map->setCellStructureAtPos(posX, posY, "---------");
+
+			}
+		}
+		cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << "test" << endl;
+	}
+}
