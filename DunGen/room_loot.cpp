@@ -2,15 +2,15 @@
 #include "room_loot.h"
 
 
-Room_loot::Room_loot(uint32_t seed, Map* map, int key, unsigned int maxX, unsigned int maxY):
-	Room::Room(seed, map, key, maxX, maxY),
+Room_loot::Room_loot(uint32_t seed, Map* map, int key, unsigned int maxX, unsigned int maxY, unsigned int minX, unsigned int minY):
+	Room::Room(seed, map, key, 'L',maxX, maxY, minX, minY),
 	test("hello"){
 	
 	cout << "Making a loot room" << endl;
 }
 
 Room_loot::~Room_loot(){
-	cout << "Deleting loot room" << " -----------------------------------" << endl;
+	cout << "Deleting loot room" << endl;
 }
 
 void Room_loot::printType() {

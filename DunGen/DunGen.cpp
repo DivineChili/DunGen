@@ -4,22 +4,39 @@
 #include "map.h"
 #include "room.h"
 #include "room_loot.h"
+#include "room_enemy.h"
+#include "room_boss.h"
 #include "randomizer.h"
 #include "xxHash32.h"
 #include <cmath>
 
 using namespace std;
 
-//Randomizer for generating seeds
+//Randomizer for seed generation.
 uint32_t globalSeed = 655863;
 Randomizer globalRandomizer(globalSeed);
 
-//Randomizer for the maze generation
+//Randomizer for the maze generation.
 uint32_t mazeSeed = globalRandomizer.randomizeFromKey(0);
 Randomizer mazeRandomizer(mazeSeed);
 
+//Randomizer for room generation.
 uint32_t roomSeed = globalRandomizer.randomizeFromKey(1);
 Randomizer roomRandomizer(roomSeed);
+
+//Randomizer for room type
+
+struct roomTypeConf {
+	roomTypeConf(unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY) : minX(minX), minY(minY), maxX(maxX), maxY(maxY){}
+	unsigned int minX;
+	unsigned int minY;
+	unsigned int maxX;
+	unsigned int maxY;
+};
+roomTypeConf room_trap_conf(2, 2, 5, 5);
+roomTypeConf room_loot_conf(2, 2, 3, 3);
+roomTypeConf room_enemy_conf(3, 3, 7, 7);
+roomTypeConf room_boss_conf(15, 15, 30, 30);
 
 void recursive_backtracking(int * start_pos, Map * grid) {
 	// Create vector for recursive-backtracking history.
@@ -129,10 +146,9 @@ void recursive_backtracking(int * start_pos, Map * grid) {
 
 int main()
 {
-	int size_x = 30;	   // Size of map's width. (Multiply by 3 to get width in chars!)
+	int size_x = 50;	   // Size of map's width. (Multiply by 3 to get width in chars!)
 	int size_y = 100;	   // Size of map's height. (Multiply by 3 to get height in chars!)
 						   // Recommended X-size for teminal is 38, for output to .txt opened in notepad 341!
-
 	cout << "This map size (" << size_x << "x" << size_y << "), will be: " << (48 * (size_x*size_y))/1024 << " KB!" << endl;
 	cout << "Are you sure you wish to continue (Y/n)?";
 	string input;
@@ -148,17 +164,24 @@ int main()
 	// Generate rooms
 	int key = 0;
 	do {
-		//Room::rooms.push_back(new Room(roomRandomizer.randomizeFromKey(Room::rooms.size()), 4, 4, &grid, key));
 		cout << endl << endl << endl;
-		//switch (roomRandomizer.randomizeFromChance(100, 0)) {
-		//case(1):
-		//}
-		new Room_loot(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key, 4, 4);//Uses the new keyword, so the room does not get deleted instantly.
+		
+		int roomTypeVal = roomRandomizer.randomizeInRange(0, 100, key);
+		if (roomTypeVal < 50) {
+			new Room_enemy(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key, room_enemy_conf.maxX, room_enemy_conf.maxY, room_enemy_conf.minX, room_enemy_conf.minY);//Uses the new keyword, so the room does not get deleted instantly.
+		}
+		else if (roomTypeVal > 50 && roomTypeVal < 75) {
+			new Room_loot(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key, room_loot_conf.maxX, room_loot_conf.maxY, room_loot_conf.minX, room_loot_conf.minY);//Uses the new keyword, so the room does not get deleted instantly.
+		}
+		else if (roomTypeVal > 75) {
+			new Room_boss(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key, room_enemy_conf.maxX, room_enemy_conf.maxY, room_enemy_conf.minX, room_enemy_conf.minY);//Uses the new keyword, so the room does not get deleted instantly.
+		}
+
+		cout << roomTypeVal << endl;
 		Room::rooms[Room::rooms.size() - 1]->printType();
-		cout << Room::rooms[Room::rooms.size() - 1]->isOverlapping() << endl;
-		//cout << Room::rooms[Room::rooms.size() - 1]->overlap << endl;
 		if (!Room::rooms[Room::rooms.size() - 1]->isOverlapping()) {
 			Room::rooms[Room::rooms.size() - 1]->build();
+			key += 4;
 		} else {
 			Room::rooms[Room::rooms.size() - 1]->~Room(); //Delete the room.
 			Room::rooms.pop_back(); //Remove last element of vector.
@@ -166,7 +189,7 @@ int main()
 			continue;
 		}
 		cout << "	Amount of rooms: " << Room::rooms.size() << endl;
-	} while (Room::rooms.size() < (size_x*size_y) / 30);
+	} while (Room::rooms.size() < (size_x*size_y) / 100);
 
 	
 
@@ -180,22 +203,8 @@ int main()
 	
 	recursive_backtracking(start_pos, &grid);
 	
-	/* // Cell Debug!
-	Cell newCell = Cell();
-	cout << "Pure Cell:\n";
-	newCell.drawCell();
-	cout << "Rebuilt visited cell:\n";
-	newCell.setVisited(true);
-	newCell.rebuild();
-	newCell.drawCell();
-	cout << "Opened top and bottom cell:\n";
-	newCell.toggleSide(UP, true);
-	newCell.toggleSide(DOWN, true);
-	newCell.drawCell();
-	cout << "Rebuilt cell:\n";
-	newCell.rebuild();
-	newCell.drawCell();
-	*/
+	// Cell Debug!
+	//Cell newCell = Cell(); cout << "Pure Cell:\n"; newCell.drawCell(); cout << "Rebuilt visited cell:\n";newCell.setVisited(true);newCell.rebuild();newCell.drawCell();cout << "Opened top and bottom cell:\n";newCell.toggleSide(UP, true);newCell.toggleSide(DOWN, true);newCell.drawCell();cout << "Rebuilt cell:\n";newCell.rebuild();newCell.drawCell();
 	cout << endl;
 	cout << "Global seed: " << globalSeed << endl;
 	cout << "Maze seed: " << mazeSeed << endl;

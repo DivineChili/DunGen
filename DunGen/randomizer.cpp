@@ -34,6 +34,9 @@ bool Randomizer::randomizeFromChance(int chance, uint32_t key){
 	else return 0;
 	cout << result % 2 << endl;
 }
+uint32_t Randomizer::randomizeInRange(uint32_t min, uint32_t max, uint32_t key) {
+	return (this->randomizeFromKey(key) + min) % max;
+}
 void Randomizer::setSeed(uint32_t seed) {
 	this->seed = seed;
 	this->updateSeed();

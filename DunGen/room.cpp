@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "room.h"
 #include "room_loot.h"
+#include <string>
 
 vector<Room*> Room::rooms;
 
@@ -57,16 +58,17 @@ vector<Room*> Room::rooms;
 }
 */
 
-Room::Room(uint32_t seed, Map* map, int key, unsigned int maxX, unsigned int maxY) :
+Room::Room(uint32_t seed, Map* map, int key, char letter, unsigned int maxX, unsigned int maxY, unsigned int minX, unsigned int minY) :
 	seed(seed),
 	randomizer(seed),
 	id(Room::rooms.size()),
 	map(map),
 	key(key),
+	letter(letter),
 	x(this->randomizer.randomizeFromKey(key) % (map->getSize().first - maxX)),
 	y(this->randomizer.randomizeFromKey(key + 1) % (map->getSize().second - maxY)),
-	width(((this->randomizer.randomizeFromKey(key + 2) % (maxX - 2))) + 2),
-	height(((this->randomizer.randomizeFromKey(key + 3) % (maxY - 2))) + 2),
+	width((this->randomizer.randomizeFromKey(key + 2) % (maxX - minX)) + minX),
+	height((this->randomizer.randomizeFromKey(key+ 3) % (maxY - minY)) + minY),
 	overlap(false) {
 
 	this->rooms.push_back(this);
@@ -119,6 +121,14 @@ void Room::build() {
 
 			}
 		}
+		string cell = "----";
+		cell += letter;
+		cell += "----";
+		this->map->setCellStructureAtPos(this->x + this->width / 2, this->y + this->height / 2, cell);
 		cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << "test" << endl;
 	}
+}
+
+void Room::updateRandomizerSeed() {
+	this->randomizer.updateSeed();
 }
