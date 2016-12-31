@@ -24,8 +24,6 @@ Randomizer mazeRandomizer(mazeSeed);
 uint32_t roomSeed = globalRandomizer.randomizeFromKey(1);
 Randomizer roomRandomizer(roomSeed);
 
-//Randomizer for room type
-
 struct roomTypeConf {
 	roomTypeConf(unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY) : minX(minX), minY(minY), maxX(maxX), maxY(maxY){}
 	unsigned int minX;
@@ -174,7 +172,7 @@ int main()
 			new Room_loot(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key, room_loot_conf.maxX, room_loot_conf.maxY, room_loot_conf.minX, room_loot_conf.minY);//Uses the new keyword, so the room does not get deleted instantly.
 		}
 		else if (roomTypeVal > 75) {
-			new Room_boss(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key, room_enemy_conf.maxX, room_enemy_conf.maxY, room_enemy_conf.minX, room_enemy_conf.minY);//Uses the new keyword, so the room does not get deleted instantly.
+			new Room_boss(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key, room_boss_conf.maxX, room_boss_conf.maxY, room_boss_conf.minX, room_boss_conf.minY);//Uses the new keyword, so the room does not get deleted instantly.
 		}
 
 		cout << roomTypeVal << endl;
@@ -190,14 +188,6 @@ int main()
 		}
 		cout << "	Amount of rooms: " << Room::rooms.size() << endl;
 	} while (Room::rooms.size() < (size_x*size_y) / 100);
-
-	
-
-	//vector<Room*>::iterator it = Room::rooms.begin();
-	//for (; it < Room::rooms.end(); it++) {
-	//	cout << "Deleting: " << (*it). << endl;
-	//	delete(*it);
-	//}
 
 	cout << "Rooms generated: " << Room::rooms.size() << endl;
 	
