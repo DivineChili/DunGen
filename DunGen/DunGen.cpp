@@ -182,7 +182,6 @@ int main()
 			key += 4;
 		} else {
 			Room::rooms[Room::rooms.size() - 1]->~Room(); //Delete the room.
-			Room::rooms.pop_back(); //Remove last element of vector.
 			key += 4; //Increment the room by 4 so the size of the room and position of the room are generated with new values.
 			continue;
 		}
@@ -199,14 +198,13 @@ int main()
 	cout << "Global seed: " << globalSeed << endl;
 	cout << "Maze seed: " << mazeSeed << endl;
 	cout << "Room seed: " << roomSeed << endl;
+	cout << "Boss rooms: " << Room_boss::bossRooms.size() << endl;;
 
 
 	grid.drawMap();
 
 	for (int i = Room::rooms.size() - 1; i > 0; i--) {
-		//cout << Room::rooms.size() << endl;
 		Room::rooms[i]->~Room();
-		Room::rooms.pop_back();
 	}
 
 	return 0;

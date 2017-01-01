@@ -77,6 +77,7 @@ Room::Room(uint32_t seed, Map* map, int key, char letter, unsigned int maxX, uns
 
 Room::~Room() {
 	cout << "Destroying room!" << endl;
+	Room::rooms.pop_back(); //Remove last element of vector.
 }
 
 bool Room::isOverlapping() {
