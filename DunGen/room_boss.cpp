@@ -18,7 +18,6 @@ Room_boss::~Room_boss(){
 void Room_boss::printType() {
 	string roomtype = typeid(this->rooms[this->id]).name();
 	cout << "This room is of type: " << roomtype << endl;
-	//cout << "Test: " << test << endl;
 }
 
-vector<Room*> Room_boss::bossRooms;
+vector<Room_boss*> Room_boss::bossRooms;

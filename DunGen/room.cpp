@@ -122,6 +122,7 @@ void Room::build() {
 
 			}
 		}
+		//Code for labeling the rooms by type with a character.
 		string cell = "----";
 		cell += letter;
 		cell += "----";

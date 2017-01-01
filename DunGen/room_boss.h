@@ -11,7 +11,7 @@ public:
 	Room_boss(uint32_t seed, Map* map, int key, unsigned int maxX, unsigned int maxY, unsigned int minX, unsigned int minY);
 	virtual ~Room_boss();
 	virtual void Room_boss::printType();
-	static vector<Room*> bossRooms;
+	static vector<Room_boss*> bossRooms;
 	uint32_t bossId;
 private:
 };

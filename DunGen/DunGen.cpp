@@ -6,6 +6,7 @@
 #include "room_loot.h"
 #include "room_enemy.h"
 #include "room_boss.h"
+#include "room_trap.h"
 #include "randomizer.h"
 #include "xxHash32.h"
 #include <cmath>
@@ -145,7 +146,7 @@ void recursive_backtracking(int * start_pos, Map * grid) {
 int main()
 {
 	int size_x = 50;	   // Size of map's width. (Multiply by 3 to get width in chars!)
-	int size_y = 100;	   // Size of map's height. (Multiply by 3 to get height in chars!)
+	int size_y = 1000;	   // Size of map's height. (Multiply by 3 to get height in chars!)
 						   // Recommended X-size for teminal is 38, for output to .txt opened in notepad 341!
 	cout << "This map size (" << size_x << "x" << size_y << "), will be: " << (48 * (size_x*size_y))/1024 << " KB!" << endl;
 	cout << "Are you sure you wish to continue (Y/n)?";
@@ -164,6 +165,7 @@ int main()
 	do {
 		cout << endl << endl << endl;
 		
+		//These percentages are not correct, because smaller rooms are less likely to overlap and get deleted. I will fix this later.
 		int roomTypeVal = roomRandomizer.randomizeInRange(0, 100, key);
 		if (roomTypeVal < 50) {
 			new Room_enemy(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key, room_enemy_conf.maxX, room_enemy_conf.maxY, room_enemy_conf.minX, room_enemy_conf.minY);//Uses the new keyword, so the room does not get deleted instantly.
@@ -171,8 +173,11 @@ int main()
 		else if (roomTypeVal > 50 && roomTypeVal < 75) {
 			new Room_loot(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key, room_loot_conf.maxX, room_loot_conf.maxY, room_loot_conf.minX, room_loot_conf.minY);//Uses the new keyword, so the room does not get deleted instantly.
 		}
-		else if (roomTypeVal > 75) {
+		else if (roomTypeVal > 75 && roomTypeVal < 90) {
 			new Room_boss(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key, room_boss_conf.maxX, room_boss_conf.maxY, room_boss_conf.minX, room_boss_conf.minY);//Uses the new keyword, so the room does not get deleted instantly.
+		}
+		else if (roomTypeVal > 90) {
+			new Room_trap(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key, room_trap_conf.maxX, room_trap_conf.maxY, room_trap_conf.minX, room_trap_conf.minY);//Uses the new keyword, so the room does not get deleted instantly.
 		}
 
 		cout << roomTypeVal << endl;
@@ -198,7 +203,10 @@ int main()
 	cout << "Global seed: " << globalSeed << endl;
 	cout << "Maze seed: " << mazeSeed << endl;
 	cout << "Room seed: " << roomSeed << endl;
-	cout << "Boss rooms: " << Room_boss::bossRooms.size() << endl;;
+	cout << "Loot rooms: " << Room_loot::lootRooms.size() << endl;
+	cout << "enemy room: " << Room_enemy::enemyRooms.size() << endl;
+	cout << "Boss rooms: " << Room_boss::bossRooms.size() << endl;
+	cout << "Trap rooms: " << Room_trap::trapRooms.size() << endl;
 
 
 	grid.drawMap();
@@ -206,6 +214,8 @@ int main()
 	for (int i = Room::rooms.size() - 1; i > 0; i--) {
 		Room::rooms[i]->~Room();
 	}
+
+
 
 	return 0;
 }
