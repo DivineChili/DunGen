@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef CELL_H
 #define CELL_H
 
@@ -15,8 +15,13 @@ enum DIRECTIONS { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 class Cell {
 private:
 	string cell_struct = "";
-	char wall = '#';
-	char floor = '-';
+	char wall   = '#';
+	char noWall = ',';
+	char corner = 'O';
+	char noCorner='-';
+	char floor  = ' ';
+	char block  = '=';
+	char door   = '/';
 public:
 	Cell::Cell();
 	void Cell::rebuild();

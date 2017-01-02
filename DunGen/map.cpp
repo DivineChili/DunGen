@@ -6,19 +6,19 @@
 
 using namespace std;
 
-// Just a constructer
+// Just a constructor
 Map::Map(unsigned int sizeX, unsigned int sizeY) {
 	this->size_x = sizeX; this->size_y = sizeY;	  // Set the private fields size_x and size_y to the sepsified parameters.
 	this->map_grid = vector< vector<Cell>>(this->size_y, vector<Cell>(this->size_x));   // Initialize the map_grid with 
 																						//2. dimensional vectors containing cell-objects
-	for (int i = 0; i < this->map_grid.size(); i++) // Loop through the virst vector
+	for (int i = 0; i < this->map_grid.size(); i++) // Loop through the first vector
 	{
 		vector<Cell>::iterator it = this->map_grid[i].begin(); // Create an iterator to loop through second vector
 		for (; it < this->map_grid[i].end(); ++it) 	// Loop through iterator
 		{
 			*it = Cell(); // Set the iterator's referenced value to a new cell-object
-			it->setFloorChar('-');
-			it->setWallChar('#');
+			//it->setFloorChar('-');
+			//it->setWallChar('#');
 		}
 	}
 }

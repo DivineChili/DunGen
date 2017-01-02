@@ -12,8 +12,8 @@ using namespace std;
 class Room {
 private:
 	uint32_t seed;
-	Randomizer randomizer;
 public:
+	Randomizer randomizer;
 	uint32_t x;
 	uint32_t y;
 	unsigned int maxX;

@@ -7,6 +7,7 @@ Room_loot::Room_loot(uint32_t seed, Map* map, int key, unsigned int maxX, unsign
 	lootId(Room_loot::lootRooms.size()){
 	
 	lootRooms.push_back(this);
+
 	cout << "Making a loot room" << endl;
 }
 

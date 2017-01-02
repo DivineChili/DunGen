@@ -98,36 +98,46 @@ bool Room::isOverlapping() {
 }
 
 void Room::build() {
-	if (this->width && this->height && this->x && this->y) {
-		// Loop through and generate the cells at positions in map
-		//cout << this->width << this->height << this->x << this->y << endl;
-		for (int posY = this->y; posY <= (this->y + this->height); posY++) { // Loops through the cells aalong the y-axis, starting from the starting y-position
-			for (int posX = this->x; posX <= (this->x + this->width); posX++) { // Loops through the cells along the x-axis starting from the starting x-position
-																				// Visit cell
-				this->map->visitCell(posX, posY);
-				// Construct the 4 corners of the room
-				if (posY == this->y && posX == this->x) this->map->setCellStructureAtPos(posX, posY, "####--#--"); // Top Left
-				else if (posY == (this->y + this->height) && posX == this->x) this->map->setCellStructureAtPos(posX, posY, "#--#--###"); // Bottom Left
-				else if (posY == this->y && posX == (this->x + this->width)) this->map->setCellStructureAtPos(posX, posY, "###--#--#"); // Top Right
-				else if (posY == (this->y + this->height) && posX == (this->x + this->width)) this->map->setCellStructureAtPos(posX, posY, "--#--####"); // Bottom Right
+	// Loop through and generate the cells at positions in map
+	//cout << this->width << this->height << this->x << this->y << endl;
+	for (int posY = this->y; posY <= (this->y + this->height); posY++) { // Loops through the cells aalong the y-axis, starting from the starting y-position
+		for (int posX = this->x; posX <= (this->x + this->width); posX++) { // Loops through the cells along the x-axis starting from the starting x-position
+																			// Visit cell
+			this->map->visitCell(posX, posY);
+			// Construct the 4 corners of the room
+			if (posY == this->y && posX == this->x) this->map->setCellStructureAtPos(posX, posY, "####--#--"); // Top Left
+			else if (posY == (this->y + this->height) && posX == this->x) this->map->setCellStructureAtPos(posX, posY, "#--#--###"); // Bottom Left
+			else if (posY == this->y && posX == (this->x + this->width)) this->map->setCellStructureAtPos(posX, posY, "###--#--#"); // Top Right
+			else if (posY == (this->y + this->height) && posX == (this->x + this->width)) this->map->setCellStructureAtPos(posX, posY, "--#--####"); // Bottom Right
+																																							   // Construct the 4 walls
+			else if (posY == this->y && (posX != this->x || posX != (this->x + this->width))) this->map->setCellStructureAtPos(posX, posY, "###------"); // Top wall
+			else if (posX == this->x && (posY != this->y || posY != (this->y + this->height))) this->map->setCellStructureAtPos(posX, posY, "#--#--#--"); // Left Wall
+			else if (posY == (this->y + this->height) && (posX != this->x || posX != (this->x + this->width))) this->map->setCellStructureAtPos(posX, posY, "------###"); // Bottom wall
+			else if (posX == (this->x + this->width) && (posY != this->y || posY != (this->y + this->height))) this->map->setCellStructureAtPos(posX, posY, "--#--#--#"); // Right wall
+																																													// Else, construct middle room
+			else this->map->setCellStructureAtPos(posX, posY, "---------");
 
-																																				   // Construct the 4 walls
-				else if (posY == this->y && (posX != this->x || posX != (this->x + this->width))) this->map->setCellStructureAtPos(posX, posY, "###------"); // Top wall
-				else if (posX == this->x && (posY != this->y || posY != (this->y + this->height))) this->map->setCellStructureAtPos(posX, posY, "#--#--#--"); // Left Wall
-				else if (posY == (this->y + this->height) && (posX != this->x || posX != (this->x + this->width))) this->map->setCellStructureAtPos(posX, posY, "------###"); // Bottom wall
-				else if (posX == (this->x + this->width) && (posY != this->y || posY != (this->y + this->height))) this->map->setCellStructureAtPos(posX, posY, "--#--#--#"); // Right wall
-
-																																										// Else, construct middle room
-				else this->map->setCellStructureAtPos(posX, posY, "---------");
-
-			}
 		}
-		//Code for labeling the rooms by type with a character.
-		string cell = "----";
-		cell += letter;
-		cell += "----";
-		this->map->setCellStructureAtPos(this->x + this->width / 2, this->y + this->height / 2, cell);
-		cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << "test" << endl;
+	}
+	//Code for labeling the rooms by type with a character.
+	string cell = "----";
+	cell += letter;
+	cell += "----";
+	this->map->setCellStructureAtPos(this->x + this->width / 2, this->y + this->height / 2, cell);
+	cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << "test" << endl;
+
+	int sideNum = this->randomizer.randomizeInRange(0, 3, this->id);
+	if (sideNum == 0) {
+		this->map->setCellStructureAtPos((this->x + this->width/2), this->y, "DDDDDDDDD");
+	}
+	else if (sideNum == 1) {
+		this->map->setCellStructureAtPos(this->x, (this->y + this->height / 2), "DDDDDDDDD");
+	}
+	else if (sideNum == 2) {
+		this->map->setCellStructureAtPos((this->x + this->width/2), (this->y + this->height), "DDDDDDDDD");
+	}
+	else if (sideNum == 3) {
+		this->map->setCellStructureAtPos((this->x + this->width), this->y + this->height/2, "DDDDDDDDD");
 	}
 }
 
