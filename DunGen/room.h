@@ -32,6 +32,7 @@ public:
 	virtual void printType() = 0;
 	virtual bool isOverlapping();
 	virtual void build();
+	virtual void buildDoors();
 	void updateRandomizerSeed();
 };
 

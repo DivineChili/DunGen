@@ -124,20 +124,42 @@ void Room::build() {
 	cell += letter;
 	cell += "----";
 	this->map->setCellStructureAtPos(this->x + this->width / 2, this->y + this->height / 2, cell);
-	cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << "test" << endl;
+	cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << endl;
 
-	int sideNum = this->randomizer.randomizeInRange(0, 3, this->id);
-	if (sideNum == 0) {
-		this->map->setCellStructureAtPos((this->x + this->width/2), this->y, "DDDDDDDDD");
-	}
-	else if (sideNum == 1) {
-		this->map->setCellStructureAtPos(this->x, (this->y + this->height / 2), "DDDDDDDDD");
-	}
-	else if (sideNum == 2) {
-		this->map->setCellStructureAtPos((this->x + this->width/2), (this->y + this->height), "DDDDDDDDD");
-	}
-	else if (sideNum == 3) {
-		this->map->setCellStructureAtPos((this->x + this->width), this->y + this->height/2, "DDDDDDDDD");
+	buildDoors();
+}
+void Room::buildDoors() {
+	for (int i = 0; i < 2; i++) {
+		int sideNum = this->randomizer.randomizeInRange(0, 3, this->id + i);
+		int j = 0;
+		if (sideNum == 0) {
+			j = 0;
+			do {
+				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, this->y, "DDDDDDDDD");
+				j++;
+			} while ((this->width + j) % 2 != 1);
+		}
+		else if (sideNum == 1) {
+			j = 0;
+			do {
+				this->map->setCellStructureAtPos(this->x, (this->y + floor(this->height / 2)) + j, "DDDDDDDDD");
+				j++;
+			} while ((this->height + j) % 2 != 1);
+		}
+		else if (sideNum == 2) {
+			j = 0;
+			do {
+				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height), "DDDDDDDDD");
+				j++;
+			} while ((this->height + j) % 2 != 1);
+		}
+		else if (sideNum == 3) {
+			j = 0;
+			do {
+				this->map->setCellStructureAtPos((this->x + this->width), this->y + floor(this->height / 2) + j, "DDDDDDDDD");
+				j++;
+			} while ((this->height + j) % 2 != 1);
+		}
 	}
 }
 
