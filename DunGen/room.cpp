@@ -120,14 +120,14 @@ void Room::build() {
 		}
 	}
 	//Code for labeling the rooms by type with a character.
-	string cell = "----";
-	cell += letter;
-	cell += "----";
+	string cell;
+	cell += "----";	cell += letter;	cell += "----";
 	this->map->setCellStructureAtPos(this->x + this->width / 2, this->y + this->height / 2, cell);
 	cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << endl;
 
 	buildDoors();
 }
+
 void Room::buildDoors() {
 	for (int i = 0; i < 2; i++) {
 		int sideNum = this->randomizer.randomizeInRange(0, 3, this->id + i);
