@@ -8,7 +8,7 @@ Room_loot::Room_loot(uint32_t seed, Map* map, int key, unsigned int maxX, unsign
 	
 	lootRooms.push_back(this);
 
-	cout << "Making a loot room" << endl;
+	//cout << "Making a loot room" << endl;
 }
 
 Room_loot::~Room_loot(){

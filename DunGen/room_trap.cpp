@@ -7,7 +7,7 @@ Room_trap::Room_trap(uint32_t seed, Map* map, int key, unsigned int maxX, unsign
 	trapId(Room_trap::trapRooms.size()) {
 
 	trapRooms.push_back(this);
-	cout << "Creating a trap room!" << endl;
+	//cout << "Creating a trap room!" << endl;
 }
 
 

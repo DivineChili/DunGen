@@ -72,7 +72,7 @@ Room::Room(uint32_t seed, Map* map, int key, char letter, unsigned int maxX, uns
 	overlap(false) {
 
 	this->rooms.push_back(this);
-	cout << "Creating room!" << endl;
+	//cout << "Creating room!" << endl;
 }
 
 Room::~Room() {
@@ -82,18 +82,18 @@ Room::~Room() {
 
 bool Room::isOverlapping() {
 	//Check for any cells already visited.
-	cout << "height:" << this->height << " width:" << this->width << " x:" << this->x << " y:" << this->y << endl;
+	//cout << "height:" << this->height << " width:" << this->width << " x:" << this->x << " y:" << this->y << endl;
 	for (int posY = this->y; posY <= (this->y + this->height); posY++) { // Loops through the cells aalong the y-axis, starting from the starting y-position
 		for (int posX = this->x; posX <= (this->x + this->width); posX++) { // Loops through the cells along the x-axis starting from the starting x-position
 			if (map->cellVisited(posX, posY)) {
 				//This will make the while-loop delete the room to prevent overlapping.
-				cout << "Room overlapping!!!!!!!" << endl;
+				//cout << "Room overlapping!!!!!!!" << endl;
 				this->overlap = true;
 				return true;
 			}
 		}
 	}
-	cout << "Room not overlapping !!!!!!" << endl;
+	//cout << "Room not overlapping !!!!!!" << endl;
 	return false;
 }
 
@@ -121,9 +121,9 @@ void Room::build() {
 	}
 	//Code for labeling the rooms by type with a character.
 	string cell;
-	cell += "----";	cell += letter;	cell += "----";
+	//cell += "----";	cell += letter;	cell += "----";
 	this->map->setCellStructureAtPos(this->x + this->width / 2, this->y + this->height / 2, cell);
-	cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << endl;
+	//cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << endl;
 
 	buildDoors();
 }

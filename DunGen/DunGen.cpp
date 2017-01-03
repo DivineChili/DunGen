@@ -163,7 +163,7 @@ int main()
 	// Generate rooms
 	int key = 0;
 	do {
-		cout << endl << endl << endl;
+		//cout << endl << endl << endl;
 		
 		//These percentages are not correct, because smaller rooms are less likely to overlap and get deleted. I will fix this later.
 		int roomTypeVal = roomRandomizer.randomizeInRange(0, 100, key);
@@ -180,8 +180,8 @@ int main()
 			new Room_trap(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key, room_trap_conf.maxX, room_trap_conf.maxY, room_trap_conf.minX, room_trap_conf.minY);//Uses the new keyword, so the room does not get deleted instantly.
 		}
 
-		cout << roomTypeVal << endl;
-		Room::rooms[Room::rooms.size() - 1]->printType();
+		//cout << roomTypeVal << endl;
+		//Room::rooms[Room::rooms.size() - 1]->printType();
 		if (!Room::rooms[Room::rooms.size() - 1]->isOverlapping()) {
 			Room::rooms[Room::rooms.size() - 1]->build();
 			key += 4;
@@ -190,7 +190,7 @@ int main()
 			key += 4; //Increment the room by 4 so the size of the room and position of the room are generated with new values.
 			continue;
 		}
-		cout << "	Amount of rooms: " << Room::rooms.size() << endl;
+		//cout << "	Amount of rooms: " << Room::rooms.size() << endl;
 	} while (Room::rooms.size() < (size_x*size_y) / 100);
 
 	cout << "Rooms generated: " << Room::rooms.size() << endl;

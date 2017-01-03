@@ -8,16 +8,7 @@ Room_boss::Room_boss(uint32_t seed, Map* map, int key, unsigned int maxX, unsign
 
 	bossRooms.push_back(this);
 
-	int doorSide = this->randomizer.randomizeInRange(0, 3, 0);
-	if (doorSide == 0) {
-		if (this->width % 2) { //True if odd
-			//cout << "lkajfsd;lkfajsl;kdfjlkasj;lfjalsk;djfl;kajl;kfjl;askdj;fklaklfjsal;jdf;lkajfkl;adsj" << endl;
-			//cout << "x:" << this->x + ((this->width / 2)) << " y:" << this->y << endl;
-			//map->setCellStructureAtPos(this->x + (floor(this->width / 2)), this->y, "DDDDDDDDD");
-		}
-	}
-
-	cout << "Creating a boss room!" << endl;
+	//cout << "Creating a boss room!" << endl;
 }
 
 
@@ -51,6 +42,89 @@ void Room_boss::build() {
 			else this->map->setCellStructureAtPos(posX, posY, "---------");
 
 		}
+	}
+
+	//This will place columns along the long sides of boss rooms.
+
+	if (this->width > this->height) {
+		if (width > 8) {
+			if ((this->width % 2) == 0) {
+				//Place a column at every other corner.
+
+				for (int i = 0; i <= this->width; i += 2) {
+					this->map->setCellStructureAtPos(this->x + i, this->y + 1,"    0    ");
+					this->map->setCellStructureAtPos(this->x + i, this->y + 2,"    0    ");
+					this->map->setCellStructureAtPos(this->x + i + 1, this->y + 1,"    0    ");
+					this->map->setCellStructureAtPos(this->x + i + 1, this->y + 2,"    0    ");
+
+					this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 1,"    0    ");
+					this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 2,"    0    ");
+					this->map->setCellStructureAtPos(this->x + i + 1, this->y + this->height - 1,"    0    ");
+					this->map->setCellStructureAtPos(this->x + i + 1, this->y + this->height - 2,"    0    ");
+				}				
+			}
+			else {
+				//Place a column at every corner.
+				for (int i = 0; i <= this->width; i++) {
+					this->map->setCellStructureAtPos(this->x + i, this->y + 1, "    - C C");
+					this->map->setCellStructureAtPos(this->x + i, this->y + 2, "C C -    ");
+					
+					this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 1, "C C -    ");
+					this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 2, "    - C C");
+				}
+			}
+		}
+		else {
+			//Place a column at every corner.
+			for (int i = 0; i <= this->width; i++) {
+				this->map->setCellStructureAtPos(this->x + i, this->y + 1, "    - C C");
+				this->map->setCellStructureAtPos(this->x + i, this->y + 2, "C C -    ");
+
+				this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 1, "C C -    ");
+				this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 2, "    - C C");
+			}
+		}
+	}
+	else if (this->width < this->height) {
+		if (width > 8) {
+			if ((this->width % 2) == 0) {
+				//Place a column at every other corner.
+				for (int i = 0; i <= this->height; i += 2) {
+					this->map->setCellStructureAtPos(this->x + 1, this->y + i,     "    0   C");
+					this->map->setCellStructureAtPos(this->x + 2, this->y + i,     "    0 C  ");
+					this->map->setCellStructureAtPos(this->x + 1, this->y + i + 1, "  C 0    ");
+					this->map->setCellStructureAtPos(this->x + 2, this->y + i + 1, "C   0    ");
+				
+					this->map->setCellStructureAtPos(this->x + this->width - 1, this->y + i,     "    0 C  ");
+					this->map->setCellStructureAtPos(this->x + this->width - 2, this->y + i,     "    0   C");
+					this->map->setCellStructureAtPos(this->x + this->width - 1, this->y + i + 1, "C   0    ");
+					this->map->setCellStructureAtPos(this->x + this->width - 2, this->y + i + 1, "  C 0    ");
+				}
+			}
+			else {
+				//Place a column at every corner.
+				for (int i = 0; i <= this->height; i++) {
+					this->map->setCellStructureAtPos(this->x + 1, this->y + i, "  C  -  C");
+					this->map->setCellStructureAtPos(this->x + 2, this->y + i, "C  -  C  ");
+					
+					this->map->setCellStructureAtPos(this->x + this->width - 1, this->y + i, "C  -  C  ");
+					this->map->setCellStructureAtPos(this->x + this->width - 2, this->y + i, "  C  -  C");
+				}
+			}
+		}
+		else {
+			//Place a column at every corner.
+			for (int i = 0; i <= this->height; i++) {
+				this->map->setCellStructureAtPos(this->x + 1, this->y + i, "  C  -  C");
+				this->map->setCellStructureAtPos(this->x + 2, this->y + i, "C  -  C  ");
+
+				this->map->setCellStructureAtPos(this->x + this->width - 1, this->y + i, "C  -  C  ");
+				this->map->setCellStructureAtPos(this->x + this->width - 2, this->y + i, "  C  -  C");
+			}
+		}
+	}
+	else if (this->width == this->height) {
+		cout << "width = height" << endl;
 	}
 
 	//Code for labeling the rooms by type with a character.
