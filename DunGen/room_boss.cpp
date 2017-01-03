@@ -22,7 +22,7 @@ Room_boss::Room_boss(uint32_t seed, Map* map, int key, unsigned int maxX, unsign
 
 
 Room_boss::~Room_boss(){
-	cout << "Deleting boss room!" << endl;
+	//cout << "Deleting boss room!" << endl;
 	Room_boss::bossRooms.pop_back();
 }
 void Room_boss::printType() {

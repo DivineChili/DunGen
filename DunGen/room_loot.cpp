@@ -12,7 +12,7 @@ Room_loot::Room_loot(uint32_t seed, Map* map, int key, unsigned int maxX, unsign
 }
 
 Room_loot::~Room_loot(){
-	cout << "Deleting loot room" << endl;
+	//cout << "Deleting loot room" << endl;
 	Room_loot::lootRooms.pop_back();
 }
 

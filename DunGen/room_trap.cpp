@@ -12,7 +12,7 @@ Room_trap::Room_trap(uint32_t seed, Map* map, int key, unsigned int maxX, unsign
 
 
 Room_trap::~Room_trap() {
-	cout << "Deleting trap room!" << endl;
+	//cout << "Deleting trap room!" << endl;
 	Room_trap::trapRooms.pop_back();
 }
 void Room_trap::printType() {

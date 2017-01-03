@@ -76,7 +76,7 @@ Room::Room(uint32_t seed, Map* map, int key, char letter, unsigned int maxX, uns
 }
 
 Room::~Room() {
-	cout << "Destroying room!" << endl;
+	//cout << "Destroying room!" << endl;
 	Room::rooms.pop_back(); //Remove last element of vector.
 }
 
@@ -151,7 +151,7 @@ void Room::buildDoors() {
 			do {
 				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height), "DDDDDDDDD");
 				j++;
-			} while ((this->height + j) % 2 != 1);
+			} while ((this->width + j) % 2 != 1);
 		}
 		else if (sideNum == 3) {
 			j = 0;

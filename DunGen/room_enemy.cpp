@@ -12,7 +12,7 @@ Room_enemy::Room_enemy(uint32_t seed, Map* map, int key, unsigned int maxX, unsi
 
 
 Room_enemy::~Room_enemy(){
-	cout << "Deleting enemy room!" << endl;
+	//cout << "Deleting enemy room!" << endl;
 	Room_enemy::enemyRooms.pop_back();
 }
 void Room_enemy::printType() {
