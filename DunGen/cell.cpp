@@ -102,7 +102,14 @@ void Cell::setVisited(bool state) { this->_visited = state; this->cell_struct[4]
 
 // Dangerous function! Use at own risk!
 void Cell::setCellStructure(string structure) {
-	this->cell_struct = structure;
+	int i = 0;
+	for (char c : structure) {
+		if (c != ' ') { // if replaced by a space, do not replace.
+			this->cell_struct[i] = c;
+		}
+		i++;
+	}
+	//this->cell_struct = structure;
 }
 
 
