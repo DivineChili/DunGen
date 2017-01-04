@@ -121,7 +121,7 @@ void Room::build() {
 	}
 	//Code for labeling the rooms by type with a character.
 	string cell;
-	//cell += "----";	cell += letter;	cell += "----";
+	cell += "----";	cell += letter;	cell += "----";
 	this->map->setCellStructureAtPos(this->x + this->width / 2, this->y + this->height / 2, cell);
 	//cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << endl;
 
