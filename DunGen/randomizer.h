@@ -19,6 +19,7 @@ public:
 	uint32_t Randomizer::randomizeAtPos(uint32_t x, uint32_t y); //Returns a random number for the specified position
 	uint32_t Randomizer::randomizeFromKey(uint32_t key);
 	bool Randomizer::randomizeFromChance(int chance, uint32_t key);
+	uint32_t Randomizer::randomizeInRange(uint32_t min, uint32_t max, uint32_t key);
 	void Randomizer::setSeed(uint32_t seed);
 	uint32_t Randomizer::getSeed();
 	void Randomizer::updateSeed();

@@ -9,26 +9,31 @@
 
 using namespace std;
 
-static enum TYPE {DEFAULT = 0, LOOT = 1, BOSS = 2};
-
 class Room {
 private:
 	uint32_t seed;
+public:
 	Randomizer randomizer;
 	uint32_t x;
 	uint32_t y;
+	unsigned int maxX;
+	unsigned int maxY;
 	uint32_t width;
 	uint32_t height;
-public:
+	Map* map;
 	static vector<Room*> rooms;
+	int key;
 	bool overlap;
 	uint32_t id;
-	Room::Room(uint32_t seed, pair<int, int> min, pair<int, int> max, Map* map, int key);
-	Room::Room(uint32_t seed, int type, Map* map, int key);
+	char letter;
+	//Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int key);
+	Room::Room(uint32_t seed, Map* map, int key, char letter, unsigned int maxX, unsigned int maxY, unsigned int minX, unsigned int minY);
 	virtual Room::~Room();
 	virtual void printType() = 0;
-	void Room::construct(Map* map);
-	int Room::getSizeFromType(char xy, int type, bool _max);
+	virtual bool isOverlapping();
+	virtual void build();
+	virtual void buildDoors();
+	void updateRandomizerSeed();
 };
 
 #endif

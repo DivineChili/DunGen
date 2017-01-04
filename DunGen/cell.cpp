@@ -15,18 +15,20 @@ Cell::Cell() {
 
 	// Create upper row (y=0)
 	for (i = 0; i < 3; i++) {
-		this->cell_struct += this->wall;
+		if (i == 0 || i == 2) this->cell_struct += this->corner;
+		else this->cell_struct += this->wall;
 	}
 
 	// Create middlerow (y=1)
 	for (i = 0; i < 3; i++) {
-		if (i == 1 && this->_visited) this->cell_struct += this->floor;
+		if (i == 1 && this->_visited) this->cell_struct += this->block;
 		else this->cell_struct += this->wall;
 	}
 
 	// Create bottom row
 	for (i = 0; i < 3; i++) {
-		this->cell_struct += this->wall;
+		if (i == 0 || i == 2) this->cell_struct += this->corner;
+		else this->cell_struct += this->wall;
 	}
 }
 
@@ -37,18 +39,20 @@ void Cell::rebuild() {
 
 	// Create upper row (y=0)
 	for (i = 0; i < 3; i++) {
-		this->cell_struct += this->wall;
+		if (i == 1 || i == 2) this->cell_struct += this->corner;
+		else this->cell_struct += this->wall;
 	}
 
 	// Create middlerow (y=1)
 	for (i = 0; i < 3; i++) {
-		if (i == 1) this->cell_struct += this->floor;
+		if (i == 1) this->cell_struct += this->block;
 		else this->cell_struct += this->wall;
 	}
 
 	// Create bottom row
 	for (i = 0; i < 3; i++) {
-		this->cell_struct += this->wall;
+		if (i == 0 || i == 2) this->cell_struct += this->corner;
+		else this->cell_struct += this->wall;
 	}
 }
 // Sets the Wall-Char. NB! Rebuilds the cell! All changes done to the cell will be lost!
@@ -94,11 +98,18 @@ char Cell::getCharAtPos(int x, int y) {
 
 
 
-void Cell::setVisited(bool state) { this->_visited = state; this->cell_struct[4] = '-'; }
+void Cell::setVisited(bool state) { this->_visited = state; this->cell_struct[4] = this->floor; }
 
 // Dangerous function! Use at own risk!
 void Cell::setCellStructure(string structure) {
-	this->cell_struct = structure;
+	int i = 0;
+	for (char c : structure) {
+		if (c != ' ') { // if replaced by a space, do not replace.
+			this->cell_struct[i] = c;
+		}
+		i++;
+	}
+	//this->cell_struct = structure;
 }
 
 
