@@ -145,9 +145,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="boss_room.h" />
     <ClInclude Include="cell.h" />
-    <ClInclude Include="default_room.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="randomizer.h" />
     <ClInclude Include="room.h" />
@@ -160,8 +158,6 @@
     <ClInclude Include="xxHash32.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="boss_room.cpp" />
-    <ClCompile Include="default_room.cpp" />
     <ClCompile Include="DunGen.cpp" />
     <ClCompile Include="cell.cpp" />
     <ClCompile Include="map.cpp" />

@@ -6,7 +6,6 @@ Boss_room::Boss_room(uint32_t seed, Map* map, int key) : Room::Room(seed, DEFAUL
 	cout << "Making room: Boss" << endl;
 }
 
-
 Boss_room::~Boss_room(){
 }
 
