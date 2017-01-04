@@ -39,6 +39,15 @@
     <ClInclude Include="room.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="room_loot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="default_room.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boss_room.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -57,6 +66,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="room.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="room_loot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="default_room.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="boss_room.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

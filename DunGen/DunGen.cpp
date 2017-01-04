@@ -3,6 +3,9 @@
 #include "cell.h"
 #include "map.h"
 #include "room.h"
+#include "room_loot.h"
+#include "default_room.h"
+#include "boss_room.h"
 #include "randomizer.h"
 #include "xxHash32.h"
 
@@ -127,8 +130,8 @@ void recursive_backtracking(int * start_pos, Map * grid) {
 
 int main()
 {
-	int size_x = 50;	   // Size of map's width. (Multiply by 3 to get width in chars!)
-	int size_y = 80;	   // Size of map's height. (Multiply by 3 to get height in chars!)
+	int size_x = 500;	   // Size of map's width. (Multiply by 3 to get width in chars!)
+	int size_y = 200;	   // Size of map's height. (Multiply by 3 to get height in chars!)
 						   // Recommended X-size for teminal is 38, for output to .txt opened in notepad 341!
 
 	cout << "This map size (" << size_x << "x" << size_y << "), will be: " << (48 * (size_x*size_y))/1024 << " KB!" << endl;
@@ -143,21 +146,33 @@ int main()
 	grid.setCellStructureAtPos(start_pos[0], start_pos[1], "---------");
 	grid.visitCell(start_pos[0], start_pos[1]);
 
-	vector<Room> rooms;
 	// Generate rooms
 	int key = 0;
 	do {
-		rooms.push_back(Room(roomRandomizer.randomizeFromKey(Room::rooms.size()),6,4, &grid, key));
-		//If the created room is overlapping another room, delete it.
+		//Room::rooms.push_back(new Room(roomRandomizer.randomizeFromKey(Room::rooms.size()), 4, 4, &grid, key));
+		//cout << endl << endl << endl;
+		if(roomRandomizer.randomizeFromChance(100,key)) new Room_loot(roomRandomizer.randomizeFromKey(Room::rooms.size()),&grid, key);//Uses the new keyword, so the room does not get deleted instantly.
+		//else if (roomRandomizer.randomizeFromChance(90, key)) new Default_room(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key);
+		//else if (roomRandomizer.randomizeFromChance(1, key)) new Boss_room(roomRandomizer.randomizeFromKey(Room::rooms.size()), &grid, key);
+		//Room::rooms[Room::rooms.size() - 1]->printType();
 		if (Room::rooms[Room::rooms.size() - 1]->overlap) {
 			Room::rooms[Room::rooms.size() - 1]->~Room(); //Delete the room.
+			//delete *Room::rooms.end();
 			Room::rooms.pop_back(); //Remove last element of vector.
 			key += 4; //Increment the room by 4 so the size of the room and position of the room are generated with new values.
 			continue;
 		}
-		cout << "	Amount of rooms: " << Room::rooms.size() << endl;
+		//cout << "	Amount of rooms: " << Room::rooms.size() << endl;
 	} while (Room::rooms.size() < (size_x*size_y) / 30);
+
 	
+
+	//vector<Room*>::iterator it = Room::rooms.begin();
+	//for (; it < Room::rooms.end(); it++) {
+	//	cout << "Deleting: " << (*it). << endl;
+	//	delete(*it);
+	//}
+
 	cout << "Rooms generated: " << Room::rooms.size() << endl;
 	
 	recursive_backtracking(start_pos, &grid);
@@ -183,8 +198,7 @@ int main()
 	cout << "Maze seed: " << mazeSeed << endl;
 	cout << "Room seed: " << roomSeed << endl;
 
-
-	grid.drawMap();
+	grid.outputMap("test");
 
 	return 0;
 }

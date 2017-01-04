@@ -9,25 +9,26 @@
 
 using namespace std;
 
+static enum TYPE {DEFAULT = 0, LOOT = 1, BOSS = 2};
+
 class Room {
 private:
 	uint32_t seed;
 	Randomizer randomizer;
-	uint32_t id;
 	uint32_t x;
 	uint32_t y;
 	uint32_t width;
 	uint32_t height;
 public:
 	static vector<Room*> rooms;
-	bool overlap; //Tells the external file that the room is overlapping a cell that has already been visited.
-	Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int key);
-	Room::~Room();
-	class Start {
-	private:
-	public:
-		Start::Start(){}
-	};
+	bool overlap;
+	uint32_t id;
+	Room::Room(uint32_t seed, pair<int, int> min, pair<int, int> max, Map* map, int key);
+	Room::Room(uint32_t seed, int type, Map* map, int key);
+	virtual Room::~Room();
+	virtual void printType() = 0;
+	void Room::construct(Map* map);
+	int Room::getSizeFromType(char xy, int type, bool _max);
 };
 
 #endif
