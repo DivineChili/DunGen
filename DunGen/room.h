@@ -29,11 +29,12 @@ public:
 	//Room::Room(uint32_t seed, unsigned int maxX, unsigned int maxY, Map* map, int key);
 	Room::Room(uint32_t seed, Map* map, int key, char letter, unsigned int maxX, unsigned int maxY, unsigned int minX, unsigned int minY);
 	virtual Room::~Room();
-	virtual void printType() = 0;
-	virtual bool isOverlapping();
-	virtual void build();
-	virtual void buildDoors();
-	void updateRandomizerSeed();
+	virtual void Room::printType() = 0;
+	virtual bool Room::isOverlapping();
+	virtual void Room::build();
+	virtual void Room::buildDoors();
+	bool Room::doorIsValid();
+	void Room::updateRandomizerSeed();
 };
 
 #endif

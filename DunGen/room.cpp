@@ -163,6 +163,10 @@ void Room::buildDoors() {
 	}
 }
 
+bool Room::doorIsValid() {
+
+}
+
 void Room::updateRandomizerSeed() {
 	this->randomizer.updateSeed();
 }

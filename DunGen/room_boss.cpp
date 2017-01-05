@@ -152,4 +152,39 @@ void Room_boss::build() {
 	buildDoors();
 }
 
+void Room_boss::buildDoors() {
+	for (int i = 0; i < 1; i++) {
+		int sideNum = this->randomizer.randomizeInRange(0, 3, this->id + i);
+		int j = 0;
+		if (sideNum == 0) {
+			j = 0;
+			do {
+				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, this->y, "DDDDDDDDD");
+				j++;
+			} while ((this->width + j) % 2 != 1);
+		}
+		else if (sideNum == 1) {
+			j = 0;
+			do {
+				this->map->setCellStructureAtPos(this->x, (this->y + floor(this->height / 2)) + j, "DDDDDDDDD");
+				j++;
+			} while ((this->height + j) % 2 != 1);
+		}
+		else if (sideNum == 2) {
+			j = 0;
+			do {
+				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height), "DDDDDDDDD");
+				j++;
+			} while ((this->width + j) % 2 != 1);
+		}
+		else if (sideNum == 3) {
+			j = 0;
+			do {
+				this->map->setCellStructureAtPos((this->x + this->width), this->y + floor(this->height / 2) + j, "DDDDDDDDD");
+				j++;
+			} while ((this->height + j) % 2 != 1);
+		}
+	}
+}
+
 vector<Room_boss*> Room_boss::bossRooms;
