@@ -164,7 +164,7 @@ void Room::buildDoors() {
 }
 
 bool Room::doorIsValid() {
-
+	return true;
 }
 
 void Room::updateRandomizerSeed() {
