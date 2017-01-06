@@ -3,6 +3,7 @@
 #define CELL_H
 
 #include "stdafx.h"
+#include "subcell.h"
 #include <string>
 #include <iostream>
 #include <vector>
@@ -17,12 +18,15 @@ private:
 	string cell_struct = "";
 	char wall   = '#';
 	char noWall = ',';
-	char corner = 'O';
+	char corner = 'x';
 	char noCorner='-';
 	char floor  = ' ';
 	char block  = '=';
 	char door   = '/';
 public:
+	vector<vector<SubCell>> subCell_grid;
+	//These are the subCells contained within one cell
+	vector<SubCell*> subCells;
 	Cell::Cell();
 	void Cell::rebuild();
 

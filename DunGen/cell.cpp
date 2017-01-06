@@ -9,8 +9,19 @@
 
 using namespace std;
 
+
 // Initializes the cell and builds the base structure!
 Cell::Cell() {
+	
+	this->subCell_grid = vector< vector<SubCell>>(5, vector<SubCell>(5));
+
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < 5; j++) {
+			new SubCell;
+			this->subCells.push_back(SubCell::subCells[SubCell::subCells.size() - 1]);
+		}
+	}
+
 	int i = 0;
 
 	// Create upper row (y=0)

@@ -51,6 +51,12 @@
     <ClInclude Include="room_trap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="loot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="subcell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -81,6 +87,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="room_trap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="loot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="subcell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
