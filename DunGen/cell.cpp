@@ -115,7 +115,7 @@ void Cell::setVisited(bool state) { this->_visited = state; this->cell_struct[4]
 void Cell::setCellStructure(string structure) {
 	int i = 0;
 	for (char c : structure) {
-		if (c != ' ') { // if replaced by a space, do not replace.
+		if (c != '/') { // If replaced by slash, do not replace.
 			this->cell_struct[i] = c;
 		}
 		i++;

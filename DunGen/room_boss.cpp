@@ -52,44 +52,44 @@ void Room_boss::build() {
 				//Place a column at every other corner.
 
 				for (int i = 0; i < this->width; i += 2) {
-					this->map->setCellStructureAtPos(this->x + i, this->y + 1,"        C");
-					this->map->setCellStructureAtPos(this->x + i, this->y + 2,"  C      ");
-					this->map->setCellStructureAtPos(this->x + i + 1, this->y + 1,"      C  ");
-					this->map->setCellStructureAtPos(this->x + i + 1, this->y + 2,"C        ");
+					this->map->setCellStructureAtPos(this->x + i, this->y + 1,    "////////C");
+					this->map->setCellStructureAtPos(this->x + i, this->y + 2,    "//C//////");
+					this->map->setCellStructureAtPos(this->x + i + 1, this->y + 1,"//////C//");
+					this->map->setCellStructureAtPos(this->x + i + 1, this->y + 2,"C////////");
 
-					this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 1,"  C      ");
-					this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 2,"        C");
-					this->map->setCellStructureAtPos(this->x + i + 1, this->y + this->height - 1,"C        ");
-					this->map->setCellStructureAtPos(this->x + i + 1, this->y + this->height - 2,"      C  ");
+					this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 1,    "//C//////");
+					this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 2,    "////////C");
+					this->map->setCellStructureAtPos(this->x + i + 1, this->y + this->height - 1,"C////////");
+					this->map->setCellStructureAtPos(this->x + i + 1, this->y + this->height - 2,"//////C//");
 				}				
 			}
 			else {
 				//Place a column at every corner.
 				for (int i = 0; i < this->width; i += 1) {
-					this->map->setCellStructureAtPos(this->x + i, this->y + 1, "        C");
-					this->map->setCellStructureAtPos(this->x + i, this->y + 2, "  C      ");
-					this->map->setCellStructureAtPos(this->x + i + 1, this->y + 1, "      C  ");
-					this->map->setCellStructureAtPos(this->x + i + 1, this->y + 2, "C        ");
+					this->map->setCellStructureAtPos(this->x + i, this->y + 1,     "////////C");
+					this->map->setCellStructureAtPos(this->x + i, this->y + 2,     "//C//////");
+					this->map->setCellStructureAtPos(this->x + i + 1, this->y + 1, "//////C//");
+					this->map->setCellStructureAtPos(this->x + i + 1, this->y + 2, "C////////");
 
-					this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 1, "  C      ");
-					this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 2, "        C");
-					this->map->setCellStructureAtPos(this->x + i + 1, this->y + this->height - 1, "C        ");
-					this->map->setCellStructureAtPos(this->x + i + 1, this->y + this->height - 2, "      C  ");
+					this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 1,     "//C//////");
+					this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 2,     "////////C");
+					this->map->setCellStructureAtPos(this->x + i + 1, this->y + this->height - 1, "C////////");
+					this->map->setCellStructureAtPos(this->x + i + 1, this->y + this->height - 2, "//////C//");
 				}
 			}
 		}
 		else {
 			//Place a column at every corner.
 			for (int i = 0; i < this->width; i += 1) {
-				this->map->setCellStructureAtPos(this->x + i, this->y + 1, "        C");
-				this->map->setCellStructureAtPos(this->x + i, this->y + 2, "  C      ");
-				this->map->setCellStructureAtPos(this->x + i + 1, this->y + 1, "      C  ");
-				this->map->setCellStructureAtPos(this->x + i + 1, this->y + 2, "C        ");
+				this->map->setCellStructureAtPos(this->x + i, this->y + 1,     "////////C");
+				this->map->setCellStructureAtPos(this->x + i, this->y + 2,     "//C//////");
+				this->map->setCellStructureAtPos(this->x + i + 1, this->y + 1, "//////C//");
+				this->map->setCellStructureAtPos(this->x + i + 1, this->y + 2, "C////////");
 
-				this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 1, "  C      ");
-				this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 2, "        C");
-				this->map->setCellStructureAtPos(this->x + i + 1, this->y + this->height - 1, "C        ");
-				this->map->setCellStructureAtPos(this->x + i + 1, this->y + this->height - 2, "      C  ");
+				this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 1,     "//C//////");
+				this->map->setCellStructureAtPos(this->x + i, this->y + this->height - 2,     "////////C");
+				this->map->setCellStructureAtPos(this->x + i + 1, this->y + this->height - 1, "C////////");
+				this->map->setCellStructureAtPos(this->x + i + 1, this->y + this->height - 2, "//////C//");
 			}
 		}
 	}
@@ -98,44 +98,44 @@ void Room_boss::build() {
 			if ((this->height % 2) == 1) {
 				//Place a column at every other corner.
 				for (int i = 0; i < this->height; i += 2) {
-					this->map->setCellStructureAtPos(this->x + 1, this->y + i,     "        C");
-					this->map->setCellStructureAtPos(this->x + 2, this->y + i,     "      C  ");
-					this->map->setCellStructureAtPos(this->x + 1, this->y + i + 1, "  C      ");
-					this->map->setCellStructureAtPos(this->x + 2, this->y + i + 1, "C        ");
+					this->map->setCellStructureAtPos(this->x + 1, this->y + i,     "////////C");
+					this->map->setCellStructureAtPos(this->x + 2, this->y + i,     "//////C//");
+					this->map->setCellStructureAtPos(this->x + 1, this->y + i + 1, "//C//////");
+					this->map->setCellStructureAtPos(this->x + 2, this->y + i + 1, "C////////");
 				
-					this->map->setCellStructureAtPos(this->x + this->width - 1, this->y + i,     "      C  ");
-					this->map->setCellStructureAtPos(this->x + this->width - 2, this->y + i,     "        C");
-					this->map->setCellStructureAtPos(this->x + this->width - 1, this->y + i + 1, "C        ");
-					this->map->setCellStructureAtPos(this->x + this->width - 2, this->y + i + 1, "  C      ");
+					this->map->setCellStructureAtPos(this->x + this->width - 1, this->y + i,     "//////C//");
+					this->map->setCellStructureAtPos(this->x + this->width - 2, this->y + i,     "////////C");
+					this->map->setCellStructureAtPos(this->x + this->width - 1, this->y + i + 1, "C////////");
+					this->map->setCellStructureAtPos(this->x + this->width - 2, this->y + i + 1, "//C//////");
 				}
 			}
 			else {
 				//Place a column at every corner.
 				for (int i = 0; i < this->height; i += 1) {
-					this->map->setCellStructureAtPos(this->x + 1, this->y + i, "        C");
-					this->map->setCellStructureAtPos(this->x + 2, this->y + i, "      C  ");
-					this->map->setCellStructureAtPos(this->x + 1, this->y + i + 1, "  C      ");
-					this->map->setCellStructureAtPos(this->x + 2, this->y + i + 1, "C        ");
+					this->map->setCellStructureAtPos(this->x + 1, this->y + i,     "////////C");
+					this->map->setCellStructureAtPos(this->x + 2, this->y + i,     "//////C//");
+					this->map->setCellStructureAtPos(this->x + 1, this->y + i + 1, "//C//////");
+					this->map->setCellStructureAtPos(this->x + 2, this->y + i + 1, "C////////");
 
-					this->map->setCellStructureAtPos(this->x + this->width - 1, this->y + i, "      C  ");
-					this->map->setCellStructureAtPos(this->x + this->width - 2, this->y + i, "        C");
-					this->map->setCellStructureAtPos(this->x + this->width - 1, this->y + i + 1, "C        ");
-					this->map->setCellStructureAtPos(this->x + this->width - 2, this->y + i + 1, "  C      ");
+					this->map->setCellStructureAtPos(this->x + this->width - 1, this->y + i,     "//////C//");
+					this->map->setCellStructureAtPos(this->x + this->width - 2, this->y + i,     "////////C");
+					this->map->setCellStructureAtPos(this->x + this->width - 1, this->y + i + 1, "C////////");
+					this->map->setCellStructureAtPos(this->x + this->width - 2, this->y + i + 1, "//C//////");
 				}
 			}
 		}
 		else {
 			//Place a column at every corner.
 			for (int i = 0; i < this->height; i += 1) {
-				this->map->setCellStructureAtPos(this->x + 1, this->y + i, "        C");
-				this->map->setCellStructureAtPos(this->x + 2, this->y + i, "      C  ");
-				this->map->setCellStructureAtPos(this->x + 1, this->y + i + 1, "  C      ");
-				this->map->setCellStructureAtPos(this->x + 2, this->y + i + 1, "C        ");
+				this->map->setCellStructureAtPos(this->x + 1, this->y + i,     "////////C");
+				this->map->setCellStructureAtPos(this->x + 2, this->y + i,     "//////C//");
+				this->map->setCellStructureAtPos(this->x + 1, this->y + i + 1, "//C//////");
+				this->map->setCellStructureAtPos(this->x + 2, this->y + i + 1, "C////////");
 
-				this->map->setCellStructureAtPos(this->x + this->width - 1, this->y + i, "      C  ");
-				this->map->setCellStructureAtPos(this->x + this->width - 2, this->y + i, "        C");
-				this->map->setCellStructureAtPos(this->x + this->width - 1, this->y + i + 1, "C        ");
-				this->map->setCellStructureAtPos(this->x + this->width - 2, this->y + i + 1, "  C      ");
+				this->map->setCellStructureAtPos(this->x + this->width - 1, this->y + i,     "//////C//");
+				this->map->setCellStructureAtPos(this->x + this->width - 2, this->y + i,     "////////C");
+				this->map->setCellStructureAtPos(this->x + this->width - 1, this->y + i + 1, "C////////");
+				this->map->setCellStructureAtPos(this->x + this->width - 2, this->y + i + 1, "//C//////");
 			}
 		}
 	}
@@ -159,28 +159,28 @@ void Room_boss::buildDoors() {
 		if (sideNum == 0) {
 			j = 0;
 			do {
-				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, this->y, " D       ");
+				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, this->y, "/D///////");
 				j++;
 			} while ((this->width + j) % 2 != 1);
 		}
 		else if (sideNum == 1) {
 			j = 0;
 			do {
-				this->map->setCellStructureAtPos(this->x, (this->y + floor(this->height / 2)) + j, "   D     ");
+				this->map->setCellStructureAtPos(this->x, (this->y + floor(this->height / 2)) + j, "///D/////");
 				j++;
 			} while ((this->height + j) % 2 != 1);
 		}
 		else if (sideNum == 2) {
 			j = 0;
 			do {
-				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height), "       D ");
+				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height), "///////D/");
 				j++;
 			} while ((this->width + j) % 2 != 1);
 		}
 		else if (sideNum == 3) {
 			j = 0;
 			do {
-				this->map->setCellStructureAtPos((this->x + this->width), this->y + floor(this->height / 2) + j, "     D   ");
+				this->map->setCellStructureAtPos((this->x + this->width), this->y + floor(this->height / 2) + j, "/////D///");
 				j++;
 			} while ((this->height + j) % 2 != 1);
 		}
