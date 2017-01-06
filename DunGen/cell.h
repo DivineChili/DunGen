@@ -29,6 +29,9 @@ public:
 	vector<SubCell*> subCells;
 	Cell::Cell();
 	void Cell::rebuild();
+	
+	//Draws a row of subcells to the terminal.
+	void Cell::drawSubCellRow(int row);
 
 	void Cell::setWallChar(char newChar);
 	void Cell::setFloorChar(char newChar);

@@ -127,6 +127,12 @@ void Cell::setCellStructure(string structure) {
 // Returns the structe of the cell reperisented in a string
 string Cell::getCellStruct() { return this->cell_struct; }
 
+void Cell::drawSubCellRow(int row) {
+	for (int i = 0; i < 5; i++) {
+		cout << this->subCell_grid[row][i].getChar();
+	}
+}
+
 // Gets a vector of all the chars in a row
 vector<char> Cell::getCellRow(int rowIndex)
 {

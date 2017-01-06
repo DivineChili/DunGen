@@ -28,6 +28,8 @@ public:
 	// Draws the entire map.
 	void Map::drawMap();
 
+	void Map::drawSubCellMap();
+
 	// Writes the enitre map to .txt file
 	void Map::outputMap(string filename);
 

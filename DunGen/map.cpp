@@ -56,6 +56,20 @@ void Map::drawMap() {
 	}
 }
 
+void Map::drawSubCellMap() {
+	//this->map_grid[0][0].drawSubCellRow(5);
+	for (int i = 0; i < this->size_y; i++) { //map y
+		for (int j = 0; j < 5; j++){ //subcell row number
+			for (int k = 0; k < this->size_x - 1; k++) { //map x
+				this->map_grid[k][i].drawSubCellRow(j);
+				cout << " ";
+			}
+			cout << endl;
+		}
+		cout << endl;
+	}
+}
+
 void Map::outputMap(string filename) {
 	ofstream outfile;
 
