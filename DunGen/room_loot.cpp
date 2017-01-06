@@ -42,30 +42,34 @@ void Room_loot::build() {
 			switch (doorSide) {
 			case 0:
 				cout << "loot on top wall" << endl;
-				chestOffset = this->randomizer.randomizeInRange(0, this->width, i);
+				chestOffset = this->randomizer.randomizeInRange(0, this->width + 1, i);
 				if (this->chestIsValid()) {
 					this->map->setCellStructureAtPos(this->x + chestOffset, this->y, "111llllll");
+					i = 10;
 					break;
 				}
 			case 1:
 				cout << "loot on left wall" << endl;
-				chestOffset = this->randomizer.randomizeInRange(0, this->height, i);
+				chestOffset = this->randomizer.randomizeInRange(0, this->height + 1, i);
 				if (this->chestIsValid()) {
 					this->map->setCellStructureAtPos(this->x, this->y + chestOffset, "lllllllll");
+					i = 10;
 					break;
 				}
 			case 2:
 				cout << "loot on bottom wall" << endl;
-				chestOffset = this->randomizer.randomizeInRange(0, this->width, i);
+				chestOffset = this->randomizer.randomizeInRange(0, this->width + 1, i);
 				if (this->chestIsValid()) {
 					this->map->setCellStructureAtPos(this->x + chestOffset, this->y + this->height, "lllllllll");
+					i = 10;
 					break;
 				}
 			case 3:
 				cout << "loot on right wall" << endl;
-				chestOffset = this->randomizer.randomizeInRange(0, this->height, i);
+				chestOffset = this->randomizer.randomizeInRange(0, this->height + 1, i);
 				if (this->chestIsValid()) {
 					this->map->setCellStructureAtPos(this->x + this->width, this->y + chestOffset, "lllllllll");
+					i = 10;
 					break;
 				}
 			default:

@@ -82,28 +82,28 @@ void Room::buildDoors() {
 		if (sideNum == 0) {
 			j = 0;
 			do {
-				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, this->y, "DDDDDDDDD");
+				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, this->y, " D       ");
 				j++;
 			} while ((this->width + j) % 2 != 1);
 		}
 		else if (sideNum == 1) {
 			j = 0;
 			do {
-				this->map->setCellStructureAtPos(this->x, (this->y + floor(this->height / 2)) + j, "DDDDDDDDD");
+				this->map->setCellStructureAtPos(this->x, (this->y + floor(this->height / 2)) + j, "   D     ");
 				j++;
 			} while ((this->height + j) % 2 != 1);
 		}
 		else if (sideNum == 2) {
 			j = 0;
 			do {
-				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height), "DDDDDDDDD");
+				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height), "       D ");
 				j++;
 			} while ((this->width + j) % 2 != 1);
 		}
 		else if (sideNum == 3) {
 			j = 0;
 			do {
-				this->map->setCellStructureAtPos((this->x + this->width), this->y + floor(this->height / 2) + j, "DDDDDDDDD");
+				this->map->setCellStructureAtPos((this->x + this->width), this->y + floor(this->height / 2) + j, "     D   ");
 				j++;
 			} while ((this->height + j) % 2 != 1);
 		}
