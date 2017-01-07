@@ -17,8 +17,9 @@ Cell::Cell() {
 
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
-			new SubCell;
-			this->subCells.push_back(SubCell::subCells[SubCell::subCells.size() - 1]);
+			cout << "j:" << j << " i:" << i << endl;
+			this->subCell_grid.at(j).at(i) = *(new SubCell(j, i));
+			//this->subCells.push_back(SubCell::subCells[SubCell::subCells.size() - 1]);
 		}
 	}
 
@@ -119,6 +120,10 @@ void Cell::drawSubCellRow(int row) {
 	for (int i = 0; i < 5; i++) {
 		cout << this->subCell_grid[row][i].getChar();
 	}
+}
+
+void Cell::setSubCellAtPos(SubCell* subCell) {
+	//this->subCell_grid[subCell]
 }
 
 // Gets a vector of all the chars in a row

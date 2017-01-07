@@ -6,12 +6,15 @@
 using namespace std;
 
 class SubCell{
-private:
+protected:
 	char type;
+	int posX;
+	int posY;
 public:
 	//These are all the existing SubCells
 	static vector<SubCell*> subCells;
 	SubCell();
+	SubCell(int posX, int posY);
 	~SubCell();
 	char getChar();
 };

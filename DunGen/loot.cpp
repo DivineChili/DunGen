@@ -2,7 +2,10 @@
 #include "loot.h"
 
 
-Loot::Loot(){
+Loot::Loot(int posX, int posY) :
+	SubCell::SubCell(posX, posY){
+
+	this->type = 'l';
 }
 
 

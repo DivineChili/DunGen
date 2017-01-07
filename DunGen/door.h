@@ -5,7 +5,7 @@
 class Door : public SubCell {
 public:
 	static vector<Door*> doors;
-	Door();
+	Door(int posX, int posY);
 	virtual ~Door();
 };
 
