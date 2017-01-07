@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Rooms">
+      <UniqueIdentifier>{8ecf7d6d-e905-411d-9df6-b046271118ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Rooms">
+      <UniqueIdentifier>{e99237f1-a8d2-4232-90e5-03c3612f4a80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -36,21 +42,6 @@
     <ClInclude Include="randomizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="room.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="room_loot.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="room_enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="room_boss.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="room_trap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="loot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -62,6 +53,21 @@
     </ClInclude>
     <ClInclude Include="door.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="room.h">
+      <Filter>Header Files\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="room_boss.h">
+      <Filter>Header Files\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="room_enemy.h">
+      <Filter>Header Files\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="room_loot.h">
+      <Filter>Header Files\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="room_trap.h">
+      <Filter>Header Files\Rooms</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,21 +86,6 @@
     <ClCompile Include="randomizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="room.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="room_loot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="room_enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="room_boss.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="room_trap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="loot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -103,6 +94,21 @@
     </ClCompile>
     <ClCompile Include="door.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="room.cpp">
+      <Filter>Source Files\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="room_boss.cpp">
+      <Filter>Source Files\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="room_enemy.cpp">
+      <Filter>Source Files\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="room_loot.cpp">
+      <Filter>Source Files\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="room_trap.cpp">
+      <Filter>Source Files\Rooms</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
