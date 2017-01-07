@@ -145,6 +145,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="algorithms.h" />
     <ClInclude Include="cell.h" />
     <ClInclude Include="loot.h" />
     <ClInclude Include="map.h" />
