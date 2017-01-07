@@ -3,6 +3,7 @@
 #define CELL_H
 
 #include "stdafx.h"
+#include "subcell.h"
 #include <string>
 #include <iostream>
 #include <vector>
@@ -19,16 +20,19 @@ private:
 	char wall   = '#';
 	char noWall = ',';
 	char corner = '#';
-	char noCorner=' ';
+	char noCorner=',';
 	char floor  = '-';
 	char block  = '=';
 	char door   = '/';
 public:
+	vector<vector<SubCell>> subCell_grid;
+	//These are the subCells contained within one cell
+	vector<SubCell*> subCells;
 	Cell::Cell();
 	void Cell::rebuild();
-
-	void Cell::setWallChar(char newChar);
-	void Cell::setFloorChar(char newChar);
+	
+	//Draws a row of subcells to the terminal.
+	void Cell::drawSubCellRow(int row);
 	
 	void Cell::toggleSide(int side, bool state);
 	

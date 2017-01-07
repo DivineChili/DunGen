@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cell.h" />
+    <ClInclude Include="loot.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="randomizer.h" />
     <ClInclude Include="room.h" />
@@ -154,12 +155,14 @@
     <ClInclude Include="room_loot.h" />
     <ClInclude Include="room_trap.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="subcell.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="xxHash32.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DunGen.cpp" />
     <ClCompile Include="cell.cpp" />
+    <ClCompile Include="loot.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="randomizer.cpp" />
     <ClCompile Include="room.cpp" />
@@ -173,6 +176,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="subcell.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

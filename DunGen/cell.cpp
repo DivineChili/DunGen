@@ -9,8 +9,19 @@
 
 using namespace std;
 
+
 // Initializes the cell and builds the base structure!
 Cell::Cell() {
+	
+	this->subCell_grid = vector< vector<SubCell>>(5, vector<SubCell>(5));
+
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < 5; j++) {
+			new SubCell;
+			this->subCells.push_back(SubCell::subCells[SubCell::subCells.size() - 1]);
+		}
+	}
+
 	int i = 0;
 
 	// Create upper row (y=0)
@@ -55,18 +66,6 @@ void Cell::rebuild() {
 		else this->cell_struct += this->wall;
 	}
 }
-// Sets the Wall-Char. NB! Rebuilds the cell! All changes done to the cell will be lost!
-void Cell::setWallChar(char newChar){
-	this->wall = newChar;
-	rebuild();
-}
-
-// Sets the Floor-Char. NB! Rebuilds the cell! All custom changes done to the cell will be lost!
-void Cell::setFloorChar(char newChar)
-{
-	this->floor = newChar;
-	rebuild();
-}
 
 // Toggles one of the sides of the cell. Changes are lost if cell is rebuilt!
 void Cell::toggleSide(int side, bool state /*true is floor, false is wall*/) {
@@ -104,7 +103,7 @@ void Cell::setVisited(bool state) { this->_visited = state; this->cell_struct[4]
 void Cell::setCellStructure(string structure) {
 	int i = 0;
 	for (char c : structure) {
-		if (c != ' ') { // if replaced by a space, do not replace.
+		if (c != '/') { // If replaced by slash, do not replace.
 			this->cell_struct[i] = c;
 		}
 		i++;
@@ -115,6 +114,12 @@ void Cell::setCellStructure(string structure) {
 
 // Returns the structe of the cell reperisented in a string
 string Cell::getCellStruct() { return this->cell_struct; }
+
+void Cell::drawSubCellRow(int row) {
+	for (int i = 0; i < 5; i++) {
+		cout << this->subCell_grid[row][i].getChar();
+	}
+}
 
 // Gets a vector of all the chars in a row
 vector<char> Cell::getCellRow(int rowIndex)

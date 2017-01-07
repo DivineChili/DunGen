@@ -143,7 +143,6 @@ void recursive_backtracking(int * start_pos, Map * grid) {
 
 }
 
-
 int main()
 {
 	int size_x = 60;	   // Size of map's width. (Multiply by 3 to get width in chars!)
@@ -211,6 +210,8 @@ int main()
 
 
 	grid.drawMap();
+
+	grid.drawSubCellMap();
 
 	for (int i = Room::rooms.size() - 1; i > 0; i--) {
 		Room::rooms[i]->~Room();

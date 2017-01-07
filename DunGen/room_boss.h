@@ -12,6 +12,7 @@ public:
 	virtual ~Room_boss();
 	virtual void Room_boss::printType();
 	virtual void build();
+	virtual void buildDoors();
 	static vector<Room_boss*> bossRooms;
 	uint32_t bossId;
 private:
