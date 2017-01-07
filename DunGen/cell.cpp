@@ -66,18 +66,6 @@ void Cell::rebuild() {
 		else this->cell_struct += this->wall;
 	}
 }
-// Sets the Wall-Char. NB! Rebuilds the cell! All changes done to the cell will be lost!
-void Cell::setWallChar(char newChar){
-	this->wall = newChar;
-	rebuild();
-}
-
-// Sets the Floor-Char. NB! Rebuilds the cell! All custom changes done to the cell will be lost!
-void Cell::setFloorChar(char newChar)
-{
-	this->floor = newChar;
-	rebuild();
-}
 
 // Toggles one of the sides of the cell. Changes are lost if cell is rebuilt!
 void Cell::toggleSide(int side, bool state /*true is floor, false is wall*/) {

@@ -57,6 +57,9 @@
     <ClInclude Include="subcell.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="algorithms.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="door.h">
       <Filter>Header Files</Filter>
     </ClInclude>

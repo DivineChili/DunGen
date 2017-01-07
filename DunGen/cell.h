@@ -15,12 +15,13 @@ enum DIRECTIONS { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 
 class Cell {
 private:
+
 	string cell_struct = "";
 	char wall   = '#';
 	char noWall = ',';
-	char corner = 'x';
-	char noCorner='-';
-	char floor  = ' ';
+	char corner = '#';
+	char noCorner=',';
+	char floor  = '-';
 	char block  = '=';
 	char door   = '/';
 public:
@@ -32,9 +33,6 @@ public:
 	
 	//Draws a row of subcells to the terminal.
 	void Cell::drawSubCellRow(int row);
-
-	void Cell::setWallChar(char newChar);
-	void Cell::setFloorChar(char newChar);
 	
 	void Cell::toggleSide(int side, bool state);
 	
