@@ -41,6 +41,11 @@ Cell::Cell() {
 		if (i == 0 || i == 2) this->cell_struct += this->corner;
 		else this->cell_struct += this->wall;
 	}
+
+	this->opened_sides[0] = false;
+	this->opened_sides[1] = false;
+	this->opened_sides[2] = false;
+	this->opened_sides[3] = false;
 }
 
 // Rebuilds the cell. NB! All changes done to the cell will be lost!
@@ -65,6 +70,11 @@ void Cell::rebuild() {
 		if (i == 0 || i == 2) this->cell_struct += this->corner;
 		else this->cell_struct += this->wall;
 	}
+
+	this->opened_sides[0] = false;
+	this->opened_sides[1] = false;
+	this->opened_sides[2] = false;
+	this->opened_sides[3] = false;
 }
 
 // Toggles one of the sides of the cell. Changes are lost if cell is rebuilt!
@@ -72,20 +82,24 @@ void Cell::toggleSide(int side, bool state /*true is floor, false is wall*/) {
 	switch (side)
 	{
 	case(UP):
-		if (state) { this->cell_struct[1] = this->floor; }
+		if (state) { this->cell_struct[1] = this->floor;}
 		else { this->cell_struct[1] = this->wall; }
+		this->opened_sides[UP] = state;
 		break;
 	case(DOWN):
 		if (state) { this->cell_struct[7] = this->floor; }
 		else { this->cell_struct[7] = this->wall; }
+		this->opened_sides[DOWN] = state;
 		break;
 	case(LEFT):
 		if (state) { this->cell_struct[3] = this->floor; }
 		else { this->cell_struct[3] = this->wall; }
+		this->opened_sides[LEFT] = state;
 		break;
 	case(RIGHT):
 		if (state) { this->cell_struct[5] = this->floor; }
 		else { this->cell_struct[5] = this->wall; }
+		this->opened_sides[RIGHT] = state;
 		break;
 	}
 }
@@ -130,6 +144,16 @@ vector<char> Cell::getCellRow(int rowIndex)
 	}
 
 	return result;
+}
+
+vector<int> Cell::sides_opened()
+{
+	vector<int> opened_sides;
+	for (int i = 0; i < sizeof(this->opened_sides); i++) {
+		if (this->opened_sides[i])
+			opened_sides[i] = i;
+	}
+	return opened_sides;
 }
 
 // Draws the cell induvidually

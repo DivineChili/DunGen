@@ -15,16 +15,20 @@ enum DIRECTIONS { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 
 class Cell {
 private:
-
 	string cell_struct = "";
-	char wall   = '#';
-	char noWall = ',';
-	char corner = '#';
-	char noCorner=',';
-	char floor  = '-';
-	char block  = '=';
-	char door   = '/';
+
+	bool opened_sides[4];
+
 public:
+	static const char wall = '#';
+	static const char noWall = ',';
+	static const char corner = '#';
+	static const char noCorner = ',';
+	static const char floor = '-';
+	static const char block = '=';
+	static const char door = '/';
+	static const char empty = ' ';
+
 	vector<vector<SubCell>> subCell_grid;
 	//These are the subCells contained within one cell
 	vector<SubCell*> subCells;
@@ -48,9 +52,11 @@ public:
 	// Returns the cell structure
 	string Cell::getCellStruct();
 
-
 	vector<char> Cell::getCellRow(int rowIndex);
-	
+
+	// Returns all opened sides. (Use Cell::Directions enum for side-references!)
+	vector<int> sides_opened();
+		
 	// Independent function to draw cell
 	void Cell::drawCell();
 };
