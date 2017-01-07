@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "room.h"
 #include "room_loot.h"
+#include "door.h"
 #include <string>
 
 vector<Room*> Room::rooms;
@@ -79,6 +80,20 @@ void Room::buildDoors() {
 	for (int i = 0; i < 2; i++) {
 		int sideNum = this->randomizer.randomizeInRange(0, 3, this->id + i);
 		int j = 0;
+		if (sideNum == 0 || sideNum == 2) {
+			do {
+				new Door();
+				j++;
+			} while ((this->width + j) % 2 != 1);
+		}
+		else if (sideNum == 1 || sideNum == 3) {
+			do {
+				new Door();
+				j++;
+			} while ((this->height + j) % 2 != 1);
+		}
+		/*
+		int j = 0;
 		if (sideNum == 0) {
 			j = 0;
 			do {
@@ -107,7 +122,12 @@ void Room::buildDoors() {
 				j++;
 			} while ((this->height + j) % 2 != 1);
 		}
+		*/
 	}
+}
+
+void Room::buildDoors_SubCell() {
+
 }
 
 bool Room::doorIsValid() {

@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cell.h" />
+    <ClInclude Include="door.h" />
     <ClInclude Include="loot.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="randomizer.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="xxHash32.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="door.cpp" />
     <ClCompile Include="DunGen.cpp" />
     <ClCompile Include="cell.cpp" />
     <ClCompile Include="loot.cpp" />

@@ -33,6 +33,7 @@ public:
 	virtual bool Room::isOverlapping();
 	virtual void Room::build();
 	virtual void Room::buildDoors();
+	void Room::buildDoors_SubCell();
 	bool Room::doorIsValid();
 	void Room::updateRandomizerSeed();
 };
