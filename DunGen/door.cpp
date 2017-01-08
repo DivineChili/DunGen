@@ -11,10 +11,11 @@ Door::Door(int posX, int posY) :
 	cout << "creating a door" << endl;
 
 	this->type = 'D';
+	//cout << "type " << this->type << endl;
 	doors.push_back(this);
 }
 
 
-Door::~Door()
-{
+Door::~Door(){
+
 }

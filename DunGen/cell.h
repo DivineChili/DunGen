@@ -24,7 +24,7 @@ private:
 	char block  = '=';
 	char door   = '/';
 	// grid of subcells
-	vector<vector<SubCell>> subCell_grid;
+	vector<vector<SubCell*>> subCell_grid;
 public:
 	//These are the subCells contained within one cell
 	//vector<SubCell*> subCells;

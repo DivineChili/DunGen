@@ -8,9 +8,9 @@ using namespace std;
 class SubCell{
 protected:
 	char type;
+public:
 	int posX;
 	int posY;
-public:
 	//These are all the existing SubCells
 	static vector<SubCell*> subCells;
 	SubCell();

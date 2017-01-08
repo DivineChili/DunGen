@@ -8,13 +8,14 @@ using namespace std;
 vector<SubCell*> SubCell::subCells;
 
 SubCell::SubCell() {
-	cout << "called without arguments" << endl;
+	//cout << "called without arguments" << endl;
+	cout << "type " << this->type << endl;
 }
 
 SubCell::SubCell(int posX, int posY) :
-	posX(posX), posY(posY), type('k') {
-
-	cout << "called with arguments" << endl;
+	posX(posX), posY(posY), type('f') {
+	//cout << "type " << this->type << endl;
+	//cout << "called with arguments" << endl;
 	this->subCells.push_back(this);
 }
 

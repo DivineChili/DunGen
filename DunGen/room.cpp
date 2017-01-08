@@ -85,7 +85,7 @@ void Room::buildDoors() {
 			j = 0;
 			do {
 				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, this->y, "/D///////");
-				//this->buildDoors_SubCell(&this->map->getCellAtPos(this->x + floor(this->width / 2) + j, this->y),0);
+				this->buildDoors_SubCell(this->map->getCellAtPos(0,0),0);
 				j++;
 			} while ((this->width + j) % 2 != 1);
 		}
@@ -117,7 +117,7 @@ void Room::buildDoors() {
 }
 
 void Room::buildDoors_SubCell(Cell* cell, int side) {
-	cout << "building subcell" << endl;
+	//cout << "building subcell" << endl;
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
 			cell->setSubCellAtPos(new Door(j, i));
