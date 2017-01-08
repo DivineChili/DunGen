@@ -93,6 +93,8 @@ int main()
 	
 	Algorithms::recursive_backtracking(start_pos, &grid, mazeRandomizer);
 	
+	//Algorithms::deadend_remover(&grid, 1);
+
 	// Cell Debug!
 	//Cell newCell = Cell(); cout << "Pure Cell:\n"; newCell.drawCell(); cout << "Rebuilt visited cell:\n";newCell.setVisited(true);newCell.rebuild();newCell.drawCell();cout << "Opened top and bottom cell:\n";newCell.toggleSide(UP, true);newCell.toggleSide(DOWN, true);newCell.drawCell();cout << "Rebuilt cell:\n";newCell.rebuild();newCell.drawCell();
 	cout << endl;
@@ -106,10 +108,11 @@ int main()
 
 
 	grid.drawMap();
-
+  
 	cout << SubCell::subCells.size() << endl;
 
 	grid.drawSubCellMap();
+
 
 	for (int i = Room::rooms.size() - 1; i > 0; i--) {
 		Room::rooms[i]->~Room();

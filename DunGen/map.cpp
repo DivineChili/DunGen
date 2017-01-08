@@ -10,7 +10,7 @@ using namespace std;
 Map::Map(unsigned int sizeX, unsigned int sizeY) {
 	this->size_x = sizeX; this->size_y = sizeY;	  // Set the private fields size_x and size_y to the sepsified parameters.
 	this->map_grid = vector< vector<Cell>>(this->size_y, vector<Cell>(this->size_x));   // Initialize the map_grid with 
-																						//2. dimensional vectors containing cell-objects
+											    //2. dimensional vectors containing cell-objects
 	for (int i = 0; i < this->map_grid.size(); i++) // Loop through the first vector
 	{
 		vector<Cell>::iterator it = this->map_grid[i].begin(); // Create an iterator to loop through second vector
@@ -111,6 +111,12 @@ void Map::visitCell(int x, int y) {
 bool Map::cellVisited(int x, int y) {
 	return this->map_grid.at(y).at(x)._visited;   // Using .at() insted of Operator[] to throw exceptions needed to bypass errors!
 }
+
+vector<int> Map::getCellopeningsAtPos(int x, int y)
+{
+	return this->map_grid[y][x].sides_opened();
+}
+
 
 // Returns the x,y size of map
 pair<int,int> Map::getSize() {

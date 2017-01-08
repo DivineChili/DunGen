@@ -15,7 +15,10 @@ class Map {
 private:
 	unsigned int size_x, size_y; //Declaration for the size of the map
 	vector< vector<Cell>> map_grid; //The map itself
+	
 public:
+	static vector<pair<int, int> > dead_ends;
+	
 	Map::Map(unsigned int sizeX, unsigned int sizeY);
 	Map::~Map();
 
@@ -42,7 +45,9 @@ public:
 	void Map::visitCell(int x, int y);
 	// Returns the visited-state of cell at [y][x] coordinates.
 	bool Map::cellVisited(int x, int y);
-	
+	// Returns all the opened sides of a cell at a position
+	vector<int> Map::getCellopeningsAtPos(int x, int y);
+
 	//Returns the size of the map
 	pair<int, int> Map::getSize();
 };
