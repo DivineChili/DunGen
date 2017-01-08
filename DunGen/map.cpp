@@ -57,10 +57,10 @@ void Map::drawMap() {
 }
 
 void Map::drawSubCellMap() {
-	for (int i = 0; i < this->size_y; i++) { //map y
+	for (int i = 0; i < this->size_x; i++) { //map x
 		for (int j = 0; j < 5; j++){ //subcell row number
-			for (int k = 0; k < this->size_x - 1; k++) { //map x
-				this->map_grid[k][i].drawSubCellRow(j);
+			for (int k = 0; k < this->size_y - 1; k++) { //map y
+				this->map_grid[i][k].drawSubCellRow(j);
 				cout << " ";
 			}
 			cout << endl;

@@ -85,7 +85,7 @@ void Room::buildDoors() {
 			j = 0;
 			do {
 				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, this->y, "/D///////");
-				this->buildDoors_SubCell(this->map->getCellAtPos(0,0),0);
+				this->buildDoors_SubCell(this->map->getCellAtPos(this->x + floor(this->width / 2) + j, this->y),0);
 				j++;
 			} while ((this->width + j) % 2 != 1);
 		}
