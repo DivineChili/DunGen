@@ -6,19 +6,20 @@
 #include <string>
 #include <iostream>																										   
 #include <vector>
+#include "door.h"
 
 using namespace std;
 
 
 // Initializes the cell and builds the base structure!
-Cell::Cell() {
-	
-	this->subCell_grid = vector< vector<SubCell>>(5, vector<SubCell>(5));
+Cell::Cell() : subCell_grid(vector< vector<SubCell*>>(5, vector<SubCell*>(5))){
 
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
-			new SubCell;
-			this->subCells.push_back(SubCell::subCells[SubCell::subCells.size() - 1]);
+			//cout << "j:" << j << " i:" << i << endl;
+			this->subCell_grid[j][i] = new SubCell(j, i);
+			//cout << subCell_grid[j][i].posX << endl;
+			//this->subCells.push_back(SubCell::subCells[SubCell::subCells.size() - 1]);
 		}
 	}
 
@@ -122,7 +123,6 @@ void Cell::setCellStructure(string structure) {
 		}
 		i++;
 	}
-	//this->cell_struct = structure;
 }
 
 
@@ -131,8 +131,25 @@ string Cell::getCellStruct() { return this->cell_struct; }
 
 void Cell::drawSubCellRow(int row) {
 	for (int i = 0; i < 5; i++) {
-		cout << this->subCell_grid[row][i].getChar();
+		cout << this->subCell_grid[row][i]->getChar();
 	}
+}
+
+void Cell::setSubCellAtPos(SubCell* subCell) {
+	//cout << subCell->getChar()<< endl;
+
+	if (subCell->getChar() == 'D') {
+		cout << "door" << endl;
+		for (int i = 0; i < this->subCell_grid[0].size(); i++) {
+			for (int j = 0; j < this->subCell_grid.size(); j++) {
+				cout << this->subCell_grid[j][i]->getChar();
+			}
+			cout << endl;
+		}
+	}
+	this->subCell_grid[subCell->posX][subCell->posY] = subCell;
+	this->subCell_grid[0][0] = new Door(0, 0);
+
 }
 
 // Gets a vector of all the chars in a row

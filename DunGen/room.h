@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "randomizer.h"
 #include "map.h"
+#include "cell.h"
 #include <vector>
 
 using namespace std;
@@ -33,7 +34,7 @@ public:
 	virtual bool Room::isOverlapping();
 	virtual void Room::build();
 	virtual void Room::buildDoors();
-	void Room::buildDoors_SubCell();
+	void Room::buildDoors_SubCell(Cell* cell, int side);
 	bool Room::doorIsValid();
 	void Room::updateRandomizerSeed();
 };

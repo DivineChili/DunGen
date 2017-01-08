@@ -23,7 +23,7 @@ public:
 	Map::~Map();
 
 	// Returns the cell at xy-coordinates
-	Cell Map::getCellAtPos(int x, int y);
+	Cell* Map::getCellAtPos(int x, int y);
 
 	// Draws the cell at a specific xy-coordinate
 	void Map::drawCellAtPos(int x, int y);

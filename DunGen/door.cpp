@@ -1,14 +1,21 @@
 #include "stdafx.h"
 #include "door.h"
 #include <vector>
+#include <iostream>
 
 vector<Door*> Door::doors;
 
-Door::Door(){
+Door::Door(int posX, int posY) : 
+	SubCell::SubCell(posX, posY){
+
+	cout << "creating a door" << endl;
+
+	this->type = 'D';
+	//cout << "type " << this->type << endl;
 	doors.push_back(this);
 }
 
 
-Door::~Door()
-{
+Door::~Door(){
+
 }

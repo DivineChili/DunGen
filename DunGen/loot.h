@@ -3,7 +3,7 @@
 
 class Loot : public SubCell {
 public:
-	Loot();
+	Loot(int posX, int posY);
 	virtual ~Loot();
 };
 
