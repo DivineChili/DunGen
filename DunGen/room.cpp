@@ -85,7 +85,7 @@ void Room::buildDoors() {
 			j = 0;
 			do {
 				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, this->y, "/D///////");
-				this->buildDoors_SubCell(this->map->getCellAtPos(this->x + floor(this->width / 2) + j, this->y),0);
+				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, this->y),0);
 				j++;
 			} while ((this->width + j) % 2 != 1);
 		}
@@ -93,7 +93,7 @@ void Room::buildDoors() {
 			j = 0;
 			do {
 				this->map->setCellStructureAtPos(this->x, (this->y + floor(this->height / 2)) + j, "///D/////");
-				//this->buildDoors_SubCell();
+				this->buildDoors_SubCell(this->map->getCellAtPos(this->x, (this->y + floor(this->height / 2)) + j), 1);
 				j++;
 			} while ((this->height + j) % 2 != 1);
 		}
@@ -101,7 +101,7 @@ void Room::buildDoors() {
 			j = 0;
 			do {
 				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height), "///////D/");
-				//this->buildDoors_SubCell();
+				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height)), 2);
 				j++;
 			} while ((this->width + j) % 2 != 1);
 		}
@@ -109,7 +109,7 @@ void Room::buildDoors() {
 			j = 0;
 			do {
 				this->map->setCellStructureAtPos((this->x + this->width), this->y + floor(this->height / 2) + j, "/////D///");
-				//this->buildDoors_SubCell();
+				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + this->width), this->y + floor(this->height / 2) + j), 3);
 				j++;
 			} while ((this->height + j) % 2 != 1);
 		}
@@ -118,11 +118,36 @@ void Room::buildDoors() {
 
 void Room::buildDoors_SubCell(Cell* cell, int side) {
 	//cout << "building subcell" << endl;
-	for (int i = 0; i < 5; i++) {
-		for (int j = 0; j < 5; j++) {
-			cell->setSubCellAtPos(new Door(j, i));
+	//for (int i = 0; i < 5; i++) {
+	//	for (int j = 0; j < 5; j++) {
+	//		cell->setSubCellAtPos(new Door(j, i));
+	//	}
+	//}
+
+	switch (side) {
+	case 0:
+		for (int i = 1; i < 4; i++) {
+			cell->setSubCellAtPos(new Door(i, 0));
 		}
+		break;
+	case 1:
+		for (int i = 1; i < 4; i++) {
+			cell->setSubCellAtPos(new Door(0, i));
+		}
+		break;
+	case 2:
+		for (int i = 1; i < 4; i++) {
+			cell->setSubCellAtPos(new Door(i, 4));
+		}
+		break;
+	case 3:
+		for (int i = 1; i < 4; i++) {
+			cell->setSubCellAtPos(new Door(4, i));
+		}
+		break;
 	}
+
+
 }
 
 bool Room::doorIsValid() {

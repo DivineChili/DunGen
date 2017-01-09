@@ -131,13 +131,11 @@ string Cell::getCellStruct() { return this->cell_struct; }
 
 void Cell::drawSubCellRow(int row) {
 	for (int i = 0; i < 5; i++) {
-		cout << this->subCell_grid[row][i]->getChar();
+		cout << this->subCell_grid[i][row]->getChar();
 	}
 }
 
 void Cell::setSubCellAtPos(SubCell* subCell) {
-	//cout << subCell->getChar()<< endl;
-
 	if (subCell->getChar() == 'D') {
 		cout << "door" << endl;
 		for (int i = 0; i < this->subCell_grid[0].size(); i++) {
@@ -148,8 +146,6 @@ void Cell::setSubCellAtPos(SubCell* subCell) {
 		}
 	}
 	this->subCell_grid[subCell->posX][subCell->posY] = subCell;
-	this->subCell_grid[0][0] = new Door(0, 0);
-
 }
 
 // Gets a vector of all the chars in a row
