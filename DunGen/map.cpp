@@ -17,8 +17,6 @@ Map::Map(unsigned int sizeX, unsigned int sizeY) {
 		for (; it < this->map_grid[i].end(); ++it) 	// Loop through iterator
 		{
 			*it = Cell(); // Set the iterator's referenced value to a new cell-object
-			//it->setFloorChar('-');
-			//it->setWallChar('#');
 		}
 	}
 }

@@ -16,10 +16,7 @@ Cell::Cell() : subCell_grid(vector< vector<SubCell*>>(5, vector<SubCell*>(5))){
 
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
-			//cout << "j:" << j << " i:" << i << endl;
 			this->subCell_grid[j][i] = new SubCell(j, i);
-			//cout << subCell_grid[j][i].posX << endl;
-			//this->subCells.push_back(SubCell::subCells[SubCell::subCells.size() - 1]);
 		}
 	}
 

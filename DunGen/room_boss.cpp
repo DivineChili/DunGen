@@ -23,7 +23,6 @@ void Room_boss::printType() {
 
 void Room_boss::build() {
 	// Loop through and generate the cells at positions in map
-	//cout << this->width << this->height << this->x << this->y << endl;
 	for (int posY = this->y; posY <= (this->y + this->height); posY++) { // Loops through the cells aalong the y-axis, starting from the starting y-position
 		for (int posX = this->x; posX <= (this->x + this->width); posX++) { // Loops through the cells along the x-axis starting from the starting x-position
 																			// Visit cell
@@ -140,7 +139,7 @@ void Room_boss::build() {
 		}
 	}
 	else if (this->width == this->height) {
-		cout << "width = height" << endl;
+		cout << "width = height" << endl; //Do some fancy stuff here
 	}
 
 	//Code for labeling the rooms by type with a character.
