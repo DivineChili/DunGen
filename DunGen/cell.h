@@ -16,6 +16,7 @@ enum DIRECTIONS { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 class Cell {
 private:
 	string cell_struct = "";
+	pair<int, int> position;
 	bool opened_sides[4];
 public:
 	static const char wall = '#';
@@ -30,7 +31,7 @@ public:
 	vector<vector<SubCell*>> subCell_grid;
 	//These are the subCells contained within one cell
 	//vector<SubCell*> subCells;
-	Cell::Cell();
+	Cell::Cell(pair<int, int> pos);
 	void Cell::rebuild();
 	
 	//Draws a row of subcells to the terminal.

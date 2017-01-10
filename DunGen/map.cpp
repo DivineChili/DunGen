@@ -16,7 +16,7 @@ Map::Map(unsigned int sizeX, unsigned int sizeY) {
 		vector<Cell>::iterator it = this->map_grid[i].begin(); // Create an iterator to loop through second vector
 		for (; it < this->map_grid[i].end(); ++it) 	// Loop through iterator
 		{
-			*it = Cell(); // Set the iterator's referenced value to a new cell-object
+			*it = Cell({i, find(this->map_grid[i].begin(), this->map_grid[i].end(), *it) - this->map_grid[i].begin()); // Set the iterator's referenced value to a new cell-object
 		}
 	}
 }
