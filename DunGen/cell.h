@@ -16,6 +16,7 @@ enum DIRECTIONS { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 class Cell {
 private:
 	string cell_struct = "";
+	pair<int, int> position;
 	bool opened_sides[4];
 public:
 	static const char wall = '#';
