@@ -12,7 +12,7 @@ using namespace std;
 
 
 // Initializes the cell and builds the base structure!
-Cell::Cell() : subCell_grid(vector< vector<SubCell*>>(5, vector<SubCell*>(5))){
+Cell::Cell(pair<int,int> pos) : subCell_grid(vector< vector<SubCell*>>(5, vector<SubCell*>(5))){
 
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
@@ -44,6 +44,8 @@ Cell::Cell() : subCell_grid(vector< vector<SubCell*>>(5, vector<SubCell*>(5))){
 	this->opened_sides[1] = false;
 	this->opened_sides[2] = false;
 	this->opened_sides[3] = false;
+	
+	this->position = pos;
 }
 
 // Rebuilds the cell. NB! All changes done to the cell will be lost!
