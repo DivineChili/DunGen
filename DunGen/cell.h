@@ -30,7 +30,7 @@ public:
 	vector<vector<SubCell*>> subCell_grid;
 	//These are the subCells contained within one cell
 	//vector<SubCell*> subCells;
-	Cell::Cell();
+	Cell::Cell(pair<int, int> pos);
 	void Cell::rebuild();
 	
 	//Draws a row of subcells to the terminal.
