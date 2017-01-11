@@ -12,14 +12,11 @@ using namespace std;
 
 
 // Initializes the cell and builds the base structure!
-Cell::Cell() : subCell_grid(vector< vector<SubCell*>>(5, vector<SubCell*>(5))){
+Cell::Cell(int x, int y) : subCell_grid(vector< vector<SubCell*>>(5, vector<SubCell*>(5))), x(x), y(y){
 
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
-			//cout << "j:" << j << " i:" << i << endl;
 			this->subCell_grid[j][i] = new SubCell(j, i);
-			//cout << subCell_grid[j][i].posX << endl;
-			//this->subCells.push_back(SubCell::subCells[SubCell::subCells.size() - 1]);
 		}
 	}
 
@@ -86,24 +83,42 @@ void Cell::toggleSide(int side, bool state /*true is floor, false is wall*/) {
 		if (state) { this->cell_struct[1] = this->floor;}
 		else { this->cell_struct[1] = this->wall; }
 		this->opened_sides[UP] = state;
+
+		for (int i = 1; i < 4; i++) {
+			//this->subCell_grid[i][0] = new Door(this->x, this->y);
+		}
 		break;
 	case(DOWN):
 		if (state) { this->cell_struct[7] = this->floor; }
 		else { this->cell_struct[7] = this->wall; }
 		this->opened_sides[DOWN] = state;
+		
+		for (int i = 1; i < 4; i++) {
+			//this->subCell_grid[i][0] = new Door(this->x, this->y);
+		}
 		break;
 	case(LEFT):
 		if (state) { this->cell_struct[3] = this->floor; }
 		else { this->cell_struct[3] = this->wall; }
 		this->opened_sides[LEFT] = state;
+		
+		for (int i = 1; i < 4; i++) {
+			//this->subCell_grid[i][0] = new Door(this->x, this->y);
+		}
 		break;
 	case(RIGHT):
 		if (state) { this->cell_struct[5] = this->floor; }
 		else { this->cell_struct[5] = this->wall; }
 		this->opened_sides[RIGHT] = state;
+		
+		for (int i = 1; i < 4; i++) {
+			//this->subCell_grid[i][0] = new Door(this->x, this->y);
+		}
 		break;
 	}
 }
+
+Cell::Cell() {}
 
 // Gets the char at a specific position in the cell
 char Cell::getCharAtPos(int x, int y) {
@@ -131,13 +146,11 @@ string Cell::getCellStruct() { return this->cell_struct; }
 
 void Cell::drawSubCellRow(int row) {
 	for (int i = 0; i < 5; i++) {
-		cout << this->subCell_grid[row][i]->getChar();
+		cout << this->subCell_grid[i][row]->getChar();
 	}
 }
 
 void Cell::setSubCellAtPos(SubCell* subCell) {
-	//cout << subCell->getChar()<< endl;
-
 	if (subCell->getChar() == 'D') {
 		cout << "door" << endl;
 		for (int i = 0; i < this->subCell_grid[0].size(); i++) {
@@ -148,8 +161,6 @@ void Cell::setSubCellAtPos(SubCell* subCell) {
 		}
 	}
 	this->subCell_grid[subCell->posX][subCell->posY] = subCell;
-	this->subCell_grid[0][0] = new Door(0, 0);
-
 }
 
 // Gets a vector of all the chars in a row

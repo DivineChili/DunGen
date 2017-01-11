@@ -7,12 +7,10 @@ Room_enemy::Room_enemy(uint32_t seed, Map* map, int key, unsigned int maxX, unsi
 	enemyId(Room_enemy::enemyRooms.size()){
 
 	enemyRooms.push_back(this);
-	//cout << "Creating an enemy room!" << endl;
 }
 
 
 Room_enemy::~Room_enemy(){
-	//cout << "Deleting enemy room!" << endl;
 	Room_enemy::enemyRooms.pop_back();
 }
 void Room_enemy::printType() {

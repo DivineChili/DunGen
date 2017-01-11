@@ -20,29 +20,24 @@ Room::Room(uint32_t seed, Map* map, int key, char letter, unsigned int maxX, uns
 	overlap(false) {
 
 	this->rooms.push_back(this);
-	//cout << "Creating room!" << endl;
 }
 
 Room::~Room() {
-	//cout << "Destroying room!" << endl;
 	Room::rooms.pop_back(); //Remove last element of vector.
 }
 
 bool Room::isOverlapping() {
 	//Check for any cells already visited.
-	//cout << "height:" << this->height << " width:" << this->width << " x:" << this->x << " y:" << this->y << endl;
 	for (int posY = this->y; posY <= (this->y + this->height); posY++) { // Loops through the cells aalong the y-axis, starting from the starting y-position
 		for (int posX = this->x; posX <= (this->x + this->width); posX++) { // Loops through the cells along the x-axis starting from the starting x-position
 			if (map->cellVisited(posX, posY)) {
 				//This will make the while-loop delete the room to prevent overlapping.
-				//cout << "Room overlapping!!!!!!!" << endl;
-				this->overlap = true;
+				this->overlap = true;//Room is overlapping
 				return true;
 			}
 		}
 	}
-	//cout << "Room not overlapping !!!!!!" << endl;
-	return false;
+	return false;//Room is not overlapping
 }
 
 void Room::build() {
@@ -71,7 +66,6 @@ void Room::build() {
 	string cell;
 	cell += "////";	cell += letter;	cell += "////";
 	this->map->setCellStructureAtPos(this->x + this->width / 2, this->y + this->height / 2, cell);
-	//cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << endl;
 
 	buildDoors();
 }
@@ -85,7 +79,7 @@ void Room::buildDoors() {
 			j = 0;
 			do {
 				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, this->y, "/D///////");
-				this->buildDoors_SubCell(this->map->getCellAtPos(this->x + floor(this->width / 2) + j, this->y),0);
+				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, this->y),0);
 				j++;
 			} while ((this->width + j) % 2 != 1);
 		}
@@ -93,7 +87,7 @@ void Room::buildDoors() {
 			j = 0;
 			do {
 				this->map->setCellStructureAtPos(this->x, (this->y + floor(this->height / 2)) + j, "///D/////");
-				//this->buildDoors_SubCell();
+				this->buildDoors_SubCell(this->map->getCellAtPos(this->x, (this->y + floor(this->height / 2)) + j), 1);
 				j++;
 			} while ((this->height + j) % 2 != 1);
 		}
@@ -101,7 +95,7 @@ void Room::buildDoors() {
 			j = 0;
 			do {
 				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height), "///////D/");
-				//this->buildDoors_SubCell();
+				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height)), 2);
 				j++;
 			} while ((this->width + j) % 2 != 1);
 		}
@@ -109,7 +103,7 @@ void Room::buildDoors() {
 			j = 0;
 			do {
 				this->map->setCellStructureAtPos((this->x + this->width), this->y + floor(this->height / 2) + j, "/////D///");
-				//this->buildDoors_SubCell();
+				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + this->width), this->y + floor(this->height / 2) + j), 3);
 				j++;
 			} while ((this->height + j) % 2 != 1);
 		}
@@ -117,12 +111,30 @@ void Room::buildDoors() {
 }
 
 void Room::buildDoors_SubCell(Cell* cell, int side) {
-	//cout << "building subcell" << endl;
-	for (int i = 0; i < 5; i++) {
-		for (int j = 0; j < 5; j++) {
-			cell->setSubCellAtPos(new Door(j, i));
+	switch (side) {
+	case 0://North
+		for (int i = 1; i < 4; i++) {
+			cell->setSubCellAtPos(new Door(i, 0));
 		}
+		break;
+	case 1://West
+		for (int i = 1; i < 4; i++) {
+			cell->setSubCellAtPos(new Door(0, i));
+		}
+		break;
+	case 2://South
+		for (int i = 1; i < 4; i++) {
+			cell->setSubCellAtPos(new Door(i, 4));
+		}
+		break;
+	case 3://East
+		for (int i = 1; i < 4; i++) {
+			cell->setSubCellAtPos(new Door(4, i));
+		}
+		break;
 	}
+
+
 }
 
 bool Room::doorIsValid() {

@@ -13,12 +13,9 @@ Map::Map(unsigned int sizeX, unsigned int sizeY) {
 											    //2. dimensional vectors containing cell-objects
 	for (int i = 0; i < this->map_grid.size(); i++) // Loop through the first vector
 	{
-		vector<Cell>::iterator it = this->map_grid[i].begin(); // Create an iterator to loop through second vector
-		for (; it < this->map_grid[i].end(); ++it) 	// Loop through iterator
+		for (int j = 0; j < this->map_grid[i].size(); j++) 	// Loop through iterator
 		{
-			*it = Cell(); // Set the iterator's referenced value to a new cell-object
-			//it->setFloorChar('-');
-			//it->setWallChar('#');
+			map_grid[i][j] = Cell(j, i); // Set the iterator's referenced value to a new cell-object
 		}
 	}
 }
@@ -27,7 +24,7 @@ Map::~Map() { cout << "Deleting map!" << endl; }	// Just a destructor
 													// Returns the cell at a spesified position in the map. (X and Y values)
 Cell* Map::getCellAtPos(int x, int y)
 {
-	return &this->map_grid.at(y).at(x);	// Using .at() instead of Operator[] to throw exceptions and bypass errors!
+	return &this->map_grid.at(x).at(y);	// Using .at() instead of Operator[] to throw exceptions and bypass errors!
 }
 
 // Draws an induvidual cell at a spesific point in the grid
@@ -57,10 +54,10 @@ void Map::drawMap() {
 }
 
 void Map::drawSubCellMap() {
-	for (int i = 0; i < this->size_x; i++) { //map x
+	for (int i = 0; i < this->size_y; i++) { //map y
 		for (int j = 0; j < 5; j++){ //subcell row number
-			for (int k = 0; k < this->size_y - 1; k++) { //map y
-				this->map_grid[i][k].drawSubCellRow(j);
+			for (int k = 0; k < this->size_y - 1; k++) { //map x
+				this->map_grid[k][i].drawSubCellRow(j);
 				cout << " ";
 			}
 			cout << endl;

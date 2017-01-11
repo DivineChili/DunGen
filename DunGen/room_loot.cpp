@@ -7,8 +7,6 @@ Room_loot::Room_loot(uint32_t seed, Map* map, int key, unsigned int maxX, unsign
 	lootId(Room_loot::lootRooms.size()){
 	
 	lootRooms.push_back(this);
-
-	//cout << "Making a loot room" << endl;
 }
 
 void Room_loot::build() {
@@ -83,13 +81,11 @@ void Room_loot::build() {
 	string cell;
 	cell += "////";	cell += letter;	cell += "////";
 	this->map->setCellStructureAtPos(this->x + this->width / 2, this->y + this->height / 2, cell);
-	//cout << "Rooms[" << this->id << "]->id: " << this->rooms[this->id]->id << endl;
 
 	buildDoors();
 }
 
 Room_loot::~Room_loot(){
-	//cout << "Deleting loot room" << endl;
 	Room_loot::lootRooms.pop_back();
 }
 
@@ -100,7 +96,6 @@ bool Room_loot::chestIsValid() {
 void Room_loot::printType() {
 	string roomtype = typeid(this->rooms[this->id]).name();
 	cout << "This room is of type: " << roomtype << endl;
-	//cout << "Test: " << test << endl;
 }
 
 vector<Room_loot*> Room_loot::lootRooms;
