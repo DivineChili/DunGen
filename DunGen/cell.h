@@ -18,6 +18,8 @@ private:
 	string cell_struct = "";
 	pair<int, int> position;
 	bool opened_sides[4];
+	int x;
+	int y;
 public:
 	static const char wall = '#';
 	static const char noWall = ',';
@@ -31,7 +33,8 @@ public:
 	vector<vector<SubCell*>> subCell_grid;
 	//These are the subCells contained within one cell
 	//vector<SubCell*> subCells;
-	Cell::Cell(pair<int, int> pos);
+	Cell::Cell(int x, int y);
+	Cell::Cell();
 	void Cell::rebuild();
 	
 	//Draws a row of subcells to the terminal.

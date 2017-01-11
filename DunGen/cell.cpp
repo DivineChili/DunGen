@@ -12,7 +12,7 @@ using namespace std;
 
 
 // Initializes the cell and builds the base structure!
-Cell::Cell(pair<int,int> pos) : subCell_grid(vector< vector<SubCell*>>(5, vector<SubCell*>(5))){
+Cell::Cell(int x, int y) : subCell_grid(vector< vector<SubCell*>>(5, vector<SubCell*>(5))), x(x), y(y){
 
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
@@ -44,8 +44,6 @@ Cell::Cell(pair<int,int> pos) : subCell_grid(vector< vector<SubCell*>>(5, vector
 	this->opened_sides[1] = false;
 	this->opened_sides[2] = false;
 	this->opened_sides[3] = false;
-	
-	this->position = pos;
 }
 
 // Rebuilds the cell. NB! All changes done to the cell will be lost!
@@ -119,6 +117,8 @@ void Cell::toggleSide(int side, bool state /*true is floor, false is wall*/) {
 		break;
 	}
 }
+
+Cell::Cell() {}
 
 // Gets the char at a specific position in the cell
 char Cell::getCharAtPos(int x, int y) {

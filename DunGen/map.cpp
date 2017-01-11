@@ -13,10 +13,9 @@ Map::Map(unsigned int sizeX, unsigned int sizeY) {
 											    //2. dimensional vectors containing cell-objects
 	for (int i = 0; i < this->map_grid.size(); i++) // Loop through the first vector
 	{
-		vector<Cell>::iterator it = this->map_grid[i].begin(); // Create an iterator to loop through second vector
-		for (; it < this->map_grid[i].end(); ++it) 	// Loop through iterator
+		for (int j = 0; j < this->map_grid[i].size(); j++) 	// Loop through iterator
 		{
-			*it = Cell({i, find(this->map_grid[i].begin(), this->map_grid[i].end(), *it) - this->map_grid[i].begin()); // Set the iterator's referenced value to a new cell-object
+			map_grid[i][j] = Cell(j, i); // Set the iterator's referenced value to a new cell-object
 		}
 	}
 }
