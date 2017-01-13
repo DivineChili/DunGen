@@ -7,6 +7,8 @@
 #include <iostream>																										   
 #include <vector>
 #include "door.h"
+#include "wall.h"
+#include "floor.h"
 
 using namespace std;
 
@@ -77,24 +79,15 @@ void Cell::rebuild() {
 
 // Toggles one of the sides of the cell. Changes are lost if cell is rebuilt!
 void Cell::toggleSide(int side, bool state /*true is floor, false is wall*/) {
-	switch (side)
-	{
+	switch (side){
 	case(UP):
 		if (state) { this->cell_struct[1] = this->floor;}
 		else { this->cell_struct[1] = this->wall; }
 		this->opened_sides[UP] = state;
 
-		for (int i = 1; i < 4; i++) {
-			this->subCell_grid[i][0] = new Door(i, 0);
-		}
-		break;
-	case(DOWN):
-		if (state) { this->cell_struct[7] = this->floor; }
-		else { this->cell_struct[7] = this->wall; }
-		this->opened_sides[DOWN] = state;
-		
-		for (int i = 1; i < 4; i++) {
-			this->subCell_grid[i][0] = new Door(0, i);
+		for (int i = 0; i < 5; i++) {
+			this->subCell_grid[i][0] = new Wall(i, 0);
+			cout << 'up' << endl;
 		}
 		break;
 	case(LEFT):
@@ -102,8 +95,19 @@ void Cell::toggleSide(int side, bool state /*true is floor, false is wall*/) {
 		else { this->cell_struct[3] = this->wall; }
 		this->opened_sides[LEFT] = state;
 		
-		for (int i = 1; i < 4; i++) {
-			this->subCell_grid[i][0] = new Door(i, 5);
+		for (int i = 0; i < 5; i++) {
+			this->subCell_grid[0][i] = new Wall(i, 5);
+			cout << "left" << endl;
+		}
+		break;
+	case(DOWN):
+		if (state) { this->cell_struct[7] = this->floor; }
+		else { this->cell_struct[7] = this->wall; }
+		this->opened_sides[DOWN] = state;
+
+		for (int i = 0; i < 5; i++) {
+			this->subCell_grid[i][4] = new Wall(0, i);
+			cout << "down" << endl;
 		}
 		break;
 	case(RIGHT):
@@ -111,8 +115,54 @@ void Cell::toggleSide(int side, bool state /*true is floor, false is wall*/) {
 		else { this->cell_struct[5] = this->wall; }
 		this->opened_sides[RIGHT] = state;
 		
-		for (int i = 1; i < 4; i++) {
-			this->subCell_grid[i][0] = new Door(5, i);
+		for (int i = 0; i < 5; i++) {
+			this->subCell_grid[4][i] = new Wall(5, i);
+			cout << "right" << endl;
+		}
+		break;
+	}
+}
+
+void Cell::toggleSubCellSide(int side, bool state){
+	switch (state){
+	case UP:
+		for (int i = 0; i < 4; i++) {
+			if (state) {
+				this->subCell_grid[0][i] = new Wall(i, 0);
+			}
+			else {
+				this->subCell_grid[0][i] = new Floor(i, 0);
+			}
+		}
+		break;
+	case LEFT:
+		for (int i = 0; i < 4; i++) {
+			if (state) {
+				this->subCell_grid[0][i] = new Wall(0, i);
+			}
+			else {
+				this->subCell_grid[0][i] = new Floor(0, i);
+			}
+		}
+		break;
+	case DOWN:
+		for (int i = 0; i < 4; i++) {
+			if (state) {
+				this->subCell_grid[0][i] = new Wall(4, i);
+			}
+			else {
+				this->subCell_grid[0][i] = new Floor(4, i);
+			}
+		}
+		break;
+	case RIGHT:
+		for (int i = 0; i < 4; i++) {
+			if (state) {
+				this->subCell_grid[0][i] = new Wall(i, 4);
+			}
+			else {
+				this->subCell_grid[0][i] = new Floor(i, 4);
+			}
 		}
 		break;
 	}

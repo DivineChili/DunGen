@@ -43,6 +43,8 @@ public:
 	void Cell::setSubCellAtPos(SubCell* subCell);
 	
 	void Cell::toggleSide(int side, bool state);
+
+	void Cell::toggleSubCellSide(int side, bool state);
 	
 	char Cell::getCharAtPos(int x, int y);
 
