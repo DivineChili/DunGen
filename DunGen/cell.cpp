@@ -109,15 +109,8 @@ void Cell::toggleSide(int side, bool state /*true is floor, false is wall*/) {
 }
 
 void Cell::toggleSubCellSide(int side, bool state){
-	cout << side << "\t" << state << endl;
-	for (int i = 0; i < 5; i++) {
-		this->drawSubCellRow(i);
-		cout << endl;
-	}
-
 	switch (side){
 	case UP:
-		cout << "UP" << endl;
 		for (int i = 0; i < 5; i++) {
 			if (state) {
 				this->subCell_grid[i][0] = new Wall(i, 0);
@@ -128,7 +121,6 @@ void Cell::toggleSubCellSide(int side, bool state){
 		}
 		break;
 	case LEFT:
-		cout << "LEFT" << endl;
 		for (int i = 0; i < 5; i++) {
 			if (state) {
 				this->subCell_grid[0][i] = new Wall(0, i);
@@ -139,7 +131,6 @@ void Cell::toggleSubCellSide(int side, bool state){
 		}
 		break;
 	case DOWN:
-		cout << "DOWN" << endl;
 		for (int i = 0; i < 5; i++) {
 			if (state) {
 				this->subCell_grid[i][4] = new Wall(4, i);
@@ -150,7 +141,6 @@ void Cell::toggleSubCellSide(int side, bool state){
 		}
 		break;
 	case RIGHT:
-		cout << "Right" << endl;
 		for (int i = 0; i < 5; i++) {
 			if (state) {
 				this->subCell_grid[4][i] = new Wall(i, 4);
@@ -161,8 +151,6 @@ void Cell::toggleSubCellSide(int side, bool state){
 		}
 		break;
 	}
-	cout << side << "\t" << state << endl;
-
 }
 
 Cell::Cell() {}
@@ -199,12 +187,11 @@ void Cell::drawSubCellRow(int row) {
 
 void Cell::setSubCellAtPos(SubCell* subCell) {
 	if (subCell->getChar() == 'D') {
-		cout << "door" << endl;
 		for (int i = 0; i < this->subCell_grid[0].size(); i++) {
 			for (int j = 0; j < this->subCell_grid.size(); j++) {
-				cout << this->subCell_grid[j][i]->getChar();
+				//cout << this->subCell_grid[j][i]->getChar();
 			}
-			cout << endl;
+			//cout << endl;
 		}
 	}
 	this->subCell_grid[subCell->posX][subCell->posY] = subCell;
