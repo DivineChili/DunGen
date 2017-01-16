@@ -69,6 +69,12 @@
     <ClInclude Include="room_trap.h">
       <Filter>Header Files\Rooms</Filter>
     </ClInclude>
+    <ClInclude Include="wall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="floor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -109,6 +115,12 @@
     </ClCompile>
     <ClCompile Include="room_trap.cpp">
       <Filter>Source Files\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="wall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="floor.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

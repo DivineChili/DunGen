@@ -148,6 +148,7 @@
     <ClInclude Include="algorithms.h" />
     <ClInclude Include="cell.h" />
     <ClInclude Include="door.h" />
+    <ClInclude Include="floor.h" />
     <ClInclude Include="loot.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="randomizer.h" />
@@ -159,12 +160,14 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="subcell.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="wall.h" />
     <ClInclude Include="xxHash32.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="door.cpp" />
     <ClCompile Include="DunGen.cpp" />
     <ClCompile Include="cell.cpp" />
+    <ClCompile Include="floor.cpp" />
     <ClCompile Include="loot.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="randomizer.cpp" />
@@ -180,6 +183,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="subcell.cpp" />
+    <ClCompile Include="wall.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
