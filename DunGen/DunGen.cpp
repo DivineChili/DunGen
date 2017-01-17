@@ -88,7 +88,7 @@ int main()
 
 	cout << "Rooms generated: " << Room::rooms.size() << endl;
 	
-	Algorithms::recursive_backtracking(start_pos, &grid, mazeRandomizer);
+	Algorithms::recursive_backtracking(start_pos, &grid, mazeRandomizer, 90);
 	
 	//Algorithms::deadend_remover(&grid, 1);
 

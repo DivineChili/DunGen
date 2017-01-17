@@ -11,8 +11,9 @@
 class Algorithms
 {
 public:
+	static vector<Cell*> dead_ends;
 
-	static void recursive_backtracking(int * start_pos, Map * grid, Randomizer mazeRandomizer) {
+	static void recursive_backtracking(int * start_pos, Map * grid, Randomizer mazeRandomizer, int deadend_logging_chance) {
 		using namespace std;
 		// Create vector for recursive-backtracking history.
 		cout << "Generating..." << endl;
@@ -113,6 +114,8 @@ public:
 			else {
 				if (history.size() > 1) {
 					//cout << "Backtracking !!!";
+					if(mazeRandomizer.randomizeFromChance(deadend_logging_chance, mazeRandomizer.randomizeAtPos(c,r)) == 1)
+						grid->dead_ends.push_back(grid->getCellAtPos(c, r));
 					history.pop_back();
 					c = history.back().first;
 					r = history.back().second;
@@ -127,8 +130,12 @@ public:
 
 	}
 
-	static void deadend_remover(Map * grid, int iterations) {
-		
+	static void deadend_remover(Map * grid, vector<Cell*> dead_ends, int iterations) {
+		vector<Cell*> local_ends = dead_ends;
+		vector<Cell*> temp_ends;
+		for (int i = 0; i < iterations; i++) {
+
+		}
 	}
 };
 
