@@ -36,18 +36,6 @@ public:
 	// Writes the enitre map to .txt file
 	void Map::outputMap(string filename);
 
-	/* The following functions is used for generating algorithms and indirect methods of changing cells. */
-	// Set cell-struct at a spesific position
-	void Map::setCellStructureAtPos(int x, int y, string newCellStruct);
-	// Toggles a specific side of cell. Indirect method of Cell::toggleSide()
-	void Map::toggleCellSideAtPos(int x, int y, int side, bool state);
-	// Sets the cell at [y][x] to be visited. Indirect method of Cell::setVisited(true)
-	void Map::visitCell(int x, int y);
-	// Returns the visited-state of cell at [y][x] coordinates.
-	bool Map::cellVisited(int x, int y);
-	// Returns all the opened sides of a cell at a position
-	vector<int> Map::getCellopeningsAtPos(int x, int y);
-
 	//Returns the size of the map
 	pair<int, int> Map::getSize();
 };

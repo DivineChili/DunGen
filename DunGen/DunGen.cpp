@@ -53,8 +53,8 @@ int main()
 
 	// [0] = x; [1] = y
 	int start_pos[2] = { 2,2 }; // Start backtracking from cell at this xy-coordinate
-	grid.setCellStructureAtPos(start_pos[0], start_pos[1], "---------");
-	grid.visitCell(start_pos[0], start_pos[1]);
+	grid.getCellAtPos(start_pos[0], start_pos[1])->setCellStructure("---------");
+	grid.getCellAtPos(start_pos[0], start_pos[1])->setVisited(true);
 
 	// Generate rooms
 	int key = 0;

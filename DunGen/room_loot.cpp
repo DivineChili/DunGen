@@ -15,19 +15,19 @@ void Room_loot::build() {
 	for (int posY = this->y; posY <= (this->y + this->height); posY++) { // Loops through the cells aalong the y-axis, starting from the starting y-position
 		for (int posX = this->x; posX <= (this->x + this->width); posX++) { // Loops through the cells along the x-axis starting from the starting x-position
 																			// Visit cell
-			this->map->visitCell(posX, posY);
+			this->map->getCellAtPos(posX, posY)->setVisited(true);
 			// Construct the 4 corners of the room
-			if (posY == this->y && posX == this->x) this->map->setCellStructureAtPos(posX, posY, "####--#--"); // Top Left
-			else if (posY == (this->y + this->height) && posX == this->x) this->map->setCellStructureAtPos(posX, posY, "#--#--###"); // Bottom Left
-			else if (posY == this->y && posX == (this->x + this->width)) this->map->setCellStructureAtPos(posX, posY, "###--#--#"); // Top Right
-			else if (posY == (this->y + this->height) && posX == (this->x + this->width)) this->map->setCellStructureAtPos(posX, posY, "--#--####"); // Bottom Right
+			if (posY == this->y && posX == this->x) this->map->getCellAtPos(posX, posY)->setCellStructure("####--#--"); // Top Left
+			else if (posY == (this->y + this->height) && posX == this->x) this->map->getCellAtPos(posX, posY)->setCellStructure("#--#--###"); // Bottom Left
+			else if (posY == this->y && posX == (this->x + this->width)) this->map->getCellAtPos(posX, posY)->setCellStructure("###--#--#"); // Top Right
+			else if (posY == (this->y + this->height) && posX == (this->x + this->width)) this->map->getCellAtPos(posX, posY)->setCellStructure("--#--####"); // Bottom Right
 																																					 // Construct the 4 walls
-			else if (posY == this->y && (posX != this->x || posX != (this->x + this->width))) this->map->setCellStructureAtPos(posX, posY, "###------"); // Top wall
-			else if (posX == this->x && (posY != this->y || posY != (this->y + this->height))) this->map->setCellStructureAtPos(posX, posY, "#--#--#--"); // Left Wall
-			else if (posY == (this->y + this->height) && (posX != this->x || posX != (this->x + this->width))) this->map->setCellStructureAtPos(posX, posY, "------###"); // Bottom wall
-			else if (posX == (this->x + this->width) && (posY != this->y || posY != (this->y + this->height))) this->map->setCellStructureAtPos(posX, posY, "--#--#--#"); // Right wall
+			else if (posY == this->y && (posX != this->x || posX != (this->x + this->width))) this->map->getCellAtPos(posX, posY)->setCellStructure("###------"); // Top wall
+			else if (posX == this->x && (posY != this->y || posY != (this->y + this->height))) this->map->getCellAtPos(posX, posY)->setCellStructure("#--#--#--"); // Left Wall
+			else if (posY == (this->y + this->height) && (posX != this->x || posX != (this->x + this->width))) this->map->getCellAtPos(posX, posY)->setCellStructure("------###"); // Bottom wall
+			else if (posX == (this->x + this->width) && (posY != this->y || posY != (this->y + this->height))) this->map->getCellAtPos(posX, posY)->setCellStructure("--#--#--#"); // Right wall
 																																										  // Else, construct middle room
-			else this->map->setCellStructureAtPos(posX, posY, "---------");
+			else this->map->getCellAtPos(posX, posY)->setCellStructure("---------");
 
 		}
 	}
@@ -42,7 +42,7 @@ void Room_loot::build() {
 				cout << "loot on top wall" << endl;
 				chestOffset = this->randomizer.randomizeInRange(0, this->width + 1, i);
 				if (this->chestIsValid()) {
-					this->map->setCellStructureAtPos(this->x + chestOffset, this->y, "111llllll");
+					this->map->getCellAtPos(this->x + chestOffset, this->y)->setCellStructure("111llllll");
 					i = 10;
 					break;
 				}
@@ -50,7 +50,7 @@ void Room_loot::build() {
 				cout << "loot on left wall" << endl;
 				chestOffset = this->randomizer.randomizeInRange(0, this->height + 1, i);
 				if (this->chestIsValid()) {
-					this->map->setCellStructureAtPos(this->x, this->y + chestOffset, "lllllllll");
+					this->map->getCellAtPos(this->x, this->y + chestOffset)->setCellStructure("lllllllll");
 					i = 10;
 					break;
 				}
@@ -58,7 +58,7 @@ void Room_loot::build() {
 				cout << "loot on bottom wall" << endl;
 				chestOffset = this->randomizer.randomizeInRange(0, this->width + 1, i);
 				if (this->chestIsValid()) {
-					this->map->setCellStructureAtPos(this->x + chestOffset, this->y + this->height, "lllllllll");
+					this->map->getCellAtPos(this->x + chestOffset, this->y + this->height)->setCellStructure("lllllllll");
 					i = 10;
 					break;
 				}
@@ -66,7 +66,7 @@ void Room_loot::build() {
 				cout << "loot on right wall" << endl;
 				chestOffset = this->randomizer.randomizeInRange(0, this->height + 1, i);
 				if (this->chestIsValid()) {
-					this->map->setCellStructureAtPos(this->x + this->width, this->y + chestOffset, "lllllllll");
+					this->map->getCellAtPos(this->x + this->width, this->y + chestOffset)->setCellStructure("lllllllll");
 					i = 10;
 					break;
 				}
@@ -80,7 +80,7 @@ void Room_loot::build() {
 	//Code for labeling the rooms by type with a character.
 	string cell;
 	cell += "////";	cell += letter;	cell += "////";
-	this->map->setCellStructureAtPos(this->x + this->width / 2, this->y + this->height / 2, cell);
+	this->map->getCellAtPos(this->x + this->width / 2, this->y + this->height / 2)->setCellStructure(cell);
 
 	buildDoors();
 }

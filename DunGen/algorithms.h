@@ -26,7 +26,7 @@ public:
 														   // Recursive backtracing starts here!
 		while (running) {
 
-			(*grid).visitCell(c, r);
+			(*grid).getCellAtPos(c, r)->setVisited(true);
 			//cout << "Visited: [" << c << "][" << r << "]   \t|| ";
 
 			vector<int> check;
@@ -34,7 +34,7 @@ public:
 			// Check blocks!
 			// Check Right
 			try {
-				if (!(*grid).cellVisited(c + 1, r)) {
+				if (!(*grid).getCellAtPos(c + 1, r)->_visited) {
 					check.push_back(RIGHT);
 				}
 			}
@@ -42,7 +42,7 @@ public:
 
 			// Check Left
 			try {
-				if (!(*grid).cellVisited(c - 1, r)) {
+				if (!(*grid).getCellAtPos(c - 1, r)->_visited) {
 					check.push_back(LEFT);
 				}
 			}
@@ -50,7 +50,7 @@ public:
 
 			// Check Up
 			try {
-				if (!(*grid).cellVisited(c, r - 1)) {
+				if (!(*grid).getCellAtPos(c, r - 1)->_visited) {
 					check.push_back(UP);
 				}
 			}
@@ -58,7 +58,7 @@ public:
 
 			// Check Down
 			try {
-				if (!(*grid).cellVisited(c, r + 1)) {
+				if (!(*grid).getCellAtPos(c, r + 1)->_visited) {
 					check.push_back(DOWN);
 				}
 			}
@@ -75,9 +75,9 @@ public:
 				//cout << mazeHash << endl;
 				uint32_t result = mazeRandomizer.randomizeAtPos(c, r);
 
-				int move_direction = check[static_cast<int>(result) % check.size()];	 // Randomly pick a cell! For use of hash-functions, put stuff here!
+				int move_direction = check[static_cast<int>(result) % check.size()];
 
-																						 //cout << "Moving:  " << move_direction << "   !!!";
+				//cout << "Moving:  " << move_direction << "   !!!";
 				if (move_direction == UP)
 				{
 					(*grid).getCellAtPos(c,r)->toggleSide(UP, true);
@@ -128,42 +128,7 @@ public:
 	}
 
 	static void deadend_remover(Map * grid, int iterations) {
-		vector< vector<pair<int, int>>> dead_ends_it;
-
-		dead_ends_it.push_back(grid->dead_ends);
-
-		vector<vector<pair<int, int>>>::iterator it = dead_ends_it.begin();
-
-		// Loop through deadends
-		for (; it != dead_ends_it.end(); it++) {
-			
-			vector<pair<int, int>> sub_dead_ends_it = *it;
-			vector<pair<int, int>> new_sub_dead_ends;
-			vector<pair<int, int>>::iterator sub_it = sub_dead_ends_it.begin();
-
-			
-			for (; sub_it != sub_dead_ends_it.end(); sub_it++) {
-
-				int x = sub_it->first;
-				int y = sub_it->second;
-
-				grid->setCellStructureAtPos(x, y, string(9, Cell::empty)); // Just makes the whole cell blank (or to Cell::empty)
-
-				vector<int> openings = grid->getCellopeningsAtPos(x, y);
-
-				if (openings.size() == 1) { // Check if current cell is a deadend. Usefull for iterations > 1
-					// Jump to the previous cell and close the opening to this cell. Then check if the cell is a deadend aswell
-					if (openings[0] == UP) { --y; grid->toggleCellSideAtPos(x, y, DOWN, false); openings = grid->getCellopeningsAtPos(x, y); if (openings.size() <= 1 && dead_ends_it.size() != iterations) new_sub_dead_ends.push_back({ x,y }); } // The previous cell is above, y-1
-					else if (openings[0] == DOWN) { ++y; grid->toggleCellSideAtPos(x, y, UP, false); openings = grid->getCellopeningsAtPos(x, y); if (openings.size() <= 1 && dead_ends_it.size() != iterations) new_sub_dead_ends.push_back({ x,y }); } // The previous cell is bellow, y+1
-					else if (openings[0] == LEFT) { --x; grid->toggleCellSideAtPos(x, y, RIGHT, false); openings = grid->getCellopeningsAtPos(x, y); if (openings.size() <= 1 && dead_ends_it.size() != iterations) new_sub_dead_ends.push_back({ x,y }); }  // The previous cell is to the left, x-1
-					else if (openings[0] == RIGHT) { ++x; grid->toggleCellSideAtPos(x, y, LEFT, false); openings = grid->getCellopeningsAtPos(x, y); if (openings.size() <= 1 && dead_ends_it.size() != iterations) new_sub_dead_ends.push_back({ x,y }); } // The previous cell is to the right, x+1
-
-				}
-			}
-			
-			// When done with one main iteration, put the new created ends into the main vector. Repeat until iterations are reached or no more dead ends exists.
-			if (new_sub_dead_ends.size() != 0 && dead_ends_it.size() != iterations) { dead_ends_it.push_back(new_sub_dead_ends); }
-		}
+		
 	}
 };
 
