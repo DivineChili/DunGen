@@ -80,33 +80,33 @@ public:
 																						 //cout << "Moving:  " << move_direction << "   !!!";
 				if (move_direction == UP)
 				{
-					(*grid).toggleCellSideAtPos(c, r, UP, true);
+					(*grid).getCellAtPos(c,r)->toggleSide(UP, true);
 					(*grid).getCellAtPos(c, r)->toggleSubCellSide(UP, true);
 					--r;
-					(*grid).toggleCellSideAtPos(c, r, DOWN, true);
+					(*grid).getCellAtPos(c, r)->toggleSide(DOWN, true);
 					(*grid).getCellAtPos(c, r)->toggleSubCellSide(DOWN, true);
 				}
 				else if (move_direction == DOWN) {
 
-					(*grid).toggleCellSideAtPos(c, r, DOWN, true);
+					(*grid).getCellAtPos(c, r)->toggleSide(DOWN, true);
 					(*grid).getCellAtPos(c, r)->toggleSubCellSide(DOWN, true);
 					++r;
-					(*grid).toggleCellSideAtPos(c, r, UP, true);
+					(*grid).getCellAtPos(c, r)->toggleSide(UP, true);
 					(*grid).getCellAtPos(c, r)->toggleSubCellSide(UP, true);
 				}
 				else if (move_direction == LEFT) {
 
-					(*grid).toggleCellSideAtPos(c, r, LEFT, true);
+					(*grid).getCellAtPos(c, r)->toggleSide(LEFT, true);
 					(*grid).getCellAtPos(c, r)->toggleSubCellSide(LEFT, true);
 					--c;
-					(*grid).toggleCellSideAtPos(c, r, RIGHT, true);
+					(*grid).getCellAtPos(c, r)->toggleSide(RIGHT, true);
 					(*grid).getCellAtPos(c, r)->toggleSubCellSide(RIGHT, true);
 				}
 				else if (move_direction == RIGHT) {
-					(*grid).toggleCellSideAtPos(c, r, RIGHT, true);
+					(*grid).getCellAtPos(c, r)->toggleSide(RIGHT, true);
 					(*grid).getCellAtPos(c, r)->toggleSubCellSide(RIGHT, true);
 					++c;
-					(*grid).toggleCellSideAtPos(c, r, LEFT, true);
+					(*grid).getCellAtPos(c, r)->toggleSide(LEFT, true);
 					(*grid).getCellAtPos(c, r)->toggleSubCellSide(LEFT, true);
 				}
 			}

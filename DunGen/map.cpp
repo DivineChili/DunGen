@@ -58,14 +58,9 @@ void Map::drawSubCellMap() {
 		for (int j = 0; j < 5; j++){ //subcell row number
 			for (int k = 0; k < this->size_y - 1; k++) { //map x
 				this->map_grid[k][i].drawSubCellRow(j);
-				cout << "|"; // Lines to create spaces between Cells
 			}
 			cout << endl;
 		}
-		//cout << endl;
-		for (int j = 0; j < this->size_x; j++) {
-			cout << "-----";
-		}cout << endl;
 	}
 }
 
