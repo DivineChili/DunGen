@@ -80,7 +80,7 @@ public:
 																						 //cout << "Moving:  " << move_direction << "   !!!";
 				if (move_direction == UP)
 				{
-					(*grid).getCellAtPos(c,r)->toggleSide(UP, true);
+					(*grid).getCellAtPos(c, r)->toggleSide(UP, true);
 					(*grid).getCellAtPos(c, r)->toggleSubCellSide(UP, true);
 					--r;
 					(*grid).getCellAtPos(c, r)->toggleSide(DOWN, true);
