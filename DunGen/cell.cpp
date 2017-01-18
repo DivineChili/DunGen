@@ -79,7 +79,7 @@ void Cell::rebuild() {
 
 // Toggles one of the sides of the cell. Changes are lost if cell is rebuilt!
 void Cell::toggleSide(int side, bool state /*true is floor, false is wall*/) {
- 	this->toggleSubCellSide(side, state);
+ 	//this->toggleSubCellSide(side, state);
 	switch (side){
 	case(UP):
 		if (state) {this->cell_struct[1] = this->floor;	}
@@ -113,16 +113,6 @@ void Cell::toggleSubCellSide(int side, bool state){
 	case UP:
 		for (int i = 0; i < 5; i++) {
 			if (state) {
-				this->subCell_grid[i][0] = new Wall(i, 0);
-			}
-			else {
-				this->subCell_grid[i][0] = new Door(i, 0);
-			}
-		}
-		break;
-	case LEFT:
-		for (int i = 0; i < 5; i++) {
-			if (state) {
 				this->subCell_grid[0][i] = new Wall(0, i);
 			}
 			else {
@@ -130,17 +120,17 @@ void Cell::toggleSubCellSide(int side, bool state){
 			}
 		}
 		break;
-	case DOWN:
+	case LEFT:
 		for (int i = 0; i < 5; i++) {
 			if (state) {
-				this->subCell_grid[i][4] = new Wall(4, i);
+				this->subCell_grid[i][0] = new Wall(i, 0);
 			}
 			else {
-				this->subCell_grid[i][4] = new Door(4, i);
+				this->subCell_grid[i][0] = new Door(i, 0);
 			}
 		}
 		break;
-	case RIGHT:
+	case DOWN:
 		for (int i = 0; i < 5; i++) {
 			if (state) {
 				this->subCell_grid[4][i] = new Wall(i, 4);
@@ -150,7 +140,18 @@ void Cell::toggleSubCellSide(int side, bool state){
 			}
 		}
 		break;
+	case RIGHT:
+		for (int i = 0; i < 5; i++) {
+			if (state) {
+				this->subCell_grid[i][4] = new Wall(4, i);
+			}
+			else {
+				this->subCell_grid[i][4] = new Door(4, i);
+			}
+		}
+		break;
 	}
+	//this->subCell_grid[3][1] = new Door(0,0);
 }
 
 Cell::Cell() {}
@@ -181,20 +182,12 @@ string Cell::getCellStruct() { return this->cell_struct; }
 
 void Cell::drawSubCellRow(int row) {
 	for (int i = 0; i < 5; i++) {
-		cout << this->subCell_grid[i][row]->getChar();
+		cout << this->subCell_grid[row][i]->getChar();
 	}
 }
 
 void Cell::setSubCellAtPos(SubCell* subCell) {
-	if (subCell->getChar() == 'D') {
-		for (int i = 0; i < this->subCell_grid[0].size(); i++) {
-			for (int j = 0; j < this->subCell_grid.size(); j++) {
-				//cout << this->subCell_grid[j][i]->getChar();
-			}
-			//cout << endl;
-		}
-	}
-	this->subCell_grid[subCell->posX][subCell->posY] = subCell;
+	this->subCell_grid[subCell->posY][subCell->posX] = subCell;
 }
 
 // Gets a vector of all the chars in a row

@@ -110,7 +110,6 @@ int main()
 
 	grid.drawSubCellMap();
 
-
 	for (int i = Room::rooms.size() - 1; i > 0; i--) {
 		Room::rooms[i]->~Room();
 	}
