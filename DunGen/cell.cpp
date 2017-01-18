@@ -110,7 +110,7 @@ void Cell::toggleSide(int side, bool state /*true is floor, false is wall*/) {
 
 void Cell::toggleSubCellSide(int side, bool state){
 	switch (side){
-	case UP:
+	case (UP):
 		for (int i = 0; i < 5; i++) {
 			if (state) {
 				this->subCell_grid[0][i] = new Wall(0, i);
@@ -120,7 +120,7 @@ void Cell::toggleSubCellSide(int side, bool state){
 			}
 		}
 		break;
-	case LEFT:
+	case (LEFT):
 		for (int i = 0; i < 5; i++) {
 			if (state) {
 				this->subCell_grid[i][0] = new Wall(i, 0);
@@ -130,7 +130,7 @@ void Cell::toggleSubCellSide(int side, bool state){
 			}
 		}
 		break;
-	case DOWN:
+	case (DOWN):
 		for (int i = 0; i < 5; i++) {
 			if (state) {
 				this->subCell_grid[4][i] = new Wall(i, 4);
@@ -140,7 +140,7 @@ void Cell::toggleSubCellSide(int side, bool state){
 			}
 		}
 		break;
-	case RIGHT:
+	case (RIGHT):
 		for (int i = 0; i < 5; i++) {
 			if (state) {
 				this->subCell_grid[i][4] = new Wall(4, i);
