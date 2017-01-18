@@ -110,17 +110,24 @@ int main()
 
 	grid.drawSubCellMap();
 
+	/*
 	for (int i = 0; i < grid.getSize().second; i++) {
 		for (int j = 0; j < grid.getSize().first; j++) {
 			grid.getCellAtPos(j, i)->drawCell();
 			cout << endl;
-			for (int k = 0; k < 5; k++) {
-				grid.getCellAtPos(j, i)->drawSubCellRow(k);
-				cout << endl;
-			}
-			cout << endl << endl;;
+			grid.getCellAtPos(j, i)->drawSubCell();
+			cout << endl << endl;
 		}
 	}
+	
+
+	for (int i = 0; i < grid.getSize().second; i++) {
+		grid.getCellAtPos(0, i)->drawCell();
+		cout << endl;
+		grid.getCellAtPos(0, i)->drawSubCell();
+		cout << endl << endl;
+	}
+	*/
 
 	for (int i = Room::rooms.size() - 1; i > 0; i--) {
 		Room::rooms[i]->~Room();

@@ -5,7 +5,7 @@
 Floor::Floor(int posX, int posY) :
 	SubCell(posX, posY){
 
-	this->type = '#';
+	this->type = ' ';
 }
 
 

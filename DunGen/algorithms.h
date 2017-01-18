@@ -23,9 +23,10 @@ public:
 
 		history.push_back({ start_pos[0], start_pos[1] }); // Start at the startingposistion
 
-														   // Recursive backtracing starts here!
+													   // Recursive backtracing starts here!
 		while (running) {
-
+			//grid->drawMap();
+			//grid->drawSubCellMap();
 			(*grid).visitCell(c, r);
 			//cout << "Visited: [" << c << "][" << r << "]   \t|| ";
 
@@ -80,34 +81,34 @@ public:
 																						 //cout << "Moving:  " << move_direction << "   !!!";
 				if (move_direction == UP)
 				{
-					(*grid).getCellAtPos(c,r)->toggleSide(UP, true);
-					(*grid).getCellAtPos(c, r)->toggleSubCellSide(UP, true);
+					(*grid).getCellAtPos(c, r)->toggleSide(UP, true);
+					//(*grid).getCellAtPos(c, r)->toggleSubCellSide(UP, true);
 					--r;
 					(*grid).getCellAtPos(c, r)->toggleSide(DOWN, true);
-					(*grid).getCellAtPos(c, r)->toggleSubCellSide(DOWN, true);
+					//(*grid).getCellAtPos(c, r)->toggleSubCellSide(DOWN, true);
 				}
 				else if (move_direction == DOWN) {
 
 					(*grid).getCellAtPos(c, r)->toggleSide(DOWN, true);
-					(*grid).getCellAtPos(c, r)->toggleSubCellSide(DOWN, true);
+					//(*grid).getCellAtPos(c, r)->toggleSubCellSide(DOWN, true);
 					++r;
 					(*grid).getCellAtPos(c, r)->toggleSide(UP, true);
-					(*grid).getCellAtPos(c, r)->toggleSubCellSide(UP, true);
+					//(*grid).getCellAtPos(c, r)->toggleSubCellSide(UP, true);
 				}
 				else if (move_direction == LEFT) {
 
 					(*grid).getCellAtPos(c, r)->toggleSide(LEFT, true);
-					(*grid).getCellAtPos(c, r)->toggleSubCellSide(LEFT, true);
+					//(*grid).getCellAtPos(c, r)->toggleSubCellSide(LEFT, true);
 					--c;
 					(*grid).getCellAtPos(c, r)->toggleSide(RIGHT, true);
-					(*grid).getCellAtPos(c, r)->toggleSubCellSide(RIGHT, true);
+					//(*grid).getCellAtPos(c, r)->toggleSubCellSide(RIGHT, true);
 				}
 				else if (move_direction == RIGHT) {
 					(*grid).getCellAtPos(c, r)->toggleSide(RIGHT, true);
-					(*grid).getCellAtPos(c, r)->toggleSubCellSide(RIGHT, true);
+					//(*grid).getCellAtPos(c, r)->toggleSubCellSide(RIGHT, true);
 					++c;
 					(*grid).getCellAtPos(c, r)->toggleSide(LEFT, true);
-					(*grid).getCellAtPos(c, r)->toggleSubCellSide(LEFT, true);
+					//(*grid).getCellAtPos(c, r)->toggleSubCellSide(LEFT, true);
 				}
 			}
 			else {

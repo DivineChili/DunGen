@@ -65,6 +65,8 @@ public:
 		
 	// Independent function to draw cell
 	void Cell::drawCell();
+
+	void Cell::drawSubCell();
 };
 
 #endif // !CELL_H
