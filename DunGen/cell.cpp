@@ -79,7 +79,6 @@ void Cell::rebuild() {
 
 // Toggles one of the sides of the cell. Changes are lost if cell is rebuilt!
 void Cell::toggleSide(int side, bool state /*true is floor, false is wall*/) {
- 	this->toggleSubCellSide(side, state);
 	switch (side){
 	case(UP):
 		if (state) {this->cell_struct[1] = this->floor;	}
