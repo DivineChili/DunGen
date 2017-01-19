@@ -30,7 +30,7 @@ bool Room::isOverlapping() {
 	//Check for any cells already visited.
 	for (int posY = this->y; posY <= (this->y + this->height); posY++) { // Loops through the cells aalong the y-axis, starting from the starting y-position
 		for (int posX = this->x; posX <= (this->x + this->width); posX++) { // Loops through the cells along the x-axis starting from the starting x-position
-			if (map->cellVisited(posX, posY)) {
+			if (map->getCellAtPos(posX, posY)->_visited) {
 				//This will make the while-loop delete the room to prevent overlapping.
 				this->overlap = true;//Room is overlapping
 				return true;
@@ -46,26 +46,26 @@ void Room::build() {
 	for (int posY = this->y; posY <= (this->y + this->height); posY++) { // Loops through the cells aalong the y-axis, starting from the starting y-position
 		for (int posX = this->x; posX <= (this->x + this->width); posX++) { // Loops through the cells along the x-axis starting from the starting x-position
 																			// Visit cell
-			this->map->visitCell(posX, posY);
+			this->map->getCellAtPos(posX, posY)->setVisited(true);
 			// Construct the 4 corners of the room
-			if (posY == this->y && posX == this->x) this->map->setCellStructureAtPos(posX, posY, "####--#--"); // Top Left
-			else if (posY == (this->y + this->height) && posX == this->x) this->map->setCellStructureAtPos(posX, posY, "#--#--###"); // Bottom Left
-			else if (posY == this->y && posX == (this->x + this->width)) this->map->setCellStructureAtPos(posX, posY, "###--#--#"); // Top Right
-			else if (posY == (this->y + this->height) && posX == (this->x + this->width)) this->map->setCellStructureAtPos(posX, posY, "--#--####"); // Bottom Right
+			if (posY == this->y && posX == this->x) this->map->getCellAtPos(posX, posY)->setCellStructure("####--#--"); // Top Left
+			else if (posY == (this->y + this->height) && posX == this->x) this->map->getCellAtPos(posX, posY)->setCellStructure("#--#--###"); // Bottom Left
+			else if (posY == this->y && posX == (this->x + this->width)) this->map->getCellAtPos(posX, posY)->setCellStructure("###--#--#"); // Top Right
+			else if (posY == (this->y + this->height) && posX == (this->x + this->width)) this->map->getCellAtPos(posX, posY)->setCellStructure("--#--####"); // Bottom Right
 																																							   // Construct the 4 walls
-			else if (posY == this->y && (posX != this->x || posX != (this->x + this->width))) this->map->setCellStructureAtPos(posX, posY, "###------"); // Top wall
-			else if (posX == this->x && (posY != this->y || posY != (this->y + this->height))) this->map->setCellStructureAtPos(posX, posY, "#--#--#--"); // Left Wall
-			else if (posY == (this->y + this->height) && (posX != this->x || posX != (this->x + this->width))) this->map->setCellStructureAtPos(posX, posY, "------###"); // Bottom wall
-			else if (posX == (this->x + this->width) && (posY != this->y || posY != (this->y + this->height))) this->map->setCellStructureAtPos(posX, posY, "--#--#--#"); // Right wall
+			else if (posY == this->y && (posX != this->x || posX != (this->x + this->width))) this->map->getCellAtPos(posX, posY)->setCellStructure("###------"); // Top wall
+			else if (posX == this->x && (posY != this->y || posY != (this->y + this->height))) this->map->getCellAtPos(posX, posY)->setCellStructure("#--#--#--"); // Left Wall
+			else if (posY == (this->y + this->height) && (posX != this->x || posX != (this->x + this->width))) this->map->getCellAtPos(posX, posY)->setCellStructure("------###"); // Bottom wall
+			else if (posX == (this->x + this->width) && (posY != this->y || posY != (this->y + this->height))) this->map->getCellAtPos(posX, posY)->setCellStructure("--#--#--#"); // Right wall
 																																													// Else, construct middle room
-			else this->map->setCellStructureAtPos(posX, posY, "---------");
+			else this->map->getCellAtPos(posX, posY)->setCellStructure("---------");
 
 		}
 	}
 	//Code for labeling the rooms by type with a character.
 	string cell;
 	cell += "////";	cell += letter;	cell += "////";
-	this->map->setCellStructureAtPos(this->x + this->width / 2, this->y + this->height / 2, cell);
+	this->map->getCellAtPos(this->x + this->width / 2, this->y + this->height / 2)->setCellStructure(cell);
 
 	buildDoors();
 }
@@ -78,7 +78,7 @@ void Room::buildDoors() {
 		if (sideNum == 0) {
 			j = 0;
 			do {
-				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, this->y, "/D///////");
+				this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, this->y)->setCellStructure("/D///////");
 				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, this->y),0);
 				j++;
 			} while ((this->width + j) % 2 != 1);
@@ -86,7 +86,7 @@ void Room::buildDoors() {
 		else if (sideNum == 1) {
 			j = 0;
 			do {
-				this->map->setCellStructureAtPos(this->x, (this->y + floor(this->height / 2)) + j, "///D/////");
+				this->map->getCellAtPos(this->x, (this->y + floor(this->height / 2)) + j)->setCellStructure("///D/////");
 				this->buildDoors_SubCell(this->map->getCellAtPos(this->x, (this->y + floor(this->height / 2)) + j), 1);
 				j++;
 			} while ((this->height + j) % 2 != 1);
@@ -94,7 +94,7 @@ void Room::buildDoors() {
 		else if (sideNum == 2) {
 			j = 0;
 			do {
-				this->map->setCellStructureAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height), "///////D/");
+				this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height))->setCellStructure("///////D/");
 				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height)), 2);
 				j++;
 			} while ((this->width + j) % 2 != 1);
@@ -102,7 +102,7 @@ void Room::buildDoors() {
 		else if (sideNum == 3) {
 			j = 0;
 			do {
-				this->map->setCellStructureAtPos((this->x + this->width), this->y + floor(this->height / 2) + j, "/////D///");
+				this->map->getCellAtPos((this->x + this->width), this->y + floor(this->height / 2) + j)->setCellStructure("/////D///");
 				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + this->width), this->y + floor(this->height / 2) + j), 3);
 				j++;
 			} while ((this->height + j) % 2 != 1);

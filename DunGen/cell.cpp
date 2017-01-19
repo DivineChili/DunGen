@@ -118,7 +118,6 @@ void Cell::toggleSubCellSide(int side, bool state){
 				}
 			}
 			else {
-			//	this->subCell_grid[0][i] = new Door(0, i);
 			}
 		break;
 	case (DOWN):
@@ -163,7 +162,7 @@ void Cell::toggleSubCellSide(int side, bool state){
 				}
 			}
 			else {
-			//	this->subCell_grid[i][4] = new Door(4, i);
+			//	this->subCell_grid[i][4] = new Door(4, i)
 			}
 		break;
 	}
