@@ -81,30 +81,27 @@ void Cell::rebuild() {
 void Cell::toggleSide(int side, bool state /*true is floor, false is wall*/) {
 	switch (side){
 	case(UP):
-		if (state) {this->cell_struct[1] = this->floor;	}
-		else { this->cell_struct[1] = this->wall; }
+
 		this->opened_sides[UP] = state;
 
 		break;
 	case(DOWN):
-		if (state) { this->cell_struct[7] = this->floor; }
-		else { this->cell_struct[7] = this->wall; }
+
 		this->opened_sides[DOWN] = state;
 
 		break;
 	case(LEFT):
-		if (state) { this->cell_struct[3] = this->floor; }
-		else { this->cell_struct[3] = this->wall; }
+
 		this->opened_sides[LEFT] = state;
 
 		break;
 	case(RIGHT):
-		if (state) { this->cell_struct[5] = this->floor; }
-		else { this->cell_struct[5] = this->wall; }
+
 		this->opened_sides[RIGHT] = state;
 		
 		break;
 	}
+	this->updateSides();
 }
 
 void Cell::toggleSubCellSide(int side, bool state){
@@ -173,6 +170,33 @@ void Cell::toggleSubCellSide(int side, bool state){
 	//this->subCell_grid[3][1] = new Door(0,0);
 }
 
+void Cell::updateSides() {
+	for (int i = 0; i < sizeof(this->opened_sides); i++) {
+		switch (i) {
+		case 0:
+			if (this->opened_sides[0]) {
+				this->cell_struct[1] = this->floor;
+			}
+			break;
+		case 1:
+			if (this->opened_sides[1]) {
+				this->cell_struct[7] = this->floor;
+			}
+			break;
+		case 2:
+			if (this->opened_sides[2]) {
+				this->cell_struct[3] = this->floor;
+			}
+			break;
+		case 3:
+			if (this->opened_sides[3]) {
+				this->cell_struct[5] = this->floor;
+			}
+			break;
+		}
+	}
+}
+
 Cell::Cell() {}
 
 // Gets the char at a specific position in the cell
@@ -220,8 +244,7 @@ vector<char> Cell::getCellRow(int rowIndex)
 	return result;
 }
 
-vector<int> Cell::sides_opened()
-{
+vector<int> Cell::sides_opened() {
 	vector<int> opened_sides;
 	for (int i = 0; i < sizeof(this->opened_sides); i++) {
 		if (this->opened_sides[i])
