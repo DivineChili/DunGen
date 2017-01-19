@@ -44,7 +44,7 @@ public:
 	
 	void Cell::toggleSide(int side, bool state);
 
-	void Cell::toggleSubCellSide(int side, bool state);
+	void Cell::updateSubCellSides();
 
 	void Cell::updateSides();
 	

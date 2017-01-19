@@ -102,12 +102,14 @@ void Cell::toggleSide(int side, bool state /*true is floor, false is wall*/) {
 		break;
 	}
 	this->updateSides();
+	this->updateSubCellSides();
 }
 
-void Cell::toggleSubCellSide(int side, bool state){
-	switch (side){
-	case (UP):
-			if (state) {
+void Cell::updateSubCellSides(){
+	for (int i = 0; i < sizeof(this->opened_sides); i++) {
+		switch (i) {
+		case (UP):
+			if (this->opened_sides[i]) {
 				for (int i = 1; i < 4; i++) {
 					this->subCell_grid[0][i] = new Floor(0, i);
 				}
@@ -119,9 +121,9 @@ void Cell::toggleSubCellSide(int side, bool state){
 			}
 			else {
 			}
-		break;
-	case (DOWN):
-			if (state) {
+			break;
+		case (DOWN):
+			if (this->opened_sides[i]) {
 				for (int i = 1; i < 4; i++) {
 					this->subCell_grid[4][i] = new Floor(i, 4);
 				}
@@ -132,11 +134,11 @@ void Cell::toggleSubCellSide(int side, bool state){
 				}
 			}
 			else {
-			//	this->subCell_grid[4][i] = new Door(i, 4);
+				//	this->subCell_grid[4][i] = new Door(i, 4);
 			}
-		break;
-	case (LEFT):
-			if (state) {
+			break;
+		case (LEFT):
+			if (this->opened_sides[i]) {
 				for (int i = 1; i < 4; i++) {
 					this->subCell_grid[i][0] = new Floor(i, 0);
 				}
@@ -147,11 +149,11 @@ void Cell::toggleSubCellSide(int side, bool state){
 				}
 			}
 			else {
-			//	this->subCell_grid[i][0] = new Door(i, 0);
+				//	this->subCell_grid[i][0] = new Door(i, 0);
 			}
-		break;
-	case (RIGHT):
-			if (state) {
+			break;
+		case (RIGHT):
+			if (this->opened_sides[i]) {
 				for (int i = 1; i < 4; i++) {
 					this->subCell_grid[i][4] = new Floor(4, i);
 				}
@@ -162,11 +164,13 @@ void Cell::toggleSubCellSide(int side, bool state){
 				}
 			}
 			else {
-			//	this->subCell_grid[i][4] = new Door(4, i)
+				//	this->subCell_grid[i][4] = new Door(4, i)
 			}
-		break;
+			break;
+		}
 	}
 	//this->subCell_grid[3][1] = new Door(0,0);
+
 }
 
 void Cell::updateSides() {
