@@ -12,7 +12,7 @@ SubCell::SubCell() {
 }
 
 SubCell::SubCell(int posX, int posY) :
-	posX(posX), posY(posY), type('#') {
+	posX(posX), posY(posY), type(' ') {
 	this->subCells.push_back(this);
 }
 

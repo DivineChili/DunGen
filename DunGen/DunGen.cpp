@@ -41,8 +41,8 @@ roomTypeConf room_boss_conf(15, 15, 30, 30);
 
 int main()
 {
-	int size_x = 50;	   // Size of map's width. (Multiply by 3 to get width in chars!)
-	int size_y = 50;	   // Size of map's height. (Multiply by 3 to get height in chars!)
+	int size_x = 100;	   // Size of map's width. (Multiply by 3 to get width in chars!)
+	int size_y = 100;	   // Size of map's height. (Multiply by 3 to get height in chars!)
 						   // Recommended X-size for teminal is 38, for output to .txt opened in notepad 341!
 	cout << "This map size (" << size_x << "x" << size_y << "), will be: " << (48 * (size_x*size_y))/1024 << " KB!" << endl;
 	cout << "Are you sure you wish to continue (Y/n)?";

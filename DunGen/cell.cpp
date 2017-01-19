@@ -118,6 +118,14 @@ void Cell::updateSubCellSides(){
 						this->subCell_grid[j][i] = new Floor(j, i);
 					}
 				}
+				for (int i = 0; i < 5; i++) {
+					if (!this->opened_sides[LEFT]) {
+						this->subCell_grid[i][0] = new Wall(i, 0);
+					}
+					if (!this->opened_sides[RIGHT]) {
+						this->subCell_grid[i][4] = new Wall(i, 4);
+					}
+				}
 			}
 			else {
 			}
@@ -130,6 +138,14 @@ void Cell::updateSubCellSides(){
 				for (int i = 1; i < 4; i++) {
 					for (int j = 1; j < 4; j++) {
 						this->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+				for (int i = 0; i < 5; i++) {
+					if (!this->opened_sides[LEFT]) {
+						this->subCell_grid[i][0] = new Wall(i, 0);
+					}
+					if (!this->opened_sides[RIGHT]) {
+						this->subCell_grid[i][4] = new Wall(i, 4);
 					}
 				}
 			}
@@ -147,6 +163,14 @@ void Cell::updateSubCellSides(){
 						this->subCell_grid[j][i] = new Floor(j, i);
 					}
 				}
+				for (int i = 0; i < 5; i++) {
+					if (!this->opened_sides[UP]) {
+						this->subCell_grid[0][i] = new Wall(i, 0);
+					}
+					if (!this->opened_sides[DOWN]) {
+						this->subCell_grid[4][i] = new Wall(i, 4);
+					}
+				}
 			}
 			else {
 				//	this->subCell_grid[i][0] = new Door(i, 0);
@@ -160,6 +184,14 @@ void Cell::updateSubCellSides(){
 				for (int i = 1; i < 4; i++) {
 					for (int j = 1; j < 4; j++) {
 						this->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+				for (int i = 0; i < 5; i++) {
+					if (!this->opened_sides[UP]) {
+						this->subCell_grid[0][i] = new Wall(i, 0);
+					}
+					if (!this->opened_sides[DOWN]) {
+						this->subCell_grid[4][i] = new Wall(i, 4);
 					}
 				}
 			}
