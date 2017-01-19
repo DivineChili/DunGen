@@ -23,9 +23,8 @@ public:
 
 		history.push_back({ start_pos[0], start_pos[1] }); // Start at the startingposistion
 
-														   // Recursive backtracing starts here!
+													   // Recursive backtracing starts here!
 		while (running) {
-
 			(*grid).getCellAtPos(c, r)->setVisited(true);
 			//cout << "Visited: [" << c << "][" << r << "]   \t|| ";
 

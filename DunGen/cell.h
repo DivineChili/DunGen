@@ -45,6 +45,8 @@ public:
 	void Cell::toggleSide(int side, bool state);
 
 	void Cell::toggleSubCellSide(int side, bool state);
+
+	void Cell::updateSides();
 	
 	char Cell::getCharAtPos(int x, int y);
 
@@ -65,6 +67,8 @@ public:
 		
 	// Independent function to draw cell
 	void Cell::drawCell();
+
+	void Cell::drawSubCell();
 };
 
 #endif // !CELL_H

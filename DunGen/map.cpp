@@ -15,7 +15,7 @@ Map::Map(unsigned int sizeX, unsigned int sizeY) {
 	{
 		for (int j = 0; j < this->map_grid[i].size(); j++) 	// Loop through iterator
 		{
-			map_grid[i][j] = Cell(j, i); // Set the iterator's referenced value to a new cell-object
+			map_grid[j][i] = Cell(j, i); // Set the iterator's referenced value to a new cell-object
 		}
 	}
 }
@@ -24,7 +24,7 @@ Map::~Map() { cout << "Deleting map!" << endl; }	// Just a destructor
 													// Returns the cell at a spesified position in the map. (X and Y values)
 Cell* Map::getCellAtPos(int x, int y)
 {
-	return &this->map_grid.at(x).at(y);	// Using .at() instead of Operator[] to throw exceptions and bypass errors!
+	return &this->map_grid.at(y).at(x);	// Using .at() instead of Operator[] to throw exceptions and bypass errors!
 }
 
 // Draws an induvidual cell at a spesific point in the grid
@@ -57,7 +57,7 @@ void Map::drawSubCellMap() {
 	for (int i = 0; i < this->size_y; i++) { //map y
 		for (int j = 0; j < 5; j++){ //subcell row number
 			for (int k = 0; k < this->size_y - 1; k++) { //map x
-				this->map_grid[k][i].drawSubCellRow(j);
+				this->map_grid[i][k].drawSubCellRow(j);
 			}
 			cout << endl;
 		}
@@ -87,7 +87,6 @@ void Map::outputMap(string filename) {
 		outfile << ""; // Also used for debugging!
 	}
 }
-
 
 // Returns the x,y size of map
 pair<int,int> Map::getSize() {
