@@ -25,6 +25,9 @@ public:
 
 													   // Recursive backtracing starts here!
 		while (running) {
+
+			//grid->drawMap();
+			//grid->drawSubCellMap();
 			(*grid).getCellAtPos(c, r)->setVisited(true);
 			//cout << "Visited: [" << c << "][" << r << "]   \t|| ";
 
