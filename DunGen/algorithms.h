@@ -80,20 +80,17 @@ public:
 				int move_direction = check[static_cast<int>(result) % check.size()];
 
 				//cout << "Moving:  " << move_direction << "   !!!";
-				if (move_direction == UP)
-				{
+				if (move_direction == UP) {
 					(*grid).getCellAtPos(c, r)->toggleSide(UP, true);
 					--r;
 					(*grid).getCellAtPos(c, r)->toggleSide(DOWN, true);
 				}
 				else if (move_direction == DOWN) {
-
 					(*grid).getCellAtPos(c, r)->toggleSide(DOWN, true);
 					++r;
 					(*grid).getCellAtPos(c, r)->toggleSide(UP, true);
 				}
 				else if (move_direction == LEFT) {
-
 					(*grid).getCellAtPos(c, r)->toggleSide(LEFT, true);
 					--c;
 					(*grid).getCellAtPos(c, r)->toggleSide(RIGHT, true);
