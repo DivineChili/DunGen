@@ -2,10 +2,12 @@
 #include "item.h"
 
 
-Item::Item()
-{
+Item::Item() {
 }
 
+void Item::drop() {
+	//drops the item on the ground
+}
 
 Item::~Item()
 {

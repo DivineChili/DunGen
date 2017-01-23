@@ -1,10 +1,11 @@
 #pragma once
 #include "item.h"
-class Item_food :
-	public Item
-{
+class Item_food : public Item {
+protected:
+	int foodValue;
+	Item_food(int foodValue);
+	void Item_food::eat();
 public:
-	Item_food();
 	virtual ~Item_food();
 };
 
