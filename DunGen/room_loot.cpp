@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "room_loot.h"
-
+#include "wall.h"
+#include "floor.h"
+#include "chest.h"
 
 Room_loot::Room_loot(uint32_t seed, Map* map, int key, unsigned int maxX, unsigned int maxY, unsigned int minX, unsigned int minY):
 	Room::Room(seed, map, key, 'L',maxX, maxY, minX, minY),
@@ -17,18 +19,115 @@ void Room_loot::build() {
 																			// Visit cell
 			this->map->getCellAtPos(posX, posY)->setVisited(true);
 			// Construct the 4 corners of the room
-			if (posY == this->y && posX == this->x) this->map->getCellAtPos(posX, posY)->setCellStructure("####--#--"); // Top Left
-			else if (posY == (this->y + this->height) && posX == this->x) this->map->getCellAtPos(posX, posY)->setCellStructure("#--#--###"); // Bottom Left
-			else if (posY == this->y && posX == (this->x + this->width)) this->map->getCellAtPos(posX, posY)->setCellStructure("###--#--#"); // Top Right
-			else if (posY == (this->y + this->height) && posX == (this->x + this->width)) this->map->getCellAtPos(posX, posY)->setCellStructure("--#--####"); // Bottom Right
-																																					 // Construct the 4 walls
-			else if (posY == this->y && (posX != this->x || posX != (this->x + this->width))) this->map->getCellAtPos(posX, posY)->setCellStructure("###------"); // Top wall
-			else if (posX == this->x && (posY != this->y || posY != (this->y + this->height))) this->map->getCellAtPos(posX, posY)->setCellStructure("#--#--#--"); // Left Wall
-			else if (posY == (this->y + this->height) && (posX != this->x || posX != (this->x + this->width))) this->map->getCellAtPos(posX, posY)->setCellStructure("------###"); // Bottom wall
-			else if (posX == (this->x + this->width) && (posY != this->y || posY != (this->y + this->height))) this->map->getCellAtPos(posX, posY)->setCellStructure("--#--#--#"); // Right wall
-																																										  // Else, construct middle room
-			else this->map->getCellAtPos(posX, posY)->setCellStructure("---------");
-
+			if (posY == this->y && posX == this->x) {// Top Left 
+				this->map->getCellAtPos(posX, posY)->setCellStructure("####--#--");
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][0] = new Wall(j, 0);
+						this->map->getCellAtPos(posX, posY)->subCell_grid[0][j] = new Wall(0, j);
+					}
+				}
+				for (int i = 1; i < 5; i++) {
+					for (int j = 1; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			}
+			else if (posY == (this->y + this->height) && posX == this->x) {// Bottom Left
+				this->map->getCellAtPos(posX, posY)->setCellStructure("#--#--###");
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][0] = new Wall(j, 0);
+						this->map->getCellAtPos(posX, posY)->subCell_grid[4][j] = new Wall(0, j);
+					}
+				}
+				for (int i = 1; i < 5; i++) {
+					for (int j = 0; j < 4; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			}
+			else if (posY == this->y && posX == (this->x + this->width)) {// Top Right
+				this->map->getCellAtPos(posX, posY)->setCellStructure("###--#--#");
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][4] = new Wall(j, 0);
+						this->map->getCellAtPos(posX, posY)->subCell_grid[0][j] = new Wall(0, j);
+					}
+				}
+				for (int i = 0; i < 4; i++) {
+					for (int j = 1; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			}
+			else if (posY == (this->y + this->height) && posX == (this->x + this->width)) {// Bottom Right
+				this->map->getCellAtPos(posX, posY)->setCellStructure("--#--####");
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][4] = new Wall(j, 0);
+						this->map->getCellAtPos(posX, posY)->subCell_grid[4][j] = new Wall(0, j);
+					}
+				}
+				for (int i = 0; i < 4; i++) {
+					for (int j = 0; j < 4; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			} 																																			   // Construct the 4 walls
+			else if (posY == this->y && (posX != this->x || posX != (this->x + this->width))) { // Top wall
+				this->map->getCellAtPos(posX, posY)->setCellStructure("###------");
+				for (int i = 0; i < 5; i++) {
+					this->map->getCellAtPos(posX, posY)->subCell_grid[0][i] = new Wall(0, i);
+				}
+				for (int i = 0; i < 5; i++) {
+					for (int j = 1; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			}
+			else if (posX == this->x && (posY != this->y || posY != (this->y + this->height))) {// Left Wall
+				this->map->getCellAtPos(posX, posY)->setCellStructure("#--#--#--");
+				for (int i = 0; i < 5; i++) {
+					this->map->getCellAtPos(posX, posY)->subCell_grid[i][0] = new Wall(i, 0);
+				}
+				for (int i = 1; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			}
+			else if (posY == (this->y + this->height) && (posX != this->x || posX != (this->x + this->width))) {// Bottom wall
+				this->map->getCellAtPos(posX, posY)->setCellStructure("------###");
+				for (int i = 0; i < 5; i++) {
+					this->map->getCellAtPos(posX, posY)->subCell_grid[4][i] = new Wall(4, i);
+				}
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 4; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			}
+			else if (posX == (this->x + this->width) && (posY != this->y || posY != (this->y + this->height))) {// Right wall
+				this->map->getCellAtPos(posX, posY)->setCellStructure("--#--#--#");
+				for (int i = 0; i < 5; i++) {
+					this->map->getCellAtPos(posX, posY)->subCell_grid[i][4] = new Wall(i, 4);
+				}
+				for (int i = 0; i < 4; i++) {
+					for (int j = 0; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			}
+			// Else, construct middle room
+			else {
+				this->map->getCellAtPos(posX, posY)->setCellStructure("---------");
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			}
 		}
 	}
 
@@ -36,37 +135,41 @@ void Room_loot::build() {
 	
 	for (int i = 0; i < 4; i++) {
 		if (this->doorIsValid()) {
-			int chestOffset = 0;
+			int chestOffset = 0; //Random number for space from wall
 			switch (doorSide) {
-			case 0:
+			case UP:
 				cout << "loot on top wall" << endl;
 				chestOffset = this->randomizer.randomizeInRange(0, this->width + 1, i);
 				if (this->chestIsValid()) {
-					this->map->getCellAtPos(this->x + chestOffset, this->y)->setCellStructure("111llllll");
+					this->map->getCellAtPos(this->x + chestOffset, this->y)->setCellStructure("lllllllll");
+					this->map->getCellAtPos(this->x + chestOffset, this->y)->subCell_grid[1][2/* Put random numbers here */] = new Chest(this->id, 0, 0);
 					i = 10;
 					break;
 				}
-			case 1:
+			case LEFT:
 				cout << "loot on left wall" << endl;
 				chestOffset = this->randomizer.randomizeInRange(0, this->height + 1, i);
 				if (this->chestIsValid()) {
 					this->map->getCellAtPos(this->x, this->y + chestOffset)->setCellStructure("lllllllll");
+					this->map->getCellAtPos(this->x, this->y + chestOffset)->subCell_grid[2][1/* Put random numbers here */] = new Chest(this->id, 0, 0);
 					i = 10;
 					break;
 				}
-			case 2:
+			case DOWN:
 				cout << "loot on bottom wall" << endl;
 				chestOffset = this->randomizer.randomizeInRange(0, this->width + 1, i);
 				if (this->chestIsValid()) {
 					this->map->getCellAtPos(this->x + chestOffset, this->y + this->height)->setCellStructure("lllllllll");
+					this->map->getCellAtPos(this->x + chestOffset, this->y + this->height)->subCell_grid[Cell::gridSize - 1][2/* Put random numbers here */] = new Chest(this->id, 0, 0);
 					i = 10;
 					break;
 				}
-			case 3:
+			case RIGHT:
 				cout << "loot on right wall" << endl;
 				chestOffset = this->randomizer.randomizeInRange(0, this->height + 1, i);
 				if (this->chestIsValid()) {
 					this->map->getCellAtPos(this->x + this->width, this->y + chestOffset)->setCellStructure("lllllllll");
+					this->map->getCellAtPos(this->x + this->width, this->y + chestOffset)->subCell_grid[2][Cell::gridSize - 1/* Put random numbers here */] = new Chest(this->id, 0, 0);
 					i = 10;
 					break;
 				}

@@ -30,6 +30,8 @@ public:
 	static const char door = '/';
 	static const char empty = ' ';
 
+	static const int gridSize = 5;
+
 	vector<vector<SubCell*>> subCell_grid;
 	//These are the subCells contained within one cell
 	//vector<SubCell*> subCells;

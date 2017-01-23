@@ -81,24 +81,16 @@ void Cell::rebuild() {
 void Cell::toggleSide(int side, bool state /*true is floor, false is wall*/) {
 	switch (side){
 	case(UP):
-
 		this->opened_sides[UP] = state;
-
 		break;
 	case(DOWN):
-
 		this->opened_sides[DOWN] = state;
-
 		break;
 	case(LEFT):
-
 		this->opened_sides[LEFT] = state;
-
 		break;
 	case(RIGHT):
-
 		this->opened_sides[RIGHT] = state;
-		
 		break;
 	}
 	this->updateSides();
