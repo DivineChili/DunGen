@@ -2,6 +2,7 @@
 #include "randomizer.h"
 #include "chest.h"
 
+vector<Chest*> Chest::chests;
 
 Chest::Chest(uint32_t lootSeed, int posX, int posY) :
 	SubCell(posX, posY),
@@ -9,8 +10,8 @@ Chest::Chest(uint32_t lootSeed, int posX, int posY) :
 	lootRandomizer(lootSeed){
 
 	this->type = 'c';
-
 	
+	this->chests.push_back(this);
 }
 
 

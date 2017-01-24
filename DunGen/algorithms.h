@@ -5,6 +5,9 @@
 #include <iostream>
 #include <vector>
 #include "cell.h"
+#include "chest.h"
+#include "item.h"
+#include "item_gold.h"
 #include "map.h"
 #include "randomizer.h"
 
@@ -120,6 +123,21 @@ public:
 
 	static void deadend_remover(Map * grid, int iterations) {
 		
+	}
+
+	static void lootSpawner(Map* map, vector<Chest*> chests, Randomizer lootRandomizer){
+		for (int i = 0; i < chests.size(); i++) {
+			//cout << chests[i]->getChar() << endl;
+			if (lootRandomizer.randomizeFromChance(50, (uint32_t) i)){ // 50 percent chance of having gold.
+				int amount = floor(pow(lootRandomizer.randomizeInRange(1, 100, (uint32_t) i), 2.5) * .001 + 3);
+				chests[i]->items.push_back(new Item_gold);
+				//cout << chests[i]->items[0]->amount << endl;
+				//cout << amount << endl;
+				
+				
+
+			}
+		}
 	}
 };
 

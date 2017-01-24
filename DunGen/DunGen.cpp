@@ -9,6 +9,7 @@
 #include "room_enemy.h"
 #include "room_boss.h"
 #include "room_trap.h"
+#include "chest.h"
 #include "randomizer.h"
 #include "xxHash32.h"
 #include <cmath>
@@ -26,6 +27,10 @@ Randomizer mazeRandomizer(mazeSeed);
 //Randomizer for room generation.
 uint32_t roomSeed = globalRandomizer.randomizeFromKey(1);
 Randomizer roomRandomizer(roomSeed);
+
+//Randomizer for loot generation.
+uint32_t lootSeed = globalRandomizer.randomizeFromKey(2);
+Randomizer lootRandomizer(lootSeed);
 
 struct roomTypeConf {
 	roomTypeConf(unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY) : minX(minX), minY(minY), maxX(maxX), maxY(maxY){}
@@ -109,6 +114,8 @@ int main()
 	cout << SubCell::subCells.size() << endl;
 
 	grid.drawSubCellMap();
+
+	Algorithms::lootSpawner(&grid, Chest::chests, lootRandomizer);
 
 	/*
 	for (int i = 0; i < grid.getSize().second; i++) {
