@@ -27,6 +27,11 @@ Cell* Map::getCellAtPos(int x, int y)
 	return &this->map_grid.at(x).at(y);	// Using .at() instead of Operator[] to throw exceptions and bypass errors!
 }
 
+Cell * Map::getCellAtPos(pair<int, int> pos)
+{
+	return &(this->map_grid[pos.second][pos.first]);
+}
+
 // Draws an induvidual cell at a spesific point in the grid
 void Map::drawCellAtPos(int x, int y) {
 	this->map_grid.at(y).at(x).drawCell();	// Draws the cell at a posistion in the map_grid.

@@ -133,8 +133,32 @@ public:
 	static void deadend_remover(Map * grid, vector<Cell*> dead_ends, int iterations) {
 		vector<Cell*> local_ends = dead_ends;
 		vector<Cell*> temp_ends;
-		for (int i = 0; i < iterations; i++) {
 
+		for (int i = 0; i < iterations; i++) { // The removing iterations
+			
+			for (int j = 0; j < local_ends.size(); j++) { // Each dead end
+				Cell* current_end = local_ends.at(j);
+				if (current_end->sides_opened().size() == 1) { // Check if only one side is opened. Usefull for iterations > 1
+					current_end->setCellStructure(string(9, ' '));
+
+					// Check if ajasent cell is dead end aswell!
+					switch (current_end->sides_opened().at(0)) {
+					case(UP):
+						
+						break;
+					case(DOWN):
+
+						break;
+					case(LEFT):
+
+						break;
+					case(RIGHT):
+
+						break;
+					}
+
+				}
+			}
 		}
 	}
 };
