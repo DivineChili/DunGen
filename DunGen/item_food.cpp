@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "item_food.h"
 
-Item_food::Item_food(int foodValue):
-	Item(),
+Item_food::Item_food(int amount, int foodValue):
+	Item(amount),
 	foodValue(foodValue){
 }
 

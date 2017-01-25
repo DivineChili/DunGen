@@ -8,6 +8,8 @@
 #include "chest.h"
 #include "item.h"
 #include "item_gold.h"
+#include "item_food.h"
+#include "food_apple.h"
 #include "map.h"
 #include "randomizer.h"
 
@@ -129,13 +131,15 @@ public:
 		for (int i = 0; i < chests.size(); i++) {
 			//cout << chests[i]->getChar() << endl;
 			if (lootRandomizer.randomizeFromChance(50, (uint32_t) i)){ // 50 percent chance of having gold.
-				int amount = floor(pow(lootRandomizer.randomizeInRange(1, 100, (uint32_t) i), 2.5) * .001 + 3);
-				chests[i]->items.push_back(new Item_gold);
-				//cout << chests[i]->items[0]->amount << endl;
-				//cout << amount << endl;
-				
-				
-
+				int amount = floor(pow(lootRandomizer.randomizeInRange(1, 100, (uint32_t) i + 100), 2.5) * .001 + 3);
+				chests[i]->items.push_back(new Item_gold(amount));
+				//Print amount of gold.
+				cout << "gold" << chests[i]->items[0]->amount << endl;
+			}
+			if (lootRandomizer.randomizeFromChance(60, (uint32_t)i + 1000)) {
+				int amount = lootRandomizer.randomizeInRange(1, 4, i + 1010);
+				chests[i]->items.push_back(new Food_apple(amount));
+				cout << "apples" << amount << endl;
 			}
 		}
 	}
