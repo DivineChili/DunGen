@@ -178,8 +178,13 @@ void Room::buildDoors() {
 			j = 0;
 			do {
 				this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, this->y)->setCellStructure("/D///////");
-				if (this->y > 1) { this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, this->y - 1)->setCellStructure("/////// /"); }
-				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, this->y),0);
+				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, this->y), 0);
+				if (this->y > 1) {
+					this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, this->y - 1)->setCellStructure("/////// /");
+					for (int i = 1; i < 4; i++) {
+						this->map->getCellAtPos(this->x + floor(this->width / 2) + j, this->y - 1)->setSubCellAtPos(new Floor(i, 4));
+					}
+				}
 				j++;
 			} while ((this->width + j) % 2 != 1);
 		}
@@ -187,8 +192,13 @@ void Room::buildDoors() {
 			j = 0;
 			do {
 				this->map->getCellAtPos(this->x, (this->y + floor(this->height / 2)) + j)->setCellStructure("///D/////");
-				if (this->x > 1) { this->map->getCellAtPos(this->x - 1, (this->y + floor(this->height / 2)) + j)->setCellStructure("///// ///"); }
 				this->buildDoors_SubCell(this->map->getCellAtPos(this->x, (this->y + floor(this->height / 2)) + j), 1);
+				if (this->x > 1) { 
+					this->map->getCellAtPos(this->x - 1, (this->y + floor(this->height / 2)) + j)->setCellStructure("///// ///"); 
+					for (int i = 1; i < 4; i++) {
+						this->map->getCellAtPos(this->x - 1, (this->y + floor(this->height / 2)) + j)->setSubCellAtPos(new Floor(4, i));
+					}
+				}
 				j++;
 			} while ((this->height + j) % 2 != 1);
 		}
@@ -196,8 +206,13 @@ void Room::buildDoors() {
 			j = 0;
 			do {
 				this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height))->setCellStructure("///////D/");
-				if (this->y + this->height + 1 < this->map->getSize().second) { this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height + 1))->setCellStructure("/ ///////"); }
 				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height)), 2);
+				if (this->y + this->height + 1 < this->map->getSize().second) {
+					this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height + 1))->setCellStructure("/ ///////");
+					for (int i = 1; i < 4; i++) {
+						this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height + 1))->setSubCellAtPos(new Floor(i, 0));
+					}
+				}
 				j++;
 			} while ((this->width + j) % 2 != 1);
 		}
@@ -205,8 +220,13 @@ void Room::buildDoors() {
 			j = 0;
 			do {
 				this->map->getCellAtPos((this->x + this->width), this->y + floor(this->height / 2) + j)->setCellStructure("/////D///");
-				if (this->x + this->width + 1 < this->map->getSize().first) { this->map->getCellAtPos((this->x + this->width + 1), this->y + floor(this->height / 2) + j)->setCellStructure("///// ///"); }
 				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + this->width), this->y + floor(this->height / 2) + j), 3);
+				if (this->x + this->width + 1 < this->map->getSize().first) {
+					this->map->getCellAtPos((this->x + this->width + 1), this->y + floor(this->height / 2) + j)->setCellStructure("///// ///"); 
+					for (int i = 1; i < 4; i++) {
+						this->map->getCellAtPos((this->x + this->width + 1), this->y + floor(this->height / 2) + j)->setSubCellAtPos(new Floor(0, i));
+					}
+				}
 				j++;
 			} while ((this->height + j) % 2 != 1);
 		}
