@@ -137,10 +137,17 @@ public:
 				cout << "gold" << chests[i]->items[0]->amount << endl;
 			}
 			if (lootRandomizer.randomizeFromChance(60, (uint32_t)i + 1000)) {
-				int amount = lootRandomizer.randomizeInRange(1, 4, i + 1010);
+				int amount = lootRandomizer.randomizeInRange(1, 4, i + 1100);
 				chests[i]->items.push_back(new Food_apple(amount));
 				cout << "apples" << amount << endl;
 			}
+			int randomIndex = lootRandomizer.randomizeInRange(0, chests.size() - 1, i + 10000);
+			cout << "index: " << randomIndex << endl;
+			//if (chests[i]->items[randomIndex]) {
+				//Item* loot = chests[i]->items[randomIndex];
+				//chests[i]->items[randomIndex] = chests[i]->items[chests[i]->items.size() - 1];
+				//chests[i]->items[chests[i]->items.size() - 1] = loot;
+			//}
 		}
 	}
 };
