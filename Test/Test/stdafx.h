@@ -11,6 +11,6 @@
 #include <stdio.h>
 #include <tchar.h>
 
-#endif
+#endif // _WIN32
 
 // TODO: reference additional headers your program requires here
