@@ -44,8 +44,7 @@ roomTypeConf room_loot_conf(2, 2, 3, 3);
 roomTypeConf room_enemy_conf(3, 3, 7, 7);
 roomTypeConf room_boss_conf(15, 15, 30, 30);
 
-int main()
-{
+int main() {
 	int size_x = 50;	   // Size of map's width. (Multiply by 3 to get width in chars!)
 	int size_y = 50;	   // Size of map's height. (Multiply by 3 to get height in chars!)
 						   // Recommended X-size for teminal is 38, for output to .txt opened in notepad 341!

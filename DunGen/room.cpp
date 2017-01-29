@@ -174,7 +174,7 @@ void Room::buildDoors() {
 		int sideNum = this->randomizer.randomizeInRange(0, 3, this->id + i);
 
 		int j = 0;
-		if (sideNum == 0) {
+		if (sideNum == UP) {
 			j = 0;
 			do {
 				this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, this->y)->setCellStructure("/D///////");
@@ -188,13 +188,13 @@ void Room::buildDoors() {
 				j++;
 			} while ((this->width + j) % 2 != 1);
 		}
-		else if (sideNum == 1) {
+		else if (sideNum == LEFT) {
 			j = 0;
 			do {
 				this->map->getCellAtPos(this->x, (this->y + floor(this->height / 2)) + j)->setCellStructure("///D/////");
 				this->buildDoors_SubCell(this->map->getCellAtPos(this->x, (this->y + floor(this->height / 2)) + j), 1);
 				if (this->x > 1) { 
-					this->map->getCellAtPos(this->x - 1, (this->y + floor(this->height / 2)) + j)->setCellStructure("///// ///"); 
+					this->map->getCellAtPos(this->x - 1, (this->y + floor(this->height / 2)) + j)->setCellStructure("999// ///"); 
 					for (int i = 1; i < 4; i++) {
 						this->map->getCellAtPos(this->x - 1, (this->y + floor(this->height / 2)) + j)->setSubCellAtPos(new Floor(4, i));
 					}
@@ -202,7 +202,7 @@ void Room::buildDoors() {
 				j++;
 			} while ((this->height + j) % 2 != 1);
 		}
-		else if (sideNum == 2) {
+		else if (sideNum == DOWN) {
 			j = 0;
 			do {
 				this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height))->setCellStructure("///////D/");
@@ -216,7 +216,7 @@ void Room::buildDoors() {
 				j++;
 			} while ((this->width + j) % 2 != 1);
 		}
-		else if (sideNum == 3) {
+		else if (sideNum == RIGHT) {
 			j = 0;
 			do {
 				this->map->getCellAtPos((this->x + this->width), this->y + floor(this->height / 2) + j)->setCellStructure("/////D///");
