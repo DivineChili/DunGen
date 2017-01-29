@@ -5,6 +5,11 @@
 #include <iostream>
 #include <vector>
 #include "cell.h"
+#include "chest.h"
+#include "item.h"
+#include "item_gold.h"
+#include "item_food.h"
+#include "food_apple.h"
 #include "map.h"
 #include "randomizer.h"
 
@@ -24,9 +29,11 @@ public:
 
 		history.push_back({ start_pos[0], start_pos[1] }); // Start at the startingposistion
 
-														   // Recursive backtracing starts here!
+													   // Recursive backtracing starts here!
 		while (running) {
 
+			//grid->drawMap();
+			//grid->drawSubCellMap();
 			(*grid).getCellAtPos(c, r)->setVisited(true);
 			//cout << "Visited: [" << c << "][" << r << "]   \t|| ";
 
@@ -79,36 +86,25 @@ public:
 				int move_direction = check[static_cast<int>(result) % check.size()];
 
 				//cout << "Moving:  " << move_direction << "   !!!";
-				if (move_direction == UP)
-				{
-					(*grid).getCellAtPos(c,r)->toggleSide(UP, true);
-					(*grid).getCellAtPos(c, r)->toggleSubCellSide(UP, true);
+				if (move_direction == UP) {
+					(*grid).getCellAtPos(c, r)->toggleSide(UP, true);
 					--r;
 					(*grid).getCellAtPos(c, r)->toggleSide(DOWN, true);
-					(*grid).getCellAtPos(c, r)->toggleSubCellSide(DOWN, true);
 				}
 				else if (move_direction == DOWN) {
-
 					(*grid).getCellAtPos(c, r)->toggleSide(DOWN, true);
-					(*grid).getCellAtPos(c, r)->toggleSubCellSide(DOWN, true);
 					++r;
 					(*grid).getCellAtPos(c, r)->toggleSide(UP, true);
-					(*grid).getCellAtPos(c, r)->toggleSubCellSide(UP, true);
 				}
 				else if (move_direction == LEFT) {
-
 					(*grid).getCellAtPos(c, r)->toggleSide(LEFT, true);
-					(*grid).getCellAtPos(c, r)->toggleSubCellSide(LEFT, true);
 					--c;
 					(*grid).getCellAtPos(c, r)->toggleSide(RIGHT, true);
-					(*grid).getCellAtPos(c, r)->toggleSubCellSide(RIGHT, true);
 				}
 				else if (move_direction == RIGHT) {
 					(*grid).getCellAtPos(c, r)->toggleSide(RIGHT, true);
-					(*grid).getCellAtPos(c, r)->toggleSubCellSide(RIGHT, true);
 					++c;
 					(*grid).getCellAtPos(c, r)->toggleSide(LEFT, true);
-					(*grid).getCellAtPos(c, r)->toggleSubCellSide(LEFT, true);
 				}
 			}
 			else {
@@ -159,6 +155,30 @@ public:
 
 				}
 			}
+		}
+	}
+
+	static void lootSpawner(Map* map, vector<Chest*> chests, Randomizer lootRandomizer){
+		for (int i = 0; i < chests.size(); i++) {
+			//cout << chests[i]->getChar() << endl;
+			if (lootRandomizer.randomizeFromChance(50, (uint32_t) i)){ // 50 percent chance of having gold.
+				int amount = floor(pow(lootRandomizer.randomizeInRange(1, 100, (uint32_t) i + 100), 2.5) * .001 + 3);
+				chests[i]->items.push_back(new Item_gold(amount));
+				//Print amount of gold.
+				cout << "gold" << chests[i]->items[0]->amount << endl;
+			}
+			if (lootRandomizer.randomizeFromChance(60, (uint32_t)i + 1000)) {
+				int amount = lootRandomizer.randomizeInRange(1, 4, i + 1100);
+				chests[i]->items.push_back(new Food_apple(amount));
+				cout << "apples" << amount << endl;
+			}
+			int randomIndex = lootRandomizer.randomizeInRange(0, chests.size() - 1, i + 10000);
+			cout << "index: " << randomIndex << endl;
+			//if (chests[i]->items[randomIndex]) {
+				//Item* loot = chests[i]->items[randomIndex];
+				//chests[i]->items[randomIndex] = chests[i]->items[chests[i]->items.size() - 1];
+				//chests[i]->items[chests[i]->items.size() - 1] = loot;
+			//}
 		}
 	}
 };

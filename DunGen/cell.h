@@ -33,6 +33,8 @@ public:
 	
 	static vector<int> cellIDs;
 
+	static const int gridSize = 5;
+
 	vector<vector<SubCell*>> subCell_grid;
 	//These are the subCells contained within one cell
 	//vector<SubCell*> subCells;
@@ -47,7 +49,9 @@ public:
 	
 	void Cell::toggleSide(int side, bool state);
 
-	void Cell::toggleSubCellSide(int side, bool state);
+	void Cell::updateSubCellSides();
+
+	void Cell::updateSides();
 	
 	char Cell::getCharAtPos(int x, int y);
 
@@ -68,6 +72,8 @@ public:
 		
 	// Independent function to draw cell
 	void Cell::drawCell();
+
+	void Cell::drawSubCell();
 };
 
 #endif // !CELL_H

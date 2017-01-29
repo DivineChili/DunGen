@@ -2,6 +2,8 @@
 #include "room.h"
 #include "room_loot.h"
 #include "door.h"
+#include "wall.h"
+#include "floor.h"
 #include <string>
 
 vector<Room*> Room::rooms;
@@ -48,18 +50,115 @@ void Room::build() {
 																			// Visit cell
 			this->map->getCellAtPos(posX, posY)->setVisited(true);
 			// Construct the 4 corners of the room
-			if (posY == this->y && posX == this->x) this->map->getCellAtPos(posX, posY)->setCellStructure("####--#--"); // Top Left
-			else if (posY == (this->y + this->height) && posX == this->x) this->map->getCellAtPos(posX, posY)->setCellStructure("#--#--###"); // Bottom Left
-			else if (posY == this->y && posX == (this->x + this->width)) this->map->getCellAtPos(posX, posY)->setCellStructure("###--#--#"); // Top Right
-			else if (posY == (this->y + this->height) && posX == (this->x + this->width)) this->map->getCellAtPos(posX, posY)->setCellStructure("--#--####"); // Bottom Right
-																																							   // Construct the 4 walls
-			else if (posY == this->y && (posX != this->x || posX != (this->x + this->width))) this->map->getCellAtPos(posX, posY)->setCellStructure("###------"); // Top wall
-			else if (posX == this->x && (posY != this->y || posY != (this->y + this->height))) this->map->getCellAtPos(posX, posY)->setCellStructure("#--#--#--"); // Left Wall
-			else if (posY == (this->y + this->height) && (posX != this->x || posX != (this->x + this->width))) this->map->getCellAtPos(posX, posY)->setCellStructure("------###"); // Bottom wall
-			else if (posX == (this->x + this->width) && (posY != this->y || posY != (this->y + this->height))) this->map->getCellAtPos(posX, posY)->setCellStructure("--#--#--#"); // Right wall
+			if (posY == this->y && posX == this->x) {// Top Left 
+				this->map->getCellAtPos(posX, posY)->setCellStructure("####--#--");
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][0] = new Wall(j, 0);
+						this->map->getCellAtPos(posX, posY)->subCell_grid[0][j] = new Wall(0, j);
+					}
+				}
+				for (int i = 1; i < 5; i++) {
+					for (int j = 1; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			} 
+			else if (posY == (this->y + this->height) && posX == this->x) {// Bottom Left
+				this->map->getCellAtPos(posX, posY)->setCellStructure("#--#--###");
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][0] = new Wall(j, 0);
+						this->map->getCellAtPos(posX, posY)->subCell_grid[4][j] = new Wall(0, j);
+					}
+				}
+				for (int i = 1; i < 5; i++) {
+					for (int j = 0; j < 4; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			} 
+			else if (posY == this->y && posX == (this->x + this->width)) {// Top Right
+				this->map->getCellAtPos(posX, posY)->setCellStructure("###--#--#");
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][4] = new Wall(j, 0);
+						this->map->getCellAtPos(posX, posY)->subCell_grid[0][j] = new Wall(0, j);
+					}
+				}
+				for (int i = 0; i < 4; i++) {
+					for (int j = 1; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			}
+			else if (posY == (this->y + this->height) && posX == (this->x + this->width)) {// Bottom Right
+				this->map->getCellAtPos(posX, posY)->setCellStructure("--#--####"); 
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][4] = new Wall(j, 0);
+						this->map->getCellAtPos(posX, posY)->subCell_grid[4][j] = new Wall(0, j);
+					}
+				}
+				for (int i = 0; i < 4; i++) {
+					for (int j = 0; j < 4; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			} 																																			   // Construct the 4 walls
+			else if (posY == this->y && (posX != this->x || posX != (this->x + this->width))) { // Top wall
+				this->map->getCellAtPos(posX, posY)->setCellStructure("###------");
+				for (int i = 0; i < 5; i++) {
+					this->map->getCellAtPos(posX, posY)->subCell_grid[0][i] = new Wall(0, i);
+				}
+				for (int i = 0; i < 5; i++) {
+					for (int j = 1; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			} 
+			else if (posX == this->x && (posY != this->y || posY != (this->y + this->height))) {// Left Wall
+				this->map->getCellAtPos(posX, posY)->setCellStructure("#--#--#--");
+				for (int i = 0; i < 5; i++) {
+					this->map->getCellAtPos(posX, posY)->subCell_grid[i][0] = new Wall(i, 0);
+				}
+				for (int i = 1; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			}
+			else if (posY == (this->y + this->height) && (posX != this->x || posX != (this->x + this->width))) {// Bottom wall
+				this->map->getCellAtPos(posX, posY)->setCellStructure("------###"); 
+				for (int i = 0; i < 5; i++) {
+					this->map->getCellAtPos(posX, posY)->subCell_grid[4][i] = new Wall(4, i);
+				}
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 4; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			} 
+			else if (posX == (this->x + this->width) && (posY != this->y || posY != (this->y + this->height))) {// Right wall
+				this->map->getCellAtPos(posX, posY)->setCellStructure("--#--#--#");
+				for (int i = 0; i < 5; i++) {
+					this->map->getCellAtPos(posX, posY)->subCell_grid[i][4] = new Wall(i, 4);
+				}
+				for (int i = 0; i < 4; i++) {
+					for (int j = 0; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			}
 																																													// Else, construct middle room
-			else this->map->getCellAtPos(posX, posY)->setCellStructure("---------");
-
+			else {
+				this->map->getCellAtPos(posX, posY)->setCellStructure("---------");
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
+						this->map->getCellAtPos(posX, posY)->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+			}
 		}
 	}
 	//Code for labeling the rooms by type with a character.
@@ -75,35 +174,59 @@ void Room::buildDoors() {
 		int sideNum = this->randomizer.randomizeInRange(0, 3, this->id + i);
 
 		int j = 0;
-		if (sideNum == 0) {
+		if (sideNum == UP) {
 			j = 0;
 			do {
 				this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, this->y)->setCellStructure("/D///////");
-				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, this->y),0);
+				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, this->y), 0);
+				if (this->y > 1) {
+					this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, this->y - 1)->setCellStructure("/////// /");
+					for (int i = 1; i < 4; i++) {
+						this->map->getCellAtPos(this->x + floor(this->width / 2) + j, this->y - 1)->setSubCellAtPos(new Floor(i, 4));
+					}
+				}
 				j++;
 			} while ((this->width + j) % 2 != 1);
 		}
-		else if (sideNum == 1) {
+		else if (sideNum == LEFT) {
 			j = 0;
 			do {
 				this->map->getCellAtPos(this->x, (this->y + floor(this->height / 2)) + j)->setCellStructure("///D/////");
 				this->buildDoors_SubCell(this->map->getCellAtPos(this->x, (this->y + floor(this->height / 2)) + j), 1);
+				if (this->x > 1) { 
+					this->map->getCellAtPos(this->x - 1, (this->y + floor(this->height / 2)) + j)->setCellStructure("999// ///"); 
+					for (int i = 1; i < 4; i++) {
+						this->map->getCellAtPos(this->x - 1, (this->y + floor(this->height / 2)) + j)->setSubCellAtPos(new Floor(4, i));
+					}
+				}
 				j++;
 			} while ((this->height + j) % 2 != 1);
 		}
-		else if (sideNum == 2) {
+		else if (sideNum == DOWN) {
 			j = 0;
 			do {
 				this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height))->setCellStructure("///////D/");
 				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height)), 2);
+				if (this->y + this->height + 1 < this->map->getSize().second) {
+					this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height + 1))->setCellStructure("/ ///////");
+					for (int i = 1; i < 4; i++) {
+						this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, (this->y + this->height + 1))->setSubCellAtPos(new Floor(i, 0));
+					}
+				}
 				j++;
 			} while ((this->width + j) % 2 != 1);
 		}
-		else if (sideNum == 3) {
+		else if (sideNum == RIGHT) {
 			j = 0;
 			do {
 				this->map->getCellAtPos((this->x + this->width), this->y + floor(this->height / 2) + j)->setCellStructure("/////D///");
 				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + this->width), this->y + floor(this->height / 2) + j), 3);
+				if (this->x + this->width + 1 < this->map->getSize().first) {
+					this->map->getCellAtPos((this->x + this->width + 1), this->y + floor(this->height / 2) + j)->setCellStructure("///// ///"); 
+					for (int i = 1; i < 4; i++) {
+						this->map->getCellAtPos((this->x + this->width + 1), this->y + floor(this->height / 2) + j)->setSubCellAtPos(new Floor(0, i));
+					}
+				}
 				j++;
 			} while ((this->height + j) % 2 != 1);
 		}

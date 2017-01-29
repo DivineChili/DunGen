@@ -84,77 +84,148 @@ void Cell::rebuild() {
 
 // Toggles one of the sides of the cell. Changes are lost if cell is rebuilt!
 void Cell::toggleSide(int side, bool state /*true is floor, false is wall*/) {
- 	this->toggleSubCellSide(side, state);
 	switch (side){
 	case(UP):
-		if (state) {this->cell_struct[1] = this->floor;	}
-		else { this->cell_struct[1] = this->wall; }
 		this->opened_sides[UP] = state;
-
-		break;
-	case(LEFT):
-		if (state) { this->cell_struct[3] = this->floor; }
-		else { this->cell_struct[3] = this->wall; }
-		this->opened_sides[LEFT] = state;
-		
 		break;
 	case(DOWN):
-		if (state) { this->cell_struct[7] = this->floor; }
-		else { this->cell_struct[7] = this->wall; }
 		this->opened_sides[DOWN] = state;
-
+		break;
+	case(LEFT):
+		this->opened_sides[LEFT] = state;
 		break;
 	case(RIGHT):
-		if (state) { this->cell_struct[5] = this->floor; }
-		else { this->cell_struct[5] = this->wall; }
 		this->opened_sides[RIGHT] = state;
-		
 		break;
 	}
+	this->updateSides();
+	this->updateSubCellSides();
 }
 
-void Cell::toggleSubCellSide(int side, bool state){
-	switch (side){
-	case UP:
-		for (int i = 0; i < 5; i++) {
-			if (state) {
-				this->subCell_grid[i][0] = new Wall(i, 0);
+void Cell::updateSubCellSides(){
+	for (int i = 0; i < sizeof(this->opened_sides); i++) {
+		switch (i) {
+		case (UP):
+			if (this->opened_sides[i]) {
+				for (int i = 1; i < 4; i++) {
+					this->subCell_grid[0][i] = new Floor(0, i);
+				}
+				for (int i = 1; i < 4; i++) {
+					for (int j = 1; j < 4; j++) {
+						this->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+				for (int i = 0; i < 5; i++) {
+					if (!this->opened_sides[LEFT]) {
+						this->subCell_grid[i][0] = new Wall(i, 0);
+					}
+					if (!this->opened_sides[RIGHT]) {
+						this->subCell_grid[i][4] = new Wall(i, 4);
+					}
+				}
 			}
 			else {
-				this->subCell_grid[i][0] = new Door(i, 0);
 			}
-		}
-		break;
-	case LEFT:
-		for (int i = 0; i < 5; i++) {
-			if (state) {
-				this->subCell_grid[0][i] = new Wall(0, i);
-			}
-			else {
-				this->subCell_grid[0][i] = new Door(0, i);
-			}
-		}
-		break;
-	case DOWN:
-		for (int i = 0; i < 5; i++) {
-			if (state) {
-				this->subCell_grid[i][4] = new Wall(4, i);
-			}
-			else {
-				this->subCell_grid[i][4] = new Door(4, i);
-			}
-		}
-		break;
-	case RIGHT:
-		for (int i = 0; i < 5; i++) {
-			if (state) {
-				this->subCell_grid[4][i] = new Wall(i, 4);
+			break;
+		case (DOWN):
+			if (this->opened_sides[i]) {
+				for (int i = 1; i < 4; i++) {
+					this->subCell_grid[4][i] = new Floor(i, 4);
+				}
+				for (int i = 1; i < 4; i++) {
+					for (int j = 1; j < 4; j++) {
+						this->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+				for (int i = 0; i < 5; i++) {
+					if (!this->opened_sides[LEFT]) {
+						this->subCell_grid[i][0] = new Wall(i, 0);
+					}
+					if (!this->opened_sides[RIGHT]) {
+						this->subCell_grid[i][4] = new Wall(i, 4);
+					}
+				}
 			}
 			else {
-				this->subCell_grid[4][i] = new Door(i, 4);
+				//	this->subCell_grid[4][i] = new Door(i, 4);
 			}
+			break;
+		case (LEFT):
+			if (this->opened_sides[i]) {
+				for (int i = 1; i < 4; i++) {
+					this->subCell_grid[i][0] = new Floor(i, 0);
+				}
+				for (int i = 1; i < 4; i++) {
+					for (int j = 1; j < 4; j++) {
+						this->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+				for (int i = 0; i < 5; i++) {
+					if (!this->opened_sides[UP]) {
+						this->subCell_grid[0][i] = new Wall(i, 0);
+					}
+					if (!this->opened_sides[DOWN]) {
+						this->subCell_grid[4][i] = new Wall(i, 4);
+					}
+				}
+			}
+			else {
+				//	this->subCell_grid[i][0] = new Door(i, 0);
+			}
+			break;
+		case (RIGHT):
+			if (this->opened_sides[i]) {
+				for (int i = 1; i < 4; i++) {
+					this->subCell_grid[i][4] = new Floor(4, i);
+				}
+				for (int i = 1; i < 4; i++) {
+					for (int j = 1; j < 4; j++) {
+						this->subCell_grid[j][i] = new Floor(j, i);
+					}
+				}
+				for (int i = 0; i < 5; i++) {
+					if (!this->opened_sides[UP]) {
+						this->subCell_grid[0][i] = new Wall(i, 0);
+					}
+					if (!this->opened_sides[DOWN]) {
+						this->subCell_grid[4][i] = new Wall(i, 4);
+					}
+				}
+			}
+			else {
+				//	this->subCell_grid[i][4] = new Door(4, i)
+			}
+			break;
 		}
-		break;
+	}
+	//this->subCell_grid[3][1] = new Door(0,0);
+
+}
+
+void Cell::updateSides() {
+	for (int i = 0; i < sizeof(this->opened_sides); i++) {
+		switch (i) {
+		case 0:
+			if (this->opened_sides[0]) {
+				this->cell_struct[1] = this->floor;
+			}
+			break;
+		case 1:
+			if (this->opened_sides[1]) {
+				this->cell_struct[7] = this->floor;
+			}
+			break;
+		case 2:
+			if (this->opened_sides[2]) {
+				this->cell_struct[3] = this->floor;
+			}
+			break;
+		case 3:
+			if (this->opened_sides[3]) {
+				this->cell_struct[5] = this->floor;
+			}
+			break;
+		}
 	}
 }
 
@@ -186,20 +257,12 @@ string Cell::getCellStruct() { return this->cell_struct; }
 
 void Cell::drawSubCellRow(int row) {
 	for (int i = 0; i < 5; i++) {
-		cout << this->subCell_grid[i][row]->getChar();
+		cout << this->subCell_grid[row][i]->getChar();
 	}
 }
 
 void Cell::setSubCellAtPos(SubCell* subCell) {
-	if (subCell->getChar() == 'D') {
-		for (int i = 0; i < this->subCell_grid[0].size(); i++) {
-			for (int j = 0; j < this->subCell_grid.size(); j++) {
-				//cout << this->subCell_grid[j][i]->getChar();
-			}
-			//cout << endl;
-		}
-	}
-	this->subCell_grid[subCell->posX][subCell->posY] = subCell;
+	this->subCell_grid[subCell->posY][subCell->posX] = subCell;
 }
 
 // Gets a vector of all the chars in a row
@@ -213,8 +276,7 @@ vector<char> Cell::getCellRow(int rowIndex)
 	return result;
 }
 
-vector<int> Cell::sides_opened()
-{
+vector<int> Cell::sides_opened() {
 	vector<int> opened_sides;
 	for (int i = 0; i < sizeof(this->opened_sides); i++) {
 		if (this->opened_sides[i])
@@ -228,6 +290,15 @@ void Cell::drawCell(){
 	for (int y = 0; y < 3; y++) {
 		for (int x = 0; x < 3; x++) {
 			cout << this->cell_struct[(3 * y) + x];
+		}
+		cout << endl;
+	}
+}
+
+void Cell::drawSubCell() {
+	for (int y = 0; y < 5; y++) {
+		for (int x = 0; x < 5; x++) {
+			cout << this->subCell_grid[y][x]->getChar();
 		}
 		cout << endl;
 	}

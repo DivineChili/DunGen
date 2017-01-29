@@ -9,6 +9,7 @@
 #include "room_enemy.h"
 #include "room_boss.h"
 #include "room_trap.h"
+#include "chest.h"
 #include "randomizer.h"
 #include "xxHash32.h"
 #include <cmath>
@@ -27,6 +28,10 @@ Randomizer mazeRandomizer(mazeSeed);
 uint32_t roomSeed = globalRandomizer.randomizeFromKey(1);
 Randomizer roomRandomizer(roomSeed);
 
+//Randomizer for loot generation.
+uint32_t lootSeed = globalRandomizer.randomizeFromKey(2);
+Randomizer lootRandomizer(lootSeed);
+
 struct roomTypeConf {
 	roomTypeConf(unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY) : minX(minX), minY(minY), maxX(maxX), maxY(maxY){}
 	unsigned int minX;
@@ -39,8 +44,7 @@ roomTypeConf room_loot_conf(2, 2, 3, 3);
 roomTypeConf room_enemy_conf(3, 3, 7, 7);
 roomTypeConf room_boss_conf(15, 15, 30, 30);
 
-int main()
-{
+int main() {
 	int size_x = 50;	   // Size of map's width. (Multiply by 3 to get width in chars!)
 	int size_y = 50;	   // Size of map's height. (Multiply by 3 to get height in chars!)
 						   // Recommended X-size for teminal is 38, for output to .txt opened in notepad 341!
@@ -110,6 +114,26 @@ int main()
 
 	grid.drawSubCellMap();
 
+	Algorithms::lootSpawner(&grid, Chest::chests, lootRandomizer);
+
+	/*
+	for (int i = 0; i < grid.getSize().second; i++) {
+		for (int j = 0; j < grid.getSize().first; j++) {
+			grid.getCellAtPos(j, i)->drawCell();
+			cout << endl;
+			grid.getCellAtPos(j, i)->drawSubCell();
+			cout << endl << endl;
+		}
+	}
+	
+
+	for (int i = 0; i < grid.getSize().second; i++) {
+		grid.getCellAtPos(0, i)->drawCell();
+		cout << endl;
+		grid.getCellAtPos(0, i)->drawSubCell();
+		cout << endl << endl;
+	}
+	*/
 
 	for (int i = Room::rooms.size() - 1; i > 0; i--) {
 		Room::rooms[i]->~Room();

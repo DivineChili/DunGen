@@ -19,6 +19,18 @@
     <Filter Include="Header Files\Rooms">
       <UniqueIdentifier>{e99237f1-a8d2-4232-90e5-03c3612f4a80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Items">
+      <UniqueIdentifier>{0db302a3-2b3d-4a03-8641-129afe72bc6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Items">
+      <UniqueIdentifier>{57558a77-aa22-4d1d-a262-69925fc2a415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Items\Food">
+      <UniqueIdentifier>{0b5cf521-ffaa-444e-b1d3-a78513e54251}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Items\Food">
+      <UniqueIdentifier>{bdd008fc-f29d-4133-8f37-3d4e7dfea088}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -40,9 +52,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="randomizer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="loot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="subcell.h">
@@ -75,6 +84,24 @@
     <ClInclude Include="floor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="chest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="subcell_loot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="item.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="item_gold.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="item_food.h">
+      <Filter>Header Files\Items\Food</Filter>
+    </ClInclude>
+    <ClInclude Include="food_apple.h">
+      <Filter>Header Files\Items\Food</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -90,9 +117,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="randomizer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="loot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="subcell.cpp">
@@ -116,11 +140,29 @@
     <ClCompile Include="room_trap.cpp">
       <Filter>Source Files\Rooms</Filter>
     </ClCompile>
+    <ClCompile Include="floor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="wall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="floor.cpp">
+    <ClCompile Include="chest.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="subcell_loot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="item.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="item_gold.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="food_apple.cpp">
+      <Filter>Source Files\Items\Food</Filter>
+    </ClCompile>
+    <ClCompile Include="item_food.cpp">
+      <Filter>Source Files\Items\Food</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

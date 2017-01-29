@@ -147,9 +147,14 @@
   <ItemGroup>
     <ClInclude Include="algorithms.h" />
     <ClInclude Include="cell.h" />
+    <ClInclude Include="chest.h" />
     <ClInclude Include="door.h" />
     <ClInclude Include="floor.h" />
-    <ClInclude Include="loot.h" />
+    <ClInclude Include="food_apple.h" />
+    <ClInclude Include="item.h" />
+    <ClInclude Include="item_food.h" />
+    <ClInclude Include="item_gold.h" />
+    <ClInclude Include="subcell_loot.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="randomizer.h" />
     <ClInclude Include="room.h" />
@@ -164,11 +169,16 @@
     <ClInclude Include="xxHash32.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="chest.cpp" />
     <ClCompile Include="door.cpp" />
     <ClCompile Include="DunGen.cpp" />
     <ClCompile Include="cell.cpp" />
     <ClCompile Include="floor.cpp" />
-    <ClCompile Include="loot.cpp" />
+    <ClCompile Include="food_apple.cpp" />
+    <ClCompile Include="item.cpp" />
+    <ClCompile Include="item_food.cpp" />
+    <ClCompile Include="item_gold.cpp" />
+    <ClCompile Include="subcell_loot.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="randomizer.cpp" />
     <ClCompile Include="room.cpp" />
