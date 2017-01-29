@@ -16,8 +16,9 @@
 class Algorithms
 {
 public:
+	static vector<Cell*> dead_ends;
 
-	static void recursive_backtracking(int * start_pos, Map * grid, Randomizer mazeRandomizer) {
+	static void recursive_backtracking(int * start_pos, Map * grid, Randomizer mazeRandomizer, int deadend_logging_chance) {
 		using namespace std;
 		// Create vector for recursive-backtracking history.
 		cout << "Generating..." << endl;
@@ -109,6 +110,8 @@ public:
 			else {
 				if (history.size() > 1) {
 					//cout << "Backtracking !!!";
+					if(mazeRandomizer.randomizeFromChance(deadend_logging_chance, mazeRandomizer.randomizeAtPos(c,r)) == 1)
+						grid->dead_ends.push_back(grid->getCellAtPos(c, r));
 					history.pop_back();
 					c = history.back().first;
 					r = history.back().second;
@@ -123,8 +126,36 @@ public:
 
 	}
 
-	static void deadend_remover(Map * grid, int iterations) {
-		
+	static void deadend_remover(Map * grid, vector<Cell*> dead_ends, int iterations) {
+		vector<Cell*> local_ends = dead_ends;
+		vector<Cell*> temp_ends;
+
+		for (int i = 0; i < iterations; i++) { // The removing iterations
+			
+			for (int j = 0; j < local_ends.size(); j++) { // Each dead end
+				Cell* current_end = local_ends.at(j);
+				if (current_end->sides_opened().size() == 1) { // Check if only one side is opened. Usefull for iterations > 1
+					current_end->setCellStructure(string(9, ' '));
+
+					// Check if ajasent cell is dead end aswell!
+					switch (current_end->sides_opened().at(0)) {
+					case(UP):
+						
+						break;
+					case(DOWN):
+
+						break;
+					case(LEFT):
+
+						break;
+					case(RIGHT):
+
+						break;
+					}
+
+				}
+			}
+		}
 	}
 
 	static void lootSpawner(Map* map, vector<Chest*> chests, Randomizer lootRandomizer){

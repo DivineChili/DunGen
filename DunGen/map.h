@@ -17,13 +17,14 @@ private:
 	vector< vector<Cell>> map_grid; //The map itself
 	
 public:
-	static vector<pair<int, int> > dead_ends;
+	static vector<Cell*> dead_ends;
 	
 	Map::Map(unsigned int sizeX, unsigned int sizeY);
 	Map::~Map();
 
 	// Returns the cell at xy-coordinates
 	Cell* Map::getCellAtPos(int x, int y);
+	Cell* Map::getCellAtPos(pair<int, int> pos);
 
 	// Draws the cell at a specific xy-coordinate
 	void Map::drawCellAtPos(int x, int y);

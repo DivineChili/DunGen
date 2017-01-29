@@ -46,6 +46,8 @@ Cell::Cell(int x, int y) : subCell_grid(vector< vector<SubCell*>>(5, vector<SubC
 	this->opened_sides[1] = false;
 	this->opened_sides[2] = false;
 	this->opened_sides[3] = false;
+	this->id = Cell::cellIDs.size();
+	Cell::cellIDs.push_back(this->id);
 }
 
 // Rebuilds the cell. NB! All changes done to the cell will be lost!
@@ -75,6 +77,9 @@ void Cell::rebuild() {
 	this->opened_sides[1] = false;
 	this->opened_sides[2] = false;
 	this->opened_sides[3] = false;
+
+	this->id = Cell::cellIDs.size();
+	Cell::cellIDs.push_back(this->id);
 }
 
 // Toggles one of the sides of the cell. Changes are lost if cell is rebuilt!

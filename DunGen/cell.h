@@ -18,6 +18,7 @@ private:
 	string cell_struct = "";
 	pair<int, int> position;
 	bool opened_sides[4];
+	int id;
 	int x;
 	int y;
 public:
@@ -29,6 +30,8 @@ public:
 	static const char block = '=';
 	static const char door = '/';
 	static const char empty = ' ';
+	
+	static vector<int> cellIDs;
 
 	static const int gridSize = 5;
 
