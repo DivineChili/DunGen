@@ -1,6 +1,6 @@
 #pragma once
 #include "subcell.h"
-#include "Item.h"
+#include "item.h"
 #include "randomizer.h"
 
 class Chest : public SubCell {

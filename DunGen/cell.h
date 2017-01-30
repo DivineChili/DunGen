@@ -38,42 +38,42 @@ public:
 	vector<vector<SubCell*>> subCell_grid;
 	//These are the subCells contained within one cell
 	//vector<SubCell*> subCells;
-	Cell::Cell(int x, int y);
-	Cell::Cell();
-	void Cell::rebuild();
+	Cell(int x, int y);
+	Cell();
+	void rebuild();
 	
 	//Draws a row of subcells to the terminal.
-	void Cell::drawSubCellRow(int row);
+	void drawSubCellRow(int row);
 
-	void Cell::setSubCellAtPos(SubCell* subCell);
+	void setSubCellAtPos(SubCell* subCell);
 	
-	void Cell::toggleSide(int side, bool state);
+	void toggleSide(int side, bool state);
 
-	void Cell::updateSubCellSides();
+	void updateSubCellSides();
 
-	void Cell::updateSides();
+	void updateSides();
 	
-	char Cell::getCharAtPos(int x, int y);
+	char getCharAtPos(int x, int y);
 
 	// Used for generation algorithms. Used to determine if the cell has been visited or not.
 	bool _visited = false;
-	void Cell::setVisited(bool state);
+	void setVisited(bool state);
 	
 	// Sets the Cellstructure. Used to create rooms and other custom cells.
-	void Cell::setCellStructure(string structure);
+	void setCellStructure(string structure);
 	
 	// Returns the cell structure
-	string Cell::getCellStruct();
+	string getCellStruct();
 
-	vector<char> Cell::getCellRow(int rowIndex);
+	vector<char> getCellRow(int rowIndex);
 
 	// Returns all opened sides. (Use Cell::Directions enum for side-references!)
 	vector<int> sides_opened();
 		
 	// Independent function to draw cell
-	void Cell::drawCell();
+	void drawCell();
 
-	void Cell::drawSubCell();
+	void drawSubCell();
 };
 
 #endif // !CELL_H

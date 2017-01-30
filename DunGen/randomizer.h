@@ -14,15 +14,15 @@ private:
 	XXHash32 hash;
 	uint32_t result;
 public:
-	Randomizer::Randomizer(uint32_t seed); //initialize with seed
-	Randomizer::~Randomizer();
-	uint32_t Randomizer::randomizeAtPos(uint32_t x, uint32_t y); //Returns a random number for the specified position
-	uint32_t Randomizer::randomizeFromKey(uint32_t key);
-	bool Randomizer::randomizeFromChance(int chance, uint32_t key);
-	uint32_t Randomizer::randomizeInRange(uint32_t min, uint32_t max, uint32_t key);
-	void Randomizer::setSeed(uint32_t seed);
-	uint32_t Randomizer::getSeed();
-	void Randomizer::updateSeed();
+	Randomizer(uint32_t seed); //initialize with seed
+        ~Randomizer();
+	uint32_t randomizeAtPos(uint32_t x, uint32_t y); //Returns a random number for the specified position
+	uint32_t randomizeFromKey(uint32_t key);
+	bool randomizeFromChance(int chance, uint32_t key);
+	uint32_t randomizeInRange(uint32_t min, uint32_t max, uint32_t key);
+	void setSeed(uint32_t seed);
+	uint32_t getSeed();
+	void updateSeed();
 };
 
 #endif // !RANDOMIZER_H

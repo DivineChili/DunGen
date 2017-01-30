@@ -7,7 +7,7 @@ public:
 	int amount;
 	Item(int amount);
 	Item();
-	void Item::drop();
+	void drop();
 	~Item();
 };
 

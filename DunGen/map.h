@@ -19,26 +19,26 @@ private:
 public:
 	static vector<Cell*> dead_ends;
 	
-	Map::Map(unsigned int sizeX, unsigned int sizeY);
-	Map::~Map();
+	Map(unsigned int sizeX, unsigned int sizeY);
+	~Map();
 
 	// Returns the cell at xy-coordinates
-	Cell* Map::getCellAtPos(int x, int y);
-	Cell* Map::getCellAtPos(pair<int, int> pos);
+	Cell* getCellAtPos(int x, int y);
+	Cell* getCellAtPos(pair<int, int> pos);
 
 	// Draws the cell at a specific xy-coordinate
-	void Map::drawCellAtPos(int x, int y);
+	void drawCellAtPos(int x, int y);
 
 	// Draws the entire map.
-	void Map::drawMap();
+	void drawMap();
 
-	void Map::drawSubCellMap();
+	void drawSubCellMap();
 
 	// Writes the enitre map to .txt file
-	void Map::outputMap(string filename);
+	void outputMap(string filename);
 
 	//Returns the size of the map
-	pair<int, int> Map::getSize();
+	pair<int, int> getSize();
 };
 
 #endif // !MAP_H

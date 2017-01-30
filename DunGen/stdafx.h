@@ -5,11 +5,12 @@
 
 #pragma once
 #ifdef _WIN32
-
 #include "targetver.h"
-
 #include <stdio.h>
 #include <tchar.h>
+
+#elif __linux__
+#include <math.h>
 
 #endif
 

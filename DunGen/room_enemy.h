@@ -10,7 +10,7 @@ class Room_enemy : public Room {
 public:
 	Room_enemy(uint32_t seed, Map* map, int key, unsigned int maxX, unsigned int maxY, unsigned int minX, unsigned int minY);
 	virtual ~Room_enemy();
-	virtual void Room_enemy::printType();
+	virtual void printType();
 	static vector<Room_enemy*> enemyRooms;
 	uint32_t enemyId;
 };

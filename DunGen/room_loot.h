@@ -10,9 +10,9 @@ class Room_loot : public Room {
 public:
 	Room_loot(uint32_t seed, Map* map, int key, unsigned int maxX, unsigned int maxY, unsigned int minX, unsigned int minY);
 	virtual ~Room_loot();
-	virtual void Room_loot::build();
-	bool Room_loot::chestIsValid();
-	virtual void Room_loot::printType();
+	virtual void build();
+	bool chestIsValid();
+	virtual void printType();
 	static vector<Room_loot*> lootRooms;
 	uint32_t lootId;
 private:

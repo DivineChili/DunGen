@@ -2,8 +2,10 @@
 #ifndef ALGORITHMS_H
 #define ALGORITHMS_H
 
+
 #include <iostream>
 #include <vector>
+#include "stdafx.h"
 #include "cell.h"
 #include "chest.h"
 #include "item.h"
@@ -13,8 +15,7 @@
 #include "map.h"
 #include "randomizer.h"
 
-class Algorithms
-{
+class Algorithms {
 public:
 	static vector<Cell*> dead_ends;
 
