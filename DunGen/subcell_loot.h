@@ -1,5 +1,5 @@
 #pragma once
-#include "subCell.h"
+#include "subcell.h"
 
 class SubCell_loot : public SubCell {
 public:

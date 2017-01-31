@@ -1,3 +1,4 @@
+#include <typeinfo>
 #include "stdafx.h"
 #include "room_trap.h"
 

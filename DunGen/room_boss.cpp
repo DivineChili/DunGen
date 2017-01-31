@@ -1,7 +1,9 @@
+#include <typeinfo>
 #include "stdafx.h"
 #include "room_boss.h"
 #include "wall.h"
 
+using namespace std;
 
 Room_boss::Room_boss(uint32_t seed, Map* map, int key, unsigned int maxX, unsigned int maxY, unsigned int minX, unsigned int minY) :
 	Room::Room(seed, map, key, 'B', maxX, maxY, minX, minY),
