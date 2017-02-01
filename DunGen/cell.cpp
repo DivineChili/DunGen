@@ -12,11 +12,11 @@
 
 using namespace std;
 
+vector<int> Cell::cellIDs;
 
 // Initializes the cell and builds the base structure!
 Cell::Cell(int x, int y) : subCell_grid(vector< vector<SubCell*>>(5, vector<SubCell*>(5))), x(x), y(y){
-
-	for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
 			this->subCell_grid[j][i] = new SubCell(j, i);
 		}
