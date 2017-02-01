@@ -21,7 +21,7 @@ public:
 
 	static void recursive_backtracking(int * start_pos, Map * grid, Randomizer mazeRandomizer, int deadend_logging_chance) {
 		using namespace std;
-		// Create vector for recursive-backtracking history.
+                // Create vector for recursive-backtracking history.
 		cout << "Generating..." << endl;
 		bool running = true;
 		vector<pair<int, int>> history;

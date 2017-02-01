@@ -6,6 +6,8 @@
 
 using namespace std;
 
+vector<Cell*> Map::dead_ends;
+
 // Just a constructor
 Map::Map(unsigned int sizeX, unsigned int sizeY) {
 	this->size_x = sizeX; this->size_y = sizeY;	  // Set the private fields size_x and size_y to the sepsified parameters.
