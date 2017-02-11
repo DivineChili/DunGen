@@ -181,9 +181,9 @@ void Room::buildDoors() {
 				this->buildDoors_SubCell(this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, this->y), 0);
 				if (this->y > 1) {
 					this->map->getCellAtPos((this->x + floor(this->width / 2)) + j, this->y - 1)->setCellStructure("/////// /");
-					for (int i = 1; i < 4; i++) {
-						this->map->getCellAtPos(this->x + floor(this->width / 2) + j, this->y - 1)->setSubCellAtPos(new Floor(i, 4));
-					}
+					//for (int i = 1; i < 4; i++) {
+					//	this->map->getCellAtPos(this->x + floor(this->width / 2) + j, this->y - 1)->setSubCellAtPos(new Floor(i, 4));
+					//}
 				}
 				j++;
 			} while ((this->width + j) % 2 != 1);
@@ -257,6 +257,10 @@ void Room::buildDoors_SubCell(Cell* cell, int side) {
 		break;
 	}
 
+
+}
+
+void Room::openDoorWall() {
 
 }
 

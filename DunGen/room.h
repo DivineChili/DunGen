@@ -34,7 +34,8 @@ public:
 	virtual void build();
 	virtual void buildDoors();
 	void buildDoors_SubCell(Cell* cell, int side);
-	bool doorIsValid();
+        void openDoorWall();
+        bool doorIsValid();
 	void updateRandomizerSeed();
 };
 

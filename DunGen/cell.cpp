@@ -20,8 +20,8 @@ Cell::Cell(int x, int y) : subCell_grid(vector< vector<SubCell*>>(5, vector<SubC
 		for (int j = 0; j < 5; j++) {
 			this->subCell_grid[j][i] = new SubCell(j, i);
 		}
-	}
-
+        }
+        
 	int i = 0;
 
 	// Create upper row (y=0)
@@ -32,8 +32,8 @@ Cell::Cell(int x, int y) : subCell_grid(vector< vector<SubCell*>>(5, vector<SubC
 
 	// Create middlerow (y=1)
 	for (i = 0; i < 3; i++) {
-		if (i == 1 && this->_visited) this->cell_struct += this->block;
-		else this->cell_struct += this->wall;
+            if (i == 1 && this->_visited) this->cell_struct += this->block;
+            else this->cell_struct += this->wall;
 	}
 
 	// Create bottom row
