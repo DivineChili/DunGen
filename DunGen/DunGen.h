@@ -1,6 +1,5 @@
-#pragma once
-#include "stdafx.h"
-#include <iostream>
+// Fill out your copyright notice in the Description page of Project Settings.
 
-using namespace std;
+#pragma once
+
 

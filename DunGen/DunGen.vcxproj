@@ -83,7 +83,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -96,7 +96,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -145,55 +145,16 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="algorithms.h" />
-    <ClInclude Include="cell.h" />
-    <ClInclude Include="chest.h" />
-    <ClInclude Include="door.h" />
-    <ClInclude Include="floor.h" />
-    <ClInclude Include="food_apple.h" />
-    <ClInclude Include="item.h" />
-    <ClInclude Include="item_food.h" />
-    <ClInclude Include="item_gold.h" />
-    <ClInclude Include="subcell_loot.h" />
-    <ClInclude Include="map.h" />
-    <ClInclude Include="randomizer.h" />
-    <ClInclude Include="room.h" />
-    <ClInclude Include="room_boss.h" />
-    <ClInclude Include="room_enemy.h" />
-    <ClInclude Include="room_loot.h" />
-    <ClInclude Include="room_trap.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="subcell.h" />
-    <ClInclude Include="targetver.h" />
-    <ClInclude Include="wall.h" />
-    <ClInclude Include="xxHash32.h" />
+    <ClCompile Include="Algorithms.cpp" />
+    <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="Cell_Map.cpp" />
+    <ClCompile Include="DunGen.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="chest.cpp" />
-    <ClCompile Include="door.cpp" />
-    <ClCompile Include="DunGen.cpp" />
-    <ClCompile Include="cell.cpp" />
-    <ClCompile Include="floor.cpp" />
-    <ClCompile Include="food_apple.cpp" />
-    <ClCompile Include="item.cpp" />
-    <ClCompile Include="item_food.cpp" />
-    <ClCompile Include="item_gold.cpp" />
-    <ClCompile Include="subcell_loot.cpp" />
-    <ClCompile Include="map.cpp" />
-    <ClCompile Include="randomizer.cpp" />
-    <ClCompile Include="room.cpp" />
-    <ClCompile Include="room_boss.cpp" />
-    <ClCompile Include="room_enemy.cpp" />
-    <ClCompile Include="room_loot.cpp" />
-    <ClCompile Include="room_trap.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="subcell.cpp" />
-    <ClCompile Include="wall.cpp" />
+    <ClInclude Include="Algorithms.h" />
+    <ClInclude Include="Cell.h" />
+    <ClInclude Include="Cell_Map.h" />
+    <ClInclude Include="DunGen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
